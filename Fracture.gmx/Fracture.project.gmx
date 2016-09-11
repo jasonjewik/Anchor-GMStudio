@@ -17,18 +17,28 @@
     <scripts name="Physics">
       <script>scripts\scr_approach.gml</script>
       <script>scripts\scr_moveCollide.gml</script>
+      <script>scripts\scr_moveCollideE.gml</script>
     </scripts>
     <scripts name="Enemies">
+      <script>scripts\scr_damageE.gml</script>
       <script>scripts\scr_normalE.gml</script>
     </scripts>
     <scripts name="Player ">
       <script>scripts\scr_normal.gml</script>
+      <script>scripts\scr_roll.gml</script>
+      <script>scripts\scr_damage.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_player</object>
-    <object>objects\obj_enemy</object>
+    <objects name="Player">
+      <object>objects\obj_player</object>
+    </objects>
+    <objects name="Enemy">
+      <object>objects\obj_enemy</object>
+    </objects>
+    <object>objects\obj_mAttack</object>
+    <object>objects\obj_eAttack</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_grid</object>
     <object>objects\obj_projectile</object>

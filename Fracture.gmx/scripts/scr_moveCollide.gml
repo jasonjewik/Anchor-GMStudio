@@ -1,6 +1,6 @@
 //Clamp Movement Values
-clamp(hSpeed, -maxSpeed, maxSpeed);
-clamp(vSpeed, -maxSpeed, maxSpeed);
+hSpeed = clamp(hSpeed, -maxSpeed, maxSpeed);
+vSpeed = clamp(vSpeed, -maxSpeed, maxSpeed);
 
 //Fractional Movement Handling
 hSpeedFinal = hSpeed + hSpeedFrac;
