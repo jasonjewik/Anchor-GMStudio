@@ -1,8 +1,7 @@
 //Controls
 key_escape = keyboard_check_pressed(vk_escape);
 key_enter = keyboard_check_pressed(vk_enter);
-key_shift = keyboard_check_direct(vk_shift);
-key_space = keyboard_check_direct(vk_space);
+key_shift = keyboard_check(vk_shift);
 mouse_left = mouse_check_button_pressed(mb_left);
 mouse_right = mouse_check_button_pressed(mb_right);
 key_right = keyboard_check_direct(ord('D'));

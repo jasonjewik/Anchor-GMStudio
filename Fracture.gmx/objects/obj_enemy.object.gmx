@@ -29,29 +29,22 @@
 eSpeed = 0;
 eSpeedFinal = 0;
 eSpeedFrac = .0;
-hSpeed = 0;
-hSpeedFinal = 0;
-hSpeedFrac = .0;
-vSpeed = 0;
-vSpeedFinal = 0;
-vSpeedFrac = .0;
-accl = 0.4;
-frc = 0.3;
-maxSpeed = 2;
+accl = 2;
+frc = 1.2;
+maxSpeed = 15;
 attack = false;
 image_speed = 0.2;
-pathExist = false;
 
 //Enemy States
 enum est {
-    normal, 
-    damage
+    normal
 }
 
 state = est.normal;
 
 //Grid Navigation 
 path = path_add();
+
 </string>
           </argument>
         </arguments>
@@ -80,6 +73,27 @@ path = path_add();
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>hp=10;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -98,11 +112,11 @@ path = path_add();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (path_exists(path) &amp;&amp; mp_grid_path(global.grid, path, x, y, (obj_player.x div 32) * 32 + 16, (obj_player.y div 32) * 32 + 16, true)) {
-    path_start(path, eSpeedFinal, path_action_stop, false);
+            <string>if (mp_grid_path(global.grid, path, x, y, (obj_player.x div 32) * 32 + 16, (obj_player.y div 32) * 32 + 16, true)) {
+    path_start(path, eSpeed, path_action_stop, false);
 }
 
-if (move == 1) alarm_set(0, 15);
+if (move == 1) alarm_set(0, 30);
 </string>
           </argument>
         </arguments>
@@ -128,13 +142,28 @@ if (move == 1) alarm_set(0, 15);
             <string>///State Machine
 switch (state) {
     case est.normal: {scr_normalE(); break;}
-    case est.damage: {scr_damageE(); break;}
 }
-
-if (place_meeting(x, y, obj_mAttack)) {
-    state = est.damage;
-    alarm_set(0, -1);
-}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (hp&lt;=0) instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -157,7 +186,7 @@ if (place_meeting(x, y, obj_mAttack)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (path_exists(path)) path_delete(path);
+            <string>path_delete(path);
 </string>
           </argument>
         </arguments>
