@@ -32,15 +32,18 @@ hSpeedFinal = 0;
 vSpeedFinal = 0;
 hSpeedFrac = .0;
 vSpeedFrac = .0;
-accl = 2;
-frc = 1.2;
-maxSpeed = 20;
+accl = 0.4;
+frc = 0.3;
+maxSpeed = 2;
 attack = false;
 image_speed = 0.2;
+global.face = 0;
 
 //Player States
 enum pst {
-    normal
+    normal, 
+    damage, 
+    roll
 }
 
 state = pst.normal;
@@ -70,10 +73,24 @@ state = pst.normal;
 scr_getInput();
 switch (state) {
     case pst.normal: {scr_normal(); break;}
+    case pst.damage: {scr_damage(); break;}
+    case pst.roll: {scr_roll(); break;}
 }
 
 //Reset
 if (keyboard_check_direct(ord('R'))) game_restart();
+
+//Collision with Enemy
+if (state != pst.roll) {
+    if (place_meeting(x, y, obj_enemy)) {
+        enemyCon = instance_place(x, y, obj_enemy);
+        state = pst.damage;
+    }
+    if (place_meeting(x, y, obj_eAttack)) {
+        enemyCon = instance_place(x, y, obj_eAttack);
+        state = pst.damage;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -98,7 +115,7 @@ if (keyboard_check_direct(ord('R'))) game_restart();
             <kind>1</kind>
             <string>///Debug
 draw_self();
-draw_text(x, y, state)
+draw_text(x, y, vSpeed)
 
 </string>
           </argument>
