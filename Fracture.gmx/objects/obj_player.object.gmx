@@ -122,7 +122,7 @@ draw_text(x, y, vSpeed)
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="32">
+    <event eventtype="9" enumb="18">
       <action>
         <libid>1</libid>
         <id>603</id>
