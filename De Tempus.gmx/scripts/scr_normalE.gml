@@ -19,7 +19,10 @@ if (move == 1 && alarm[0] = -1) {
 
 if (distance_to_object(obj_player) < 15) {
     eSpeed = scr_approach(eSpeed, 0, frc);
-    alarm_set(1, 15);
+    if (obj_player.x > x) instance_create(x + 15, y, obj_eAttack);
+    if (obj_player.x < x) instance_create(x - 15, y, obj_eAttack);
+    if (obj_player.y > y) instance_create(x, y + 15, obj_eAttack);
+    if (obj_player.y < y) instance_create(x, y - 15, obj_eAttack);
 }
 
 scr_moveCollideE();

@@ -39,7 +39,12 @@ if (mouse_left) {
 }
 
 //Ranged Attacks
-if (key_alt && alarm[0] = -1) alarm_set(0, 5);
+if (key_alt) {
+    projectile = instance_create(x,y,obj_projectile);
+    projectile.direction = global.face * 90;
+    projectile.image_angle = image_angle;
+    projectile.speed = 8;
+}
 
 //Switch to Roll
 if (key_space) state = pst.roll;
