@@ -24,6 +24,7 @@
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_tele</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_npc</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -53,6 +54,7 @@
     <font>fonts\fnt_arial</font>
     <font>fonts\fnt_pixel</font>
     <font>fonts\fnt_text</font>
+    <font>fonts\fnt_txt</font>
   </fonts>
   <objects name="objects">
     <objects name="Player">
@@ -71,6 +73,10 @@
     <object>objects\obj_tele</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_grid</object>
+    <objects name="NPC">
+      <object>objects\obj_npc</object>
+      <object>objects\obj_textbox</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>
