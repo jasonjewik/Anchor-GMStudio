@@ -3,8 +3,8 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
-  <persistent>0</persistent>
+  <depth>-10</depth>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,26 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialize Grid
+            <string>global.pause = false;
 
-//Variables
-cWidth = 32;
-cHeight = 32;
-
-hCells = room_width div cWidth;
-vCells = room_height div cHeight;
-
-//Grid Creation
-global.grid = mp_grid_create(0, 0, hCells, vCells, cWidth, cHeight);
-
-//Add Walls
-mp_grid_add_instances(global.grid, obj_wall, false);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="3">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -61,7 +49,18 @@ mp_grid_add_instances(global.grid, obj_wall, false);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>mp_grid_destroy(global.grid);
+            <string>scr_getInput();
+
+if (key_escape) {   
+    if (!global.pause) {
+        global.pause = true
+        screen_save("pauseScr.png")
+        instance_deactivate_all(true)
+    } else {
+        global.pause = false
+        instance_activate_all() 
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -84,20 +83,28 @@ mp_grid_add_instances(global.grid, obj_wall, false);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_alpha(0.1);
+            <string>if (global.pause) {
 
-mp_grid_draw(global.grid);
+    //Set background
+    draw_sprite(sprite_add("pauseScr.png", 1, false, true, 0, 0), 0, 0, 0);
+    
+    //Set Tint
+    draw_set_color(c_black);
+    draw_set_alpha(0.5);
+    draw_rectangle(0, 0, room_width, room_height, false);
 
-for (var i = 0; i &lt; room_width; i+= 32) {
-    draw_line(i, 0, i, room_height);
+    //Draw Text
+    draw_set_color(c_white);
+    draw_set_alpha(1.0);
+    draw_set_font(fnt_pixel);
+    draw_set_halign(fa_center);
+    draw_text(room_width/2, room_height/2, "Game Paused");
+    
+    //Reset
+    draw_set_color(c_black);
+    draw_set_font(fnt_arial);
+    
 }
-for (var j = 0; j &lt; room_height; j+= 32) {
-    draw_line(0, j, room_width, j);
-}
-
-draw_set_alpha(1);
-
-if (path_exists(obj_enemy.path)) draw_path(obj_enemy.path, x, y, true);
 </string>
           </argument>
         </arguments>
