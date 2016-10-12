@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,16 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>str[0] = "Hello, I am a NPC";
-str[1] = "Why am I a NPC?";
-str[2] = "Because I am a NPC";
-str_draw = "";
-str_current = 0;
-str_end = 2;
-str_length = string_length(str[str_current]);
-line = 0;
-total_messages = 2;
-depth = -20
+            <string>//Create Spawn Grid
+spawnGrid = ds_grid_create(room_width div 32, room_height div 32);
+
+//Set Random Values between 0 and 9
+for (var a = 0; a &lt; ds_grid_height(spawnGrid); a++) {
+    for (var b = 0; b &lt; ds_grid_width(spawnGrid); b++) {
+        ds_grid_set(spawnGrid, a, b, irandom(9));
+    }
+}
+
+spawn = false;
 </string>
           </argument>
         </arguments>
@@ -57,11 +58,41 @@ depth = -20
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (line &lt; str_length) { 
-    str_draw = string_copy(str[str_current], 0, line); }
-    else { if (keyboard_check_pressed(ord('I'))) {
-        if (str_current &lt; str_end) { str_current += 1; str_length = string_length(str[str_current]); line = 0; str_draw = ""; }
-             else { instance_destroy();}}}
+            <string>//Retrieve Values
+if (!spawn) {
+for (var i = 0; i &lt; ds_grid_height(spawnGrid); i++) {
+    for (var j = 0; j &lt; ds_grid_width(spawnGrid); j++) {
+        val = ds_grid_get(spawnGrid, i, j)
+        if (val &gt; 3 &amp;&amp; val &lt; 7) instance_create(i * 64, j * 32, obj_wall);
+        if (val == 9) instance_create(i * 64, j * 32, obj_enemy);
+    }
+}
+spawn = true
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Destroy Grid to prevent memory leaks
+ds_grid_destroy(spawnGrid);
 </string>
           </argument>
         </arguments>
@@ -84,10 +115,13 @@ depth = -20
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.draw = true){
- draw_set_color(c_white); draw_rectangle(160, 200, 480, 280, false);
-    draw_set_halign(fa_left); draw_set_valign(fa_right);
-    draw_set_color(c_black); draw_text(180, 250, str_draw)  }
+            <string>/*Draw Values
+for (var k = 0; k &lt; ds_grid_height(spawnGrid); k++) {
+    for (var l = 0; l &lt; ds_grid_width(spawnGrid); l++) {
+        draw_set_color(c_white);
+        draw_text(k * 64, l * 32, ds_grid_get(spawnGrid, k, l));
+    }
+}
 </string>
           </argument>
         </arguments>

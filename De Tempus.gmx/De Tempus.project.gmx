@@ -9,6 +9,7 @@
     <sprites name="Items">
       <sprite>sprites\spr_heavyAxe</sprite>
       <sprite>sprites\spr_hydrauHamm</sprite>
+      <sprite>sprites\spr_inv</sprite>
       <sprite>sprites\spr_items</sprite>
     </sprites>
     <sprites name="Enemies">
@@ -24,7 +25,6 @@
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_tele</sprite>
     <sprite>sprites\spr_wall</sprite>
-    <sprite>sprites\spr_npc</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -54,7 +54,6 @@
     <font>fonts\fnt_arial</font>
     <font>fonts\fnt_pixel</font>
     <font>fonts\fnt_text</font>
-    <font>fonts\fnt_txt</font>
   </fonts>
   <objects name="objects">
     <objects name="Player">
@@ -64,21 +63,22 @@
     </objects>
     <objects name="Enemy">
       <object>objects\obj_enemy</object>
+      <object>objects\ds_spawn</object>
       <object>objects\obj_eAttack</object>
     </objects>
     <objects name="Items">
       <object>objects\obj_item</object>
       <object>objects\obj_inv</object>
     </objects>
+    <objects name="Menus">
+      <object>objects\obj_pause</object>
+    </objects>
     <object>objects\obj_tele</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_grid</object>
-    <objects name="NPC">
-      <object>objects\obj_npc</object>
-      <object>objects\obj_textbox</object>
-    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_initialize</room>
     <room>rooms\rm_test</room>
     <room>rooms\rm_test2</room>
   </rooms>
