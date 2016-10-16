@@ -49,11 +49,15 @@
       <script>scripts\scr_damage.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>
+    <scripts name="Menu">
+      <script>scripts\scr_menu.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_arial</font>
     <font>fonts\fnt_pixel</font>
     <font>fonts\fnt_text</font>
+    <font>fonts\fnt_menu</font>
   </fonts>
   <objects name="objects">
     <objects name="Player">
@@ -76,8 +80,10 @@
     <object>objects\obj_tele</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_grid</object>
+    <object>objects\obj_menu</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_initialize</room>
     <room>rooms\rm_test</room>
     <room>rooms\rm_test2</room>
