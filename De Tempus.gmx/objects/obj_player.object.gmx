@@ -97,7 +97,7 @@ state = pst.normal;
           <argument>
             <kind>1</kind>
             <string>projectile = instance_create(x,y,obj_projectile);
-projectile.direction = global.face * 90;
+projectile.direction = point_direction(x,y,mouse_x,mouse_y);
 projectile.image_angle = image_angle;
 projectile.speed = 8;
 

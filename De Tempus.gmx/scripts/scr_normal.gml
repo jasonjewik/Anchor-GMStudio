@@ -39,7 +39,9 @@ if (mouse_left) {
 }
 
 //Ranged Attacks
-if (key_alt && alarm[0] = -1) alarm_set(0, 5);
+if (mouse_right) {
+    if (mouse_left && alarm[0] = -1) alarm_set(0, 5);
+}
 
 //Switch to Roll
 if (key_space) state = pst.roll;

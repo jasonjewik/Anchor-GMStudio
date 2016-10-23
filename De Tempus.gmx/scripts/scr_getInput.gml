@@ -12,4 +12,4 @@ key_down = keyboard_check_direct(ord('S'));
 key_i = keyboard_check_pressed(ord('I'));
 
 mouse_left = mouse_check_button_pressed(mb_left);
-mouse_right = mouse_check_button_pressed(mb_right);
+mouse_right = mouse_check_button(mb_right);
