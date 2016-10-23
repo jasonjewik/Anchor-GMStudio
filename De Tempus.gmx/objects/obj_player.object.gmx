@@ -153,6 +153,8 @@ if (instance_position(x, y, item)) scr_itemPick(item);
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -170,13 +172,15 @@ if (instance_position(x, y, item)) scr_itemPick(item);
           <argument>
             <kind>1</kind>
             <string>///Anim Handling
-image_index = global.face;
+if (global.face = 0) image_xscale = -1;
+if (global.face = 2) image_xscale = 1;
+image_speed = 1;
+
+if (state = pst.normal) sprite_index = spr_player; 
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
