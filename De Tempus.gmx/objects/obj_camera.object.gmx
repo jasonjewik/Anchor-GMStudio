@@ -57,7 +57,9 @@
 if (obj_player.state = est.normal) view_object[0] = obj_player;
 
 view_xview[0] = x - 140;
+view_wview[0] = 640;
 view_yview[0] = y - 90;
+view_hview[0] = 360;
 
 </string>
           </argument>
