@@ -52,22 +52,14 @@
             <string>if (instance_exists(obj_player)) {
     if (x != mouse_x) x += (mouse_x - x)/6;
     if (y != mouse_y) y += (mouse_y - y)/6;
-    view_object[0] = obj_player;
 }
 
-if (obj_player.ranged) {
-    view_xview[0] = x - 140;
-    view_wview[0] = 180;
-    view_yview[0] = y - 90;
-    view_yview[0] = 90;
-}/* else {
+
     view_object[0] = obj_player;
     view_xview[0] = x - 140;
     view_wview[0] = 320;
     view_yview[0] = y - 90;
     view_hview[0] = 180;
-}
-
 
 </string>
           </argument>
