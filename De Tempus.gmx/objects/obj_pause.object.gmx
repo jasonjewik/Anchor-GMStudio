@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>global.pause = false;
-done = false;
 
 </string>
           </argument>
@@ -53,21 +52,11 @@ done = false;
             <string>scr_getInput();
 
 if (key_escape) {  
-    if (!global.pause) {
-        surf = surface_create(display_get_width(), display_get_height()) 
-        surface_set_target(surf);
-        pauseScr = background_create_from_surface(surf, 0, 0, display_get_width(), display_get_height(), false, false); 
-        pauseScr2 = sprite_create_from_surface(surf, 0, 0, display_get_width(), display_get_height(), false, false, 0, 0);
-        surface_reset_target();
-        surface_free(surf);
-        sprite_save(pauseScr2, 0, "pauseScr2.png");
-        background_save(pauseScr, "pauseScr.png");
+    if (!global.pause) { 
         global.pause = true
         instance_deactivate_all(true)
     } else {
         global.pause = false
-        done = false;
-        background_delete(pauseScr);
         instance_activate_all() 
     }
 }
@@ -93,11 +82,7 @@ if (key_escape) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.pause) {
-    if (!done) {
-    //Background
-    background_add("pauseScr.png", false, false);
-    
+            <string>if (global.pause) {    
     //Set Tint
     draw_set_color(c_black);
     draw_set_alpha(0.5);
@@ -108,14 +93,12 @@ if (key_escape) {
     draw_set_alpha(1.0);
     draw_set_font(fnt_pixel);
     draw_set_halign(fa_center);
-    draw_text(display_get_width()/2, display_get_height()/2, "Game Paused");
+    draw_text(room_width/2, room_height/2, "Game Paused");
     
     //Reset
     draw_set_color(c_black);
     draw_set_font(fnt_arial);
     
-    done = true;
-    }
 }
 </string>
           </argument>

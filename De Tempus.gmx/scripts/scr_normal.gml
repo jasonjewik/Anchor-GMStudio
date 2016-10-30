@@ -5,12 +5,6 @@ if (key_shift) {
     maxSpeed = 2;
 }
 
-//Face Values
-if (key_right) global.face = 0;
-if (key_up) global.face = 1;
-if (key_left) global.face = 2;
-if (key_down) global.face = 3;
-
 //Player Movements
 var hMove;
 hMove = -key_left + key_right;
@@ -31,19 +25,20 @@ if (vMove == 0) {
 }
 
 //Melee Attacks
-if (mouse_left) {
-    if (mouse_x > obj_player.x && abs(mouse_y - obj_player.y) < 16) instance_create(obj_player.x + 16, y, obj_mAttack);
-    if (mouse_x < obj_player.x && abs(mouse_y - obj_player.y) < 16) instance_create(obj_player.x - 16, y, obj_mAttack);
-    if (mouse_y > obj_player.y && abs(mouse_x - obj_player.x) < 16) instance_create(obj_player.x, y + 16, obj_mAttack);
-    if (mouse_y < obj_player.y && abs(mouse_x - obj_player.x) < 16) instance_create(obj_player.x, y - 16, obj_mAttack);
+if (!ranged && mouse_left) {
+    instance_create(x + 16 * sign(mouse_x - x), y + 16 * sign(mouse_y - y), obj_mAttack);
 }
 
 //Ranged Attacks
 if (mouse_right) {
+    ranged = true;
     if (mouse_left && alarm[0] = -1) alarm_set(0, 5);
-}
+} else ranged = false;
 
 //Switch to Roll
-if (key_space) state = pst.roll;
+if (key_space) {
+    alarm_set(1, 10);
+    state = pst.roll;
+}
 
 scr_moveCollide();

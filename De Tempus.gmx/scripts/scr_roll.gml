@@ -1,17 +1,14 @@
 //Direction of Roll
-if (global.face == 0) hSpeed = scr_approach(hSpeed, 10, accl * 8);
-if (global.face == 1) vSpeed = scr_approach(vSpeed, -10, accl * 8);
-if (global.face == 2) hSpeed = scr_approach(hSpeed, -10, accl * 8);
-if (global.face == 3) vSpeed = scr_approach(vSpeed, 10, accl * 8);
+if (!rollVal) {
+    y1 = mouse_y;
+    x1 = mouse_x;
+    rollVal = true;
+} else rollVal = false 
+
+vSpeed = scr_approach(vSpeed, 10*sign(y1 - y), accl * 8)
+hSpeed = scr_approach(hSpeed, 10*sign(x1 - x), accl * 8)
 
 //MoveSpeed Increase
 maxSpeed = 10;
 
 scr_moveCollide();
-
-//Switch to Normal
-if (abs(hSpeed) == abs(maxSpeed) || abs(vSpeed) == abs(maxSpeed) || hSpeed == 0 || vSpeed == 0) {
-    maxSpeed = 2;
-    state = pst.normal;
-}
-

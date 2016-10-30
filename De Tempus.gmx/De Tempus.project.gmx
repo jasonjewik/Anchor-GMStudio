@@ -13,21 +13,23 @@
       <sprite>sprites\spr_items</sprite>
     </sprites>
     <sprites name="Enemies">
-      <sprite>sprites\spr_enemy3</sprite>
-      <sprite>sprites\spr_enemy2</sprite>
-      <sprite>sprites\spr_enemy</sprite>
+      <sprite>sprites\spr_roborat</sprite>
     </sprites>
     <sprites name="Player">
-      <sprite>sprites\spr_player</sprite>
+      <sprite>sprites\spr_player_idle_back</sprite>
+      <sprite>sprites\spr_player_idle</sprite>
     </sprites>
     <sprite>sprites\spr_projectile</sprite>
     <sprite>sprites\spr_menu</sprite>
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_tele</sprite>
     <sprite>sprites\spr_cursor</sprite>
+    <sprite>sprites\spr_cursorA</sprite>
     <sprite>sprites\spr_wall</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Inventory">
@@ -80,6 +82,7 @@
       <object>objects\obj_menu</object>
     </objects>
     <object>objects\obj_camera</object>
+    <object>objects\obj_mouse</object>
     <object>objects\obj_tele</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_grid</object>
