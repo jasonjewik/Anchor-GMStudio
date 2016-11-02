@@ -244,6 +244,7 @@ if (hp &lt;= 0) state = est.dead;
             <string>///Animation Handling
 draw_self();
 image_speed = random_range(0.5, 1);
+scr_light();
 </string>
           </argument>
         </arguments>

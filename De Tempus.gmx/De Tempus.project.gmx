@@ -26,9 +26,12 @@
     <sprite>sprites\spr_cursor</sprite>
     <sprite>sprites\spr_cursorA</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_button</sprite>
   </sprites>
   <backgrounds name="background">
+    <background>background\bg_tile</background>
     <background>background\background0</background>
+    <background>background\bg_wall</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -39,6 +42,7 @@
     <scripts name="Physics">
       <script>scripts\scr_approach.gml</script>
       <script>scripts\scr_moveCollide.gml</script>
+      <script>scripts\scr_light.gml</script>
       <script>scripts\scr_moveCollideE.gml</script>
     </scripts>
     <scripts name="Enemies">
@@ -78,6 +82,7 @@
       <object>objects\obj_inv</object>
     </objects>
     <objects name="Menus">
+      <object>objects\obj_button</object>
       <object>objects\obj_pause</object>
       <object>objects\obj_menu</object>
     </objects>

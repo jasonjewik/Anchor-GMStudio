@@ -241,7 +241,8 @@ if (global.xFace = 1) image_xscale = 1;
 if (global.yFace = 1) sprite_index = spr_player_idle_back;
 if (global.yFace = 0) sprite_index = spr_player_idle;
 image_speed = 1;
- 
+scr_light();
+
 </string>
           </argument>
         </arguments>

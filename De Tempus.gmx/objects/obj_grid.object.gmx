@@ -106,7 +106,7 @@ wallAdd = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Debug
+            <string>/*Debug
 
 draw_set_alpha(0.1);
 

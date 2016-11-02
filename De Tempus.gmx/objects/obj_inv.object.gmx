@@ -124,7 +124,7 @@ global.showInv = false;
 scr_getInput();
 
 //Opening &amp;&amp; closing inv
-if (key_i == 1) {
+if (key_tab == 1) {
     if (!global.showInv) global.showInv = true
     else global.showInv = false;
 }
