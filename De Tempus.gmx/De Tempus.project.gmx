@@ -16,6 +16,8 @@
       <sprite>sprites\spr_roborat</sprite>
     </sprites>
     <sprites name="Player">
+      <sprite>sprites\spr_player_dash</sprite>
+      <sprite>sprites\spr_player_dash_sil</sprite>
       <sprite>sprites\spr_player_idle_back</sprite>
       <sprite>sprites\spr_player_idle</sprite>
     </sprites>
@@ -42,8 +44,8 @@
     <scripts name="Physics">
       <script>scripts\scr_approach.gml</script>
       <script>scripts\scr_moveCollide.gml</script>
-      <script>scripts\scr_light.gml</script>
       <script>scripts\scr_moveCollideE.gml</script>
+      <script>scripts\scr_light.gml</script>
     </scripts>
     <scripts name="Enemies">
       <script>scripts\scr_deadE.gml</script>
@@ -51,13 +53,10 @@
       <script>scripts\scr_normalE.gml</script>
     </scripts>
     <scripts name="Player ">
-      <script>scripts\scr_normal.gml</script>
       <script>scripts\scr_roll.gml</script>
+      <script>scripts\scr_normal.gml</script>
       <script>scripts\scr_damage.gml</script>
       <script>scripts\scr_getInput.gml</script>
-    </scripts>
-    <scripts name="Menu">
-      <script>scripts\scr_menu.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -71,11 +70,14 @@
       <object>objects\obj_player</object>
       <object>objects\obj_mAttack</object>
       <object>objects\obj_projectile</object>
+      <object>objects\obj_camera</object>
+      <object>objects\obj_mouse</object>
     </objects>
     <objects name="Enemy">
       <object>objects\obj_enemy</object>
       <object>objects\ds_spawn</object>
       <object>objects\obj_eAttack</object>
+      <object>objects\obj_grid</object>
     </objects>
     <objects name="Items">
       <object>objects\obj_item</object>
@@ -84,13 +86,14 @@
     <objects name="Menus">
       <object>objects\obj_button</object>
       <object>objects\obj_pause</object>
-      <object>objects\obj_menu</object>
     </objects>
-    <object>objects\obj_camera</object>
-    <object>objects\obj_mouse</object>
-    <object>objects\obj_tele</object>
-    <object>objects\obj_wall</object>
-    <object>objects\obj_grid</object>
+    <objects name="NPCs">
+      <object>objects\obj_npc</object>
+    </objects>
+    <objects name="Collision-based">
+      <object>objects\obj_wall</object>
+      <object>objects\obj_tele</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_initialize</room>

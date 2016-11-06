@@ -8,55 +8,6 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>30</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -75,10 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>//Movement and Collision
-
 image_angle = direction;
-speed = scr_approach(speed, 3, 0.07);
+speed = scr_approach(speed, 12, 1);
 
+//Determines if hit the enemy
 hit = instance_place(x, y, obj_enemy);
 
 if (hit != noone) {
@@ -88,7 +39,14 @@ if (hit != noone) {
     instance_destroy();
 } 
 
-if (place_meeting(x, y, obj_wall)) instance_destroy();
+//Fade out
+if (image_alpha &gt; 0) image_alpha -= 0.03;
+
+//Destroy if collide with wall or faded completely 
+if (place_meeting(x, y, obj_wall) || image_alpha == 0) instance_destroy();
+
+
+
 </string>
           </argument>
         </arguments>

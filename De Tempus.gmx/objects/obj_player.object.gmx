@@ -41,6 +41,8 @@ global.xFace = 0;
 global.yFace = 0;
 ranged = false;
 rollVal = false;
+dir = ""
+dash = false
 
 //Debug [temp variables]
 t = 0;
@@ -186,7 +188,7 @@ switch (state) {
 if (keyboard_check_direct(ord('R'))) game_restart();
 
 //Collision with Enemy
-if (state != pst.roll) {
+if (!dash) {
     if (place_meeting(x, y, obj_enemy)) {
         enemyCon = instance_place(x, y, obj_enemy);
         state = pst.damage;
@@ -207,12 +209,12 @@ if (hSpeed == 0 &amp;&amp; vSpeed == 0) {
     if (mouse_x &lt; x) global.xFace = 1;
     if (mouse_y &gt; y) global.yFace = 0;
     if (mouse_y &lt; y) global.yFace = 1;
-} else {
+} /*else {
     if (key_right) global.xFace = 0;
     if (key_left) global.xFace = 1;
     if (key_up) global.yFace = 1;
     if (key_down) global.yFace = 0;
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -238,8 +240,28 @@ if (hSpeed == 0 &amp;&amp; vSpeed == 0) {
             <string>///Anim Handling
 if (global.xFace = 0) image_xscale = -1;
 if (global.xFace = 1) image_xscale = 1;
-if (global.yFace = 1) sprite_index = spr_player_idle_back;
-if (global.yFace = 0) sprite_index = spr_player_idle;
+
+switch (state) {
+    case pst.normal: {
+        if (global.yFace = 1) sprite_index = spr_player_idle_back;
+        if (global.yFace = 0) sprite_index = spr_player_idle;
+        break;
+    }
+    case pst.roll: {
+        if (global.yFace = 1) sprite_index = spr_player_dash
+        if (global.yFace = 0) sprite_index = spr_player_dash;
+        if (dir == "v") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10 , y, image_xscale, image_yscale, image_angle, image_blend, 0.5);
+        else if (dir == "h") draw_sprite_ext(spr_player_dash_sil, image_index, x, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
+        else if (dir == "hv") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
+        break;      
+    }
+    default: {
+        if (global.yFace = 1) sprite_index = spr_player_idle_back;
+        if (global.yFace = 0) sprite_index = spr_player_idle;
+        break;
+    }
+}
+
 image_speed = 1;
 scr_light();
 
@@ -265,6 +287,7 @@ scr_light();
             <kind>1</kind>
             <string>///Debug [press tab to scroll through inv]
 draw_self();
+
 /*
 draw_text(x, y, global.inventory[0, t])
 

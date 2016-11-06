@@ -50,8 +50,8 @@
           <argument>
             <kind>1</kind>
             <string>if (instance_exists(obj_player)) {
-    if (x != mouse_x) x += (mouse_x - x)/40;
-    if (y != mouse_y) y += (mouse_y - y)/40;
+    if (x != mouse_x) x += (mouse_x - x)/20;
+    if (y != mouse_y) y += (mouse_y - y)/20;
 }
 
 view_object[0] = obj_player;
@@ -59,6 +59,9 @@ view_xview[0] = x - 140;
 view_wview[0] = 320;
 view_yview[0] = y - 90;
 view_hview[0] = 180;
+
+x = clamp(x, obj_player.x - 32, obj_player.x + 32);
+y = clamp(y, obj_player.y - 32, obj_player.y + 32);
 </string>
           </argument>
         </arguments>

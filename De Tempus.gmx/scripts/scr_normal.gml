@@ -5,6 +5,10 @@ if (key_shift) {
     maxSpeed = 2;
 }
 
+//Reset Variables
+rollVal = false;
+dash = false;
+
 //Player Movements
 var hMove;
 hMove = -key_left + key_right;
