@@ -27,6 +27,7 @@
     <sprite>sprites\spr_tele</sprite>
     <sprite>sprites\spr_cursor</sprite>
     <sprite>sprites\spr_cursorA</sprite>
+    <sprite>sprites\spr_textBox</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_button</sprite>
   </sprites>
@@ -58,12 +59,15 @@
       <script>scripts\scr_damage.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>
+    <scripts name="Menus">
+      <script>scripts\scr_startGame.gml</script>
+      <script>scripts\scr_endGame.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_arial</font>
     <font>fonts\fnt_pixel</font>
     <font>fonts\fnt_text</font>
-    <font>fonts\fnt_menu</font>
     <font>fonts\fnt_ammogui</font>
   </fonts>
   <objects name="objects">
@@ -86,10 +90,14 @@
       <object>objects\obj_inv</object>
     </objects>
     <objects name="Menus">
-      <object>objects\obj_button</object>
+      <object>objects\startGame_menu</object>
+      <object>objects\endGame_menu</object>
+      <object>objects\class_button</object>
       <object>objects\obj_pause</object>
     </objects>
     <objects name="NPCs">
+      <object>objects\class_textBox</object>
+      <object>objects\npc1_text</object>
       <object>objects\obj_npc</object>
     </objects>
     <objects name="Collision-based">
