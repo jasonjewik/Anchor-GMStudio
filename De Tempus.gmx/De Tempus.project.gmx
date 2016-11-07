@@ -64,6 +64,7 @@
     <font>fonts\fnt_pixel</font>
     <font>fonts\fnt_text</font>
     <font>fonts\fnt_menu</font>
+    <font>fonts\fnt_ammogui</font>
   </fonts>
   <objects name="objects">
     <objects name="Player">
@@ -72,6 +73,7 @@
       <object>objects\obj_projectile</object>
       <object>objects\obj_camera</object>
       <object>objects\obj_mouse</object>
+      <object>objects\obj_ammogui</object>
     </objects>
     <objects name="Enemy">
       <object>objects\obj_enemy</object>

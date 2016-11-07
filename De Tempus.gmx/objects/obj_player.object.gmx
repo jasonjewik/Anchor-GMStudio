@@ -43,6 +43,7 @@ ranged = false;
 rollVal = false;
 dir = ""
 dash = false
+ammo = 10
 
 //Debug [temp variables]
 t = 0;
