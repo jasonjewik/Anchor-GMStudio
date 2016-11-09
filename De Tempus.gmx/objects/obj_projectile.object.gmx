@@ -56,7 +56,7 @@ speed = scr_approach(speed, 12, 1);
 hit = instance_place(x, y, obj_enemy);
 
 if (hit != noone) {
-    hit.hp -= 1;
+    hit.hp -= 5;
     hit.state = est.damage;
     hit.alarm[0] = -1;
     instance_destroy();

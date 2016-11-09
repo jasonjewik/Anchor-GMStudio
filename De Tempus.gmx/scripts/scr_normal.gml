@@ -43,8 +43,8 @@ if (ammo = 0){
 } 
 //Switch to Roll
 if (key_space) {
-    alarm_set(1, 10);
     state = pst.roll;
+    image_index = 0;
 }
 
 scr_moveCollide();

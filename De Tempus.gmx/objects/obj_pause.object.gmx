@@ -52,6 +52,7 @@
             <string>scr_getInput();
 
 if (key_escape) {  
+    game_end();
     if (!global.pause) { 
         global.pause = true
         instance_deactivate_all(true)

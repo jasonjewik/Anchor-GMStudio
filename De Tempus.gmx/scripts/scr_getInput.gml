@@ -13,6 +13,7 @@ key_int = keyboard_check_pressed(ord('E'));
 key_slow = keyboard_check_pressed(ord('Q'));
 key_ab1 = keyboard_check_pressed(ord('V'));
 key_ab2 = keyboard_check_pressed(ord('C'));
+key_reload = keyboard_check_pressed(ord('R'));
 
 mouse_left = mouse_check_button_pressed(mb_left);
 mouse_right = mouse_check_button(mb_right);

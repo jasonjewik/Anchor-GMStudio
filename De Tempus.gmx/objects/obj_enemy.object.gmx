@@ -45,7 +45,7 @@ frc = 0.3;
 maxSpeed = 2;
 
 //Combat
-hp = 10;
+hp = 15;
 attack = false;
 
 //Misc
@@ -245,6 +245,16 @@ if (hp &lt;= 0) state = est.dead;
 draw_self();
 image_speed = random_range(0.5, 1);
 scr_light();
+
+if (state = est.normal) {
+    sprite_index = spr_roborat;
+    if (abs(eSpeed) &gt; 0) sprite_index = spr_roborat_run;
+}
+if (place_meeting(x, y, obj_projectile)) {
+    sprite_index = spr_roborat_hurt;
+}
+
+image_xscale = -sign(obj_player.x - x)
 </string>
           </argument>
         </arguments>

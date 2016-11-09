@@ -9,23 +9,29 @@
     <sprites name="Items">
       <sprite>sprites\spr_heavyAxe</sprite>
       <sprite>sprites\spr_hydrauHamm</sprite>
+      <sprite>sprites\spr_pistol</sprite>
       <sprite>sprites\spr_inv</sprite>
       <sprite>sprites\spr_items</sprite>
     </sprites>
     <sprites name="Enemies">
+      <sprite>sprites\spr_roborat_run</sprite>
       <sprite>sprites\spr_roborat</sprite>
+      <sprite>sprites\spr_roborat_hurt</sprite>
     </sprites>
     <sprites name="Player">
       <sprite>sprites\spr_player_dash</sprite>
       <sprite>sprites\spr_player_dash_sil</sprite>
+      <sprite>sprites\spr_player_walk</sprite>
       <sprite>sprites\spr_player_idle_back</sprite>
       <sprite>sprites\spr_player_idle</sprite>
+      <sprite>sprites\spr_player_dmg</sprite>
     </sprites>
     <sprite>sprites\spr_projectile</sprite>
     <sprite>sprites\spr_menu</sprite>
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_tele</sprite>
     <sprite>sprites\spr_cursor</sprite>
+    <sprite>sprites\spr_cursorB</sprite>
     <sprite>sprites\spr_cursorA</sprite>
     <sprite>sprites\spr_textBox</sprite>
     <sprite>sprites\spr_wall</sprite>
@@ -54,9 +60,9 @@
       <script>scripts\scr_normalE.gml</script>
     </scripts>
     <scripts name="Player ">
-      <script>scripts\scr_roll.gml</script>
       <script>scripts\scr_normal.gml</script>
       <script>scripts\scr_damage.gml</script>
+      <script>scripts\scr_roll.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>
     <scripts name="Menus">
