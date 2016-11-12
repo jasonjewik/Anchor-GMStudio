@@ -1,6 +1,12 @@
 //Set dodging to true
 dash = true;
 
+//Lock keyboard controls
+key_right = 0;
+key_left = 0;
+key_up = 0;
+key_down = 0;
+
 //Direction of Roll
 if (!rollVal) {
     //Gets mouse position at time of activation so it doesn't change in real-time

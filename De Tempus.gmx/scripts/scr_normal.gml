@@ -42,7 +42,7 @@ if (ammo = 0){
     projectile = false
 } 
 //Switch to Roll
-if (key_space) {
+if (key_space && dashCD) {
     state = pst.roll;
     image_index = 0;
 }
