@@ -52,7 +52,6 @@
             <string>scr_getInput();
 
 if (key_escape) {  
-    game_end();
     if (!global.pause) { 
         global.pause = true
         instance_deactivate_all(true)
@@ -66,7 +65,7 @@ if (key_escape) {
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -86,15 +85,15 @@ if (key_escape) {
             <string>if (global.pause) {    
     //Set Tint
     draw_set_color(c_black);
-    draw_set_alpha(0.5);
-    draw_rectangle(0, 0, display_get_width(), display_get_height(), false);
+    draw_set_alpha(1);
+    draw_rectangle(view_xview, view_yview, view_xview + view_wview, view_yview + view_hview, false);
 
     //Draw Text
     draw_set_color(c_white);
     draw_set_alpha(1.0);
-    draw_set_font(fnt_pixel);
+    draw_set_font(fnt_text);
     draw_set_halign(fa_center);
-    draw_text(room_width/2, room_height/2, "Game Paused");
+    draw_text(view_xview + view_wview * 0.5, view_yview + view_hview * 0.5, "Game Paused");
     
     //Reset
     draw_set_color(c_black);
