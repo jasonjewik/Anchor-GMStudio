@@ -62,6 +62,7 @@
     <scripts name="Player ">
       <script>scripts\scr_normal.gml</script>
       <script>scripts\scr_damage.gml</script>
+      <script>scripts\scr_petrif.gml</script>
       <script>scripts\scr_roll.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>

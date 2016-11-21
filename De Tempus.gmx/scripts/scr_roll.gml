@@ -1,5 +1,6 @@
 //Set dodging to true
 dash = true;
+dashCD = true;
 
 //Lock keyboard controls
 key_right = 0;

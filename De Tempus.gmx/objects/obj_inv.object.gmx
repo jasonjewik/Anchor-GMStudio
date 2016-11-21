@@ -130,8 +130,8 @@ if (key_tab == 1) {
 }
 
 //Positioning
-x = obj_player.x
-y = obj_player.y
+x = view_xview + view_wview * 0.5;
+y = view_yview + view_hview * 0.5;
 </string>
           </argument>
         </arguments>
@@ -178,8 +178,8 @@ y = obj_player.y
           <argument>
             <kind>1</kind>
             <string>if (global.showInv) {
+    draw_sprite_ext(spr_inv, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, 0.8);
     for (var i = 0; i &lt; global.maxInvSlots; i++) {
-        draw_self();
         draw_text(x, y, ds_grid_get(global.inventory, 0, 0))
     }
 }

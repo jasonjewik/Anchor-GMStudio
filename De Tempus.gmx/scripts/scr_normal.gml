@@ -36,13 +36,13 @@ if (!ranged && mouse_middle) {
 //Ranged Attacks
 if (mouse_right && ammo > 0) {
     ranged = true;
-    if (mouse_left && alarm[0] = -1) alarm_set(0, 5);
+    if (mouse_left && alarm[0] == -1) alarm_set(0, 5);
 } else ranged = false;   
 if (ammo = 0){
     projectile = false
 } 
 //Switch to Roll
-if (key_space && dashCD) {
+if (key_space && !dashCD) {
     state = pst.roll;
     image_index = 0;
 }
