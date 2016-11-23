@@ -93,6 +93,8 @@
     <instance objName="obj_inv" x="224" y="96" name="inst_DD4CF606" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_tele" x="304" y="80" name="inst_A72A7900" locked="0" code="tarX = 64;&#xA;tarY = 96;&#xA;tarR = rm_test;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_camera" x="160" y="192" name="inst_174103AA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_health" x="32" y="32" name="inst_21D2CB92" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_stamina" x="32" y="64" name="inst_D70343BB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

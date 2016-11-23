@@ -42,9 +42,13 @@ if (ammo = 0){
     projectile = false
 } 
 //Switch to Roll
-if (key_space && !dashCD) {
+if (key_space && !dashCD && global.stamina > 33) {
     state = pst.roll;
     image_index = 0;
+}
+
+if (key_space && global.stamina > 33) {
+    global.stamina -= 33
 }
 
 scr_moveCollide();
