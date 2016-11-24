@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,20 +25,106 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>start = ds_list_create();
-ds_list_add(start, 0);
+            <string>///Initialize Variables
+var width, height;
 
-textPos = 0;
+//source = ini_open("Text Interactions");
+message = "Hello there! Welcome to the world of Anchor. Here you'll be able to explore and test out some of your abilites. Have fun, and beware the rats!"
+
 lastSpace = 0;
-
-text = "";
-textFinal = "";
+textPos = 1;
+maxHeight = false;
 line = 0;
-trigger = false;
+spaceCheck = false;
 
-width = 112;
-height = 16;
-padding = 6;
+//Create the DataStructure to hold the text values
+text = ds_queue_create();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Insert Text Logic
+//Check for Spaces
+if (spaceCheck) {
+    textPos++;
+    spaceCheck = false;
+}
+
+//Data Queue
+ds_queue_enqueue(text, string_copy(message, textPos, 1));
+
+//Check to see if a space was added
+if (string_copy(message, textPos, 1) == " ") {
+    lastSpace = textPos;
+}
+    
+//Set the Output
+output = string_insert(ds_queue_head(text), output, textPos + 1);
+
+//Determine if the width of the string has gone past the sides of the textbox
+if (string_width(output) &gt; view_xview + view_wview - 7) {
+    line++;
+    output = string_delete(output, lastSpace, 1);
+    output = string_insert("#", output, lastSpace);
+}
+
+//Move the queue forward
+ds_queue_dequeue(text);
+textPos++;
+
+//Determine if the height of the string has gone past the bottom of the textbox
+if (line == 2) {
+    maxHeight = true;
+    output = string_delete(output, textPos-1, 1);
+    textPos-=2;
+    alarm_set(0, -1);
+    exit;
+}
+
+//Set the alarm
+if (textPos &lt; string_length(message) + 1) alarm_set(0, 1);
 </string>
           </argument>
         </arguments>
@@ -61,7 +147,14 @@ padding = 6;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (distance_to_object(obj_player) &lt; 64) trigger = true;
+            <string>///Move the string up
+if (maxHeight &amp;&amp; keyboard_check_pressed(vk_enter)) {
+    output = string_delete(output, 1, string_length(output));
+    maxHeight = false;
+    line = 0;
+    spaceCheck = true;
+    alarm_set(0, 1);
+}
 </string>
           </argument>
         </arguments>
@@ -84,7 +177,7 @@ padding = 6;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ds_list_destroy(start);
+            <string>ds_queue_destroy(text);
 </string>
           </argument>
         </arguments>
@@ -107,38 +200,24 @@ padding = 6;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (trigger) {
-draw_set_alpha(0.7);
-draw_roundrect_colour(x, y, x + width, y + height, c_black, c_black, false );
+            <string>//Set Box Values
+draw_set_color(c_black);
+draw_set_alpha(0.6);
+//Draw the box
+draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8, view_xview + view_wview * 0.99, view_yview + view_hview - 5, false);
+
+//Set Text Values
 draw_set_alpha(1);
-
-draw_set_halign(fa_left);
-draw_set_valign(fa_middle);
 draw_set_color(c_white);
+texture_set_interpolation(false);
 draw_set_font(fnt_text);
+draw_set_halign(fa_left);
+draw_set_valign(fa_top); 
 
-if (string_width(textFinal) &gt; width - padding - padding) {
-    text = string_delete(text, lastSpace, 1);
-    text = string_insert("#", text, lastSpace);
-    ds_list_add(start, lastSpace + 1);
-}
-
-if (textPos &lt; string_length(text)) {
-    if (string_char_at(text, textPos) == "") lastSpace = textPos;
-    textPos++;
-}
-
-if (string_height(textFinal) &gt; height - padding) {
-    line++;
-}
-
-textFinal = string_copy(text, ds_list_find_value(start, line), textPos - ds_list_find_value(start, line));
-
-draw_text(x + padding, y + padding, textFinal);
-
-draw_set_halign(fa_center);
-draw_set_halign(fa_top);
-}
+//Draw the text
+//See alarm[0] for the actual text logic
+draw_text(view_xview + 7, view_yview + view_hview * 0.8 + 5, output);
+draw_text(view_xview + 7, view_yview + view_hview * 0.6, textPos);
 </string>
           </argument>
         </arguments>

@@ -104,8 +104,6 @@
     </objects>
     <objects name="NPCs">
       <object>objects\class_textBox</object>
-      <object>objects\npc1_text</object>
-      <object>objects\obj_npc</object>
     </objects>
     <objects name="Collision-based">
       <object>objects\obj_wall</object>

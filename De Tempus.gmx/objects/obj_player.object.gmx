@@ -275,10 +275,10 @@ if (global.showInv) state = pst.petrif;
             <kind>1</kind>
             <string>///Debug [press tab to scroll through inv]
 draw_self();
-
+/*
 draw_text(x, y, obj_camera.state);
 
-/*
+
 draw_text(x, y, global.inventory[0, t])
 
 if (keyboard_check_pressed(vk_tab)) {

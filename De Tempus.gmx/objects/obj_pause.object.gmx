@@ -94,6 +94,7 @@ if (key_escape) {
     draw_set_font(fnt_text);
     draw_set_halign(fa_center);
     draw_text(view_xview + view_wview * 0.5, view_yview + view_hview * 0.5, "Game Paused");
+    draw_set_halign(fa_left);
     
     //Reset
     draw_set_color(c_black);
