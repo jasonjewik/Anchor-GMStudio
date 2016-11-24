@@ -85,6 +85,8 @@
       <object>objects\obj_camera</object>
       <object>objects\obj_mouse</object>
       <object>objects\obj_ammogui</object>
+      <object>objects\obj_health</object>
+      <object>objects\obj_stamina</object>
     </objects>
     <objects name="Enemy">
       <object>objects\obj_enemy</object>
