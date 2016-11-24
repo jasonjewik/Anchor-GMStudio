@@ -51,7 +51,6 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="obj_tele" x="400" y="48" name="inst_F57DF4AC" locked="0" code="tarX = 192&#xA;tarY = 192;&#xA;tarR = rm_test2;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="64" y="96" name="inst_E4B92AF5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_inv" x="320" y="544" name="inst_DD4CF606" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_grid" x="64" y="128" name="inst_F2C23BF3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -61,6 +60,8 @@
     <instance objName="obj_enemy" x="224" y="320" name="inst_A052C28D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="352" y="256" name="inst_14E072D1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="class_textBox" x="640" y="192" name="inst_1E7D805B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_health" x="128" y="128" name="inst_8B2B389C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_stamina" x="96" y="96" name="inst_7ECD8BAC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bg_tile" x="0" y="0" w="64" h="64" xo="0" yo="0" id="10000256" name="inst_7D481D74" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

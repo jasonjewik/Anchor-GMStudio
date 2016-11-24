@@ -116,7 +116,6 @@
     <room>rooms\rm_initialize</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_test</room>
-    <room>rooms\rm_test2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

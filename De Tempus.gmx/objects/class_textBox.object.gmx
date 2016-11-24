@@ -30,6 +30,7 @@ var width, height;
 
 //source = ini_open("Text Interactions");
 message = "Hello there! Welcome to the world of Anchor. Here you'll be able to explore and test out some of your abilites. Have fun, and beware the rats!"
+output = ""
 
 lastSpace = 0;
 textPos = 1;
