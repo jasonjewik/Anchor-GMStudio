@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-5</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,7 +29,7 @@
 var width, height;
 
 //source = ini_open("Text Interactions");
-message = "Hello there! Welcome to the world of Anchor. Here you'll be able to explore and test out some of your abilites. Have fun, and beware the rats!"
+message = ""
 output = ""
 
 lastSpace = 0;
@@ -37,6 +37,7 @@ textPos = 1;
 maxHeight = false;
 line = 0;
 spaceCheck = false;
+sprite = noone;
 
 //Create the DataStructure to hold the text values
 text = ds_queue_create();
@@ -207,6 +208,10 @@ draw_set_alpha(0.6);
 //Draw the box
 draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8, view_xview + view_wview * 0.99, view_yview + view_hview - 5, false);
 
+//Draw the person talking
+draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8 - 17, view_xview + 24, view_yview + view_hview * 0.8, false);
+draw_sprite_ext(sprite, image_index, view_xview + 17, view_yview + view_hview * 0.8 - 10, -image_xscale * 2, image_yscale * 2, image_angle, image_blend, image_alpha);
+
 //Set Text Values
 draw_set_alpha(1);
 draw_set_color(c_white);
@@ -218,7 +223,6 @@ draw_set_valign(fa_top);
 //Draw the text
 //See alarm[0] for the actual text logic
 draw_text(view_xview + 7, view_yview + view_hview * 0.8 + 5, output);
-draw_text(view_xview + 7, view_yview + view_hview * 0.6, textPos);
 </string>
           </argument>
         </arguments>

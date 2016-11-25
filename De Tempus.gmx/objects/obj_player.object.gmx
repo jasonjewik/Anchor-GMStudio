@@ -44,8 +44,10 @@ rollVal = false;
 dir = ""
 dash = false
 dashCD = false
+stamCD = false;
 ammo = 10
 enemyCon = noone;
+global.talk = false;
 
 //Debug [temp variables]
 t = 0;
@@ -108,6 +110,105 @@ state = pst.normal;
           <argument>
             <kind>4</kind>
             <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>2</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>3</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>stamCD = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Decrement Stamina
+global.stamina-=3;
+
+//Reset alarm
+if (obj_player.sprite_index == spr_player_dash) alarm_set(2, 1);
+else alarm_set(2, -1);
+</string>
           </argument>
         </arguments>
       </action>
@@ -188,14 +289,18 @@ switch (state) {
     case pst.petrif: {scr_petrif(); break;}
 }
 
+//Reload functions found in obj_mouse
+
 //Collision with Enemy
 if (!dash) {
     if (place_meeting(x, y, obj_enemy)) {
         enemyCon = instance_place(x, y, obj_enemy);
+        global.hp -= 10;
         state = pst.damage;
     }
     if (place_meeting(x, y, obj_eAttack)) {
         enemyCon = instance_place(x, y, obj_eAttack);
+        global.hp -= 10;
         state = pst.damage;
     }
 }
@@ -214,31 +319,6 @@ if (hSpeed == 0 &amp;&amp; vSpeed == 0) {
 
 //Petrify if inventory open
 if (global.showInv) state = pst.petrif;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>hit = instance_place(x, y, obj_enemy);
-
-if (hit != noone) {
-    global.health -= 10;
-}
 </string>
           </argument>
         </arguments>

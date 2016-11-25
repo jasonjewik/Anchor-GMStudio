@@ -1,12 +1,17 @@
 //Set dodging to true
 dash = true;
 dashCD = true;
+alarm_set(2, 1);
 
 //Lock keyboard controls
 key_right = 0;
 key_left = 0;
 key_up = 0;
 key_down = 0;
+
+//Stamina Regen Cooldown
+stamCD = true;
+alarm_set(3, 30);
 
 //Direction of Roll
 if (!rollVal) {
