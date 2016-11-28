@@ -7,10 +7,10 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>9</bbox_left>
-  <bbox_right>28</bbox_right>
+  <bbox_left>8</bbox_left>
+  <bbox_right>30</bbox_right>
   <bbox_top>1</bbox_top>
-  <bbox_bottom>30</bbox_bottom>
+  <bbox_bottom>31</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -28,5 +28,8 @@
     <frame index="5">images\spr_player_dash_5.png</frame>
     <frame index="6">images\spr_player_dash_6.png</frame>
     <frame index="7">images\spr_player_dash_7.png</frame>
+    <frame index="8">images\spr_player_dash_8.png</frame>
+    <frame index="9">images\spr_player_dash_9.png</frame>
+    <frame index="10">images\spr_player_dash_10.png</frame>
   </frames>
 </sprite>

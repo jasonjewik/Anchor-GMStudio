@@ -438,6 +438,7 @@ switch (state) {
         break;
     }
     case pst.roll: {
+        image_speed = 0.5;
         if (global.yFace = 1) sprite_index = spr_player_dash
         if (global.yFace = 0) sprite_index = spr_player_dash;
         if (dir == "v") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10 , y, image_xscale, image_yscale, image_angle, image_blend, 0.5);
