@@ -49,3 +49,13 @@ if (key_space && !dashCD && global.stamina > 33) {
 }
 
 scr_moveCollide();
+
+//Timeslow
+if key_slow
+{
+    with(all)
+        {
+        maxSpeed = 0
+        }
+}
+
