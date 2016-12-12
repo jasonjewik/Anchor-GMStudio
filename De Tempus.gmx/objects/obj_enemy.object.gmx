@@ -243,8 +243,6 @@ if (hp &lt;= 0) state = est.dead;
             <kind>1</kind>
             <string>///Animation Handling
 draw_self();
-image_speed = random_range(0.5, 1);
-scr_light();
 
 if (state = est.normal) {
     sprite_index = spr_roborat;
@@ -255,6 +253,8 @@ if (place_meeting(x, y, obj_projectile)) {
 }
 
 image_xscale = -sign(obj_player.x - x)
+
+scr_light();
 </string>
           </argument>
         </arguments>

@@ -13,17 +13,17 @@ vSpeedFinal -= vSpeedFrac;
 
 //Collision
 if (place_meeting(x + hSpeedFinal, y, obj_wall)) {
-    inc = sign(hSpeedFinal)
+    inc = sign(hSpeedFinal);
     while (!place_meeting(x + inc, y, obj_wall)) x += inc;
-    hSpeed = 0;
     hSpeedFinal = 0;
+    hSpeed = 0;
 }
 x += hSpeedFinal;
     
 if (place_meeting(x, y + vSpeedFinal, obj_wall)) {
-    inc = sign(vSpeedFinal)
+    inc = sign(vSpeedFinal);
     while (!place_meeting(x, y + inc, obj_wall)) y += inc;
-    vSpeed = 0;
     vSpeedFinal = 0;
+    vSpeed = 0;
 }   
 y += vSpeedFinal;

@@ -28,14 +28,20 @@
             <string>///Initialize Variables
 toggle = false;
 
-/*Stamina*/
+//Stamina
 global.stamina = 100;
 global.maxStamina = 100;
 staminaCol = make_color_rgb(204, 204, 204);
 
-/*Health*/
+//Health
 global.hp = 100;
 global.maxhp = 100;
+
+/*Particle System
+partSys = part_system_create();
+appear = part_emitter_create(partSys);
+p_line = part_type_create();
+p_line2 = part_type_shape(p_line, pt_shape_line);*/
 
 /*Position
 x1 = view_xview - global.stamina/2 - 2;
@@ -116,14 +122,12 @@ x5 = view_xview - 2;
             <string>///Main Logic
 //Check to see if the player has toggled their view
 scr_getInput();
-if (key_int &amp;&amp; !global.talk &amp;&amp; obj_player.state = pst.normal) {
+if ((key_int &amp;&amp; !global.talk &amp;&amp; obj_player.state = pst.normal) || obj_player.stamCD == true) {
     toggle = true;
-    alarm_set(0, 150);
+    /*part_emitter_region(partSys, appear, view_xview - 2, view_xview + global.maxhp + 2, view_yview + 17, view_yview + 22, ps_shape_rectangle, ps_distr_gaussian); 
+    part_emitter_burst(partSys, appear, p_line2, 5);*/
+    alarm_set(0, 300);
 }
-if (obj_player.stamCD == true) {
-    toggle = true;
-    alarm_set(0, 150);
-} 
     
 /*Stamina*/
 if (obj_player.stamCD == false &amp;&amp; global.stamina &lt; global.maxStamina &amp;&amp; obj_player.state == pst.normal) {
@@ -132,6 +136,31 @@ if (obj_player.stamCD == false &amp;&amp; global.stamina &lt; global.maxStamina 
 
 /*Health*/
 if (global.hp &lt;= 0) game_end();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*part_emitter_destroy(partSys, appear);
+part_system_destroy(partSys);
+part_type_destroy(p_line);*/
 </string>
           </argument>
         </arguments>

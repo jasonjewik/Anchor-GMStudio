@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprites name="Items">
       <sprite>sprites\spr_heavyAxe</sprite>
+      <sprite>sprites\spr_umbrella</sprite>
       <sprite>sprites\spr_hydrauHamm</sprite>
       <sprite>sprites\spr_pistol</sprite>
       <sprite>sprites\spr_inv</sprite>
@@ -25,16 +26,20 @@
       <sprite>sprites\spr_player_idle_back</sprite>
       <sprite>sprites\spr_player_idle</sprite>
       <sprite>sprites\spr_player_dmg</sprite>
+      <sprite>sprites\spr_projectile</sprite>
     </sprites>
-    <sprite>sprites\spr_npc1</sprite>
-    <sprite>sprites\spr_npc1head</sprite>
-    <sprite>sprites\spr_projectile</sprite>
+    <sprites name="NPCs">
+      <sprite>sprites\spr_npc1</sprite>
+      <sprite>sprites\spr_npc1head</sprite>
+    </sprites>
+    <sprites name="Cursor">
+      <sprite>sprites\spr_cursorB</sprite>
+      <sprite>sprites\spr_cursorA</sprite>
+      <sprite>sprites\spr_cursor</sprite>
+    </sprites>
     <sprite>sprites\spr_menu</sprite>
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_tele</sprite>
-    <sprite>sprites\spr_cursor</sprite>
-    <sprite>sprites\spr_cursorB</sprite>
-    <sprite>sprites\spr_cursorA</sprite>
     <sprite>sprites\spr_textBox</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_button</sprite>
@@ -66,6 +71,7 @@
       <script>scripts\scr_damage.gml</script>
       <script>scripts\scr_petrif.gml</script>
       <script>scripts\scr_roll.gml</script>
+      <script>scripts\scr_time.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>
     <scripts name="Menus">
@@ -86,7 +92,6 @@
       <object>objects\obj_projectile</object>
       <object>objects\obj_camera</object>
       <object>objects\obj_mouse</object>
-      <object>objects\obj_ammogui</object>
       <object>objects\obj_stamHP</object>
     </objects>
     <objects name="Enemy">

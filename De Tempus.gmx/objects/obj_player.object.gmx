@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>///Initialize Variables
+
+//Physics and Movement
 hSpeed = 0;
 vSpeed = 0;
 hSpeedFinal = 0;
@@ -35,19 +37,26 @@ vSpeedFrac = .0;
 accl = 0.5;
 frc = 0.5;
 maxSpeed = 2;
+
+//State dependent
 attack = false;
-image_speed = 0.2;
-global.xFace = 0;
-global.yFace = 0;
 ranged = false;
 rollVal = false;
 dir = ""
 dash = false
 dashCD = false
 stamCD = false;
-ammo = 10
 enemyCon = noone;
 global.talk = false;
+global.timeSlow = false;
+
+//Animations and Drawing
+global.xFace = 0;
+global.yFace = 0;
+image_speed = 0.2;
+
+//Miscellaneous
+ammo = 10
 
 //Debug [temp variables]
 t = 0;
@@ -57,7 +66,8 @@ enum pst {
     normal, 
     damage, 
     roll, 
-    petrif
+    petrif,
+    time
 }
 
 state = pst.normal;
@@ -158,6 +168,30 @@ state = pst.normal;
           <argument>
             <kind>4</kind>
             <string>3</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>4</string>
           </argument>
         </arguments>
       </action>
@@ -287,6 +321,8 @@ switch (state) {
     case pst.damage: {scr_damage(); break;}
     case pst.roll: {scr_roll(); break;}
     case pst.petrif: {scr_petrif(); break;}
+    case pst.time: {scr_time(); break;}
+    default: break;
 }
 
 //Reload functions found in obj_mouse
@@ -294,12 +330,12 @@ switch (state) {
 //Collision with Enemy
 if (!dash) {
     if (place_meeting(x, y, obj_enemy)) {
-        enemyCon = instance_place(x, y, obj_enemy);
+        if (instance_exists(enemyCon)) enemyCon = instance_place(x, y, obj_enemy);
         global.hp -= 10;
         state = pst.damage;
     }
     if (place_meeting(x, y, obj_eAttack)) {
-        enemyCon = instance_place(x, y, obj_eAttack);
+        if (instance_exists(enemyCon)) enemyCon = instance_place(x, y, obj_eAttack);
         global.hp -= 10;
         state = pst.damage;
     }
@@ -319,6 +355,37 @@ if (hSpeed == 0 &amp;&amp; vSpeed == 0) {
 
 //Petrify if inventory open
 if (global.showInv) state = pst.petrif;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Debug
+var lastmsg;
+lastmsg = noone;
+
+if (place_meeting(x, y, obj_wall)) {
+    lastmsg = "Collision";
+    show_debug_message(lastmsg);
+} else if (!place_meeting(x, y, obj_wall)) {
+    lastmsg = "Free";
+    show_debug_message(lastmsg);
+}
 </string>
           </argument>
         </arguments>
@@ -378,42 +445,9 @@ if (global.showInv) state = pst.petrif;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Debug [press tab to scroll through inv]
-draw_self();
-/*
-draw_text(x, y, obj_camera.state);
-
-
-draw_text(x, y, global.inventory[0, t])
-
-if (keyboard_check_pressed(vk_tab)) {
-    if (t == array_length_2d(global.inventory, 0) - 1) t = 0;
-    else t++;
-}
-
-draw_text(x + 10, y, alarm[0]);
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Anim Handling
+draw_self();
+
 if (global.xFace = 0) image_xscale = -1;
 if (global.xFace = 1) image_xscale = 1;
 image_speed = 1;
