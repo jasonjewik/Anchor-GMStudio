@@ -64,26 +64,26 @@ if (!global.showInv) {
     else move = true;
 
     //Follow the mouse
-    if (instance_exists(obj_player) &amp;&amp; move &amp;&amp; state != "regress") {
+    if (instance_exists(obj_playerTest) &amp;&amp; move &amp;&amp; state != "regress") {
         if (x != mouse_x) x += (mouse_x - x)/20;
         if (y != mouse_y) y += (mouse_y - y)/20;
     }
 
     //Set the view and lock on player
-    view_object[0] = obj_player;
+    view_object[0] = obj_playerTest;
     view_xview[0] = x - 140;
     view_wview[0] = 320;
     view_yview[0] = y - 90;
     view_hview[0] = 180;
-    
+    /*
     //Switch Block
     switch (state) {
         case "player": {
             //Leash the camera movement
-            x = clamp(x, obj_player.x - 32, obj_player.x + 32);
-            y = clamp(y, obj_player.y - 32, obj_player.y + 32);   
+            x = clamp(x, obj_playerTest.x - 32, obj_playerTest.x + 32);
+            y = clamp(y, obj_playerTest.y - 32, obj_playerTest.y + 32);   
             
-            if (obj_player.ranged) {
+            if (obj_playerTest.ranged) {
                 prevX = x;
                 prevY = y;
                 //state = "aim";
@@ -92,17 +92,17 @@ if (!global.showInv) {
         }
         case "aim": {
             //Leash the camera movement
-            x = clamp(x, obj_player.x - 64, obj_player.x + 64);
-            y = clamp(y, obj_player.y - 64, obj_player.y + 64);   
+            x = clamp(x, obj_playerTest.x - 64, obj_playerTest.x + 64);
+            y = clamp(y, obj_playerTest.y - 64, obj_playerTest.y + 64);   
         
-            if (!obj_player.ranged) state = "regress";
+            if (!obj_playerTest.ranged) state = "regress";
             break;
         }
         case "regress": {
             //Check to see if outside standard range
-            if (distance_to_point(obj_player.x, obj_player.y) &gt; 32) {
+            if (distance_to_point(obj_playerTest.x, obj_playerTest.y) &gt; 32) {
                 //Regress to player leash range
-                if (instance_exists(obj_player)) {
+                if (instance_exists(obj_playerTest)) {
                     state = "player";
                     if (x != prevX) x += (prevX - x)/10;
                     if (y != prevY) y += (prevY - y)/10;
@@ -113,7 +113,7 @@ if (!global.showInv) {
             break;
         }
         default: break;
-    } 
+    }*/
 }
 </string>
           </argument>

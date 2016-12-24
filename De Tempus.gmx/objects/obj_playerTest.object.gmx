@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>spr_mask</maskName>
+  <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -27,52 +27,40 @@
             <kind>1</kind>
             <string>///Initialize Variables
 
-//Physics and Movement
+//Physics 
 hSpeed = 0;
 vSpeed = 0;
+hSpeedFrac = 0;
+vSpeedFrac = 0;
 hSpeedFinal = 0;
 vSpeedFinal = 0;
-hSpeedFrac = .0;
-vSpeedFrac = .0;
-accl = 0.5;
-frc = 0.5;
-maxSpeed = 2;
-hMove = 0;
-vMove = 0;
+mass = 1;
+frc = mass * 0.25;
+accl = mass * 0.4;
+maxSpeed = mass * 1.2;
 
-//State dependent
-attack = false;
-ranged = false;
-rollVal = false;
-dir = ""
-dash = false
-dashCD = false
-stamCD = false;
-enemyCon = noone;
-global.talk = false;
-global.timeSlow = false;
+//Animations
+animReset = false;
+pXFace = 1;
+pYFace = 1;
 
-//Animations and Drawing
-global.xFace = 0;
-global.yFace = 0;
-image_speed = 0.2;
+//Combat
+global.stamina = 100;
+global.maxStamina = 100;
+dashCD = false;
+roll = false;
+staminaCD = false;
+dir = "";
+global.hp = 100;
+global.maxhp = 100;
 
-//Miscellaneous
-ammo = 10
-
-//Debug [temp variables]
-t = 0;
-
-//Player States
-enum pst {
-    normal, 
-    damage, 
-    roll, 
-    petrif,
-    time
+//States
+enum st {
+    idle,
+    walk,
+    dash
 }
-
-state = pst.normal;
+global.pState = st.idle;
 </string>
           </argument>
         </arguments>
@@ -149,77 +137,6 @@ state = pst.normal;
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>-1</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>3</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>-1</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>4</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="3">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>stamCD = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="2" enumb="2">
       <action>
@@ -242,7 +159,7 @@ state = pst.normal;
 global.stamina-=3;
 
 //Reset alarm
-if (obj_player.sprite_index == spr_player_dash) alarm_set(2, 1);
+if (sprite_index == spr_player_dash) alarm_set(2, 1);
 else alarm_set(2, -1);
 </string>
           </argument>
@@ -266,7 +183,8 @@ else alarm_set(2, -1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dashCD = false;
+            <string>///Stamina CDs
+staminaCD = false;
 </string>
           </argument>
         </arguments>
@@ -289,11 +207,9 @@ else alarm_set(2, -1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>projectile = instance_create(x,y,obj_projectile);
-projectile.direction = point_direction(x,y,mouse_x,mouse_y);
-projectile.image_angle = image_angle;
-projectile.speed = 8;
-
+            <string>///Dash CDs
+dashCD = false;
+roll = false;
 </string>
           </argument>
         </arguments>
@@ -310,57 +226,35 @@ projectile.speed = 8;
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>other</whoName>
+        <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///State Engine
-
-//Load Inputs
+            <string>///Player Main Logic
 scr_getInput();
 
-//Switch States
-switch (state) {
-    case pst.normal: {scr_normal(); break;}
-    case pst.damage: {scr_damage(); break;}
-    case pst.roll: {scr_roll(); break;}
-    case pst.petrif: {scr_petrif(); break;}
-    case pst.time: {scr_time(); break;}
+hMove = key_right - key_left;
+vMove = key_down - key_up;
+
+//Player States
+switch (global.pState) {
+    case st.idle: 
+        Idle(); 
+        break;
+    case st.walk: 
+        Walk(); 
+        break;
+    case st.dash:
+        Dash();
+        break;
     default: break;
 }
 
-//Reload functions found in obj_mouse
+if (!staminaCD &amp;&amp; global.stamina &lt; global.maxStamina &amp;&amp; global.pState != st.dash) global.stamina++;
 
-//Collision with Enemy
-if (!dash) {
-    if (place_meeting(x, y, obj_enemy)) {
-        if (instance_exists(enemyCon)) enemyCon = instance_place(x, y, obj_enemy);
-        global.hp -= 10;
-        state = pst.damage;
-    }
-    if (place_meeting(x, y, obj_eAttack)) {
-        if (instance_exists(enemyCon)) enemyCon = instance_place(x, y, obj_eAttack);
-        global.hp -= 10;
-        state = pst.damage;
-    }
-}
 
-//Item Pickup
-item = instance_position(x, y, obj_item)   
-if (instance_position(x, y, item)) scr_itemPick(item);
-
-//Face Values
-if (hSpeed == 0 &amp;&amp; vSpeed == 0) {
-    if (mouse_x &gt; x) global.xFace = 0;
-    if (mouse_x &lt; x) global.xFace = 1;
-    if (mouse_y &gt; y) global.yFace = 0;
-    if (mouse_y &lt; y) global.yFace = 1;
-} 
-
-//Petrify if inventory open
-if (global.showInv) state = pst.petrif;
 </string>
           </argument>
         </arguments>
@@ -381,18 +275,8 @@ if (global.showInv) state = pst.petrif;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Debug
-if (keyboard_check_pressed(vk_control)) {
-    if (place_meeting(x, y, obj_wall)) show_debug_message("Collision"); 
-    else if (!place_meeting(x, y, obj_wall)) show_debug_message("Free"); 
-    show_debug_message("hSpeed: " + string(hSpeed));
-    show_debug_message("hSpeedFrac: " + string(hSpeedFrac));
-    show_debug_message("hSpeedFinal: " + string(hSpeedFinal));
-    show_debug_message("vSpeed: " + string(vSpeed));
-    show_debug_message("vSpeedFrac: " + string(vSpeedFrac));
-    show_debug_message("vSpeedFinal: " + string(vSpeedFinal));
-    show_debug_message("--------------------------------------------");
-}
+            <string>///Debugging
+show_debug_message(maxSpeed);
 </string>
           </argument>
         </arguments>
@@ -415,21 +299,15 @@ if (keyboard_check_pressed(vk_control)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch (state) {
-    case pst.roll: {
-        state = pst.normal;
-        alarm_set(1, 10);
-        image_index = 0;
-        break;
-    } 
-    case pst.damage: {
-        state = pst.normal;
-        image_index = 0;
-        break;
-    }
+            <string>///Break States
+switch (global.pState) {
+    case st.dash: 
+        global.pState = st.idle;
+        alarm_set(0, 10);
+        alarm_set(1, 90);
+        AnimReset(0);
     default: break;
 }
-
 </string>
           </argument>
         </arguments>
@@ -452,73 +330,48 @@ if (keyboard_check_pressed(vk_control)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Anim Handling
+            <string>///Animation Handling
 draw_self();
 
-if (global.xFace = 0) image_xscale = -1;
-if (global.xFace = 1) image_xscale = 1;
-image_speed = 1;
+pYFace = sign(mouse_y - y);
 
-switch (state) {
-    case pst.normal: {
-        if (hSpeed == 0 &amp;&amp; vSpeed == 0) {
-            if (global.yFace = 1) sprite_index = spr_player_idle_back;
-            else if (global.yFace = 0) sprite_index = spr_player_idle;
-        } else if (abs(hSpeed) &gt; 0) {
-            image_speed = 0.5;
-            image_xscale = sign(hSpeed)
-            sprite_index = spr_player_walk;
-        }
-        if (ranged) {
-            if (point_direction(x, y, mouse_x, mouse_y) &gt;= 180 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 270) {
-                draw_sprite_ext(spr_pistol, image_index, x, y, image_xscale, -image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
-            } else if (point_direction(x, y, mouse_x, mouse_y) &gt; 270 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 360) {
-                draw_sprite_ext(spr_pistol, image_index, x, y, -image_xscale, image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
-            }
-        }
+switch (global.pState) {
+    case st.idle:
+        AnimReset(1);
+        image_speed = 1;
+        if (pYFace == 1) {
+            AnimReset(1);
+            sprite_index = spr_player_idle;
+            AnimReset(0);
+        } else {
+            AnimReset(1);
+            sprite_index = spr_player_idle_back;
+            AnimReset(0);
+        }   
+        pXFace = -sign(mouse_x - x);
         break;
-    }
-    case pst.roll: {
+    case st.walk:
+        AnimReset(1);
         image_speed = 0.5;
-        if (global.yFace = 1) sprite_index = spr_player_dash
-        if (global.yFace = 0) sprite_index = spr_player_dash;
+        sprite_index = spr_player_walk;
+        pXFace = sign(hSpeed);
+        break;
+    case st.dash: 
+        AnimReset(0);
+        image_speed = 0.5;
+        sprite_index = spr_player_dash;
+        pXFace = -sign(hSpeed);
         if (dir == "v") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10 , y, image_xscale, image_yscale, image_angle, image_blend, 0.5);
         else if (dir == "h") draw_sprite_ext(spr_player_dash_sil, image_index, x, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
         else if (dir == "hv") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
-        break;      
-    }
-    case pst.damage: {
-        sprite_index = spr_player_dmg;
-        image_xscale = -sign(enemyCon.x - x); 
         break;
-    }
     default: break;
 }
 
-scr_light();
+if (abs(pXFace) &gt; 0) image_xscale = pXFace;
+else image_xscale = 1;
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Collision Mask
-draw_sprite_ext(spr_mask, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, 0.3);
+scr_light();
 </string>
           </argument>
         </arguments>

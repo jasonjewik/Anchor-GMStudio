@@ -26,6 +26,7 @@
       <sprite>sprites\spr_player_idle_back</sprite>
       <sprite>sprites\spr_player_idle</sprite>
       <sprite>sprites\spr_player_dmg</sprite>
+      <sprite>sprites\spr_mask</sprite>
       <sprite>sprites\spr_projectile</sprite>
     </sprites>
     <sprites name="NPCs">
@@ -51,12 +52,21 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="Player">
+      <script>scripts\scr_physics.gml</script>
+      <script>scripts\AnimReset.gml</script>
+      <script>scripts\Idle.gml</script>
+      <script>scripts\Walk.gml</script>
+      <script>scripts\Dash.gml</script>
+      <script>scripts\scr_getInput.gml</script>
+    </scripts>
     <scripts name="Inventory">
       <script>scripts\scr_itemPick.gml</script>
       <script>scripts\scr_inventory.gml</script>
     </scripts>
     <scripts name="Physics">
       <script>scripts\scr_approach.gml</script>
+      <script>scripts\scr_inertia.gml</script>
       <script>scripts\scr_moveCollide.gml</script>
       <script>scripts\scr_moveCollideE.gml</script>
       <script>scripts\scr_light.gml</script>
@@ -66,13 +76,12 @@
       <script>scripts\scr_damageE.gml</script>
       <script>scripts\scr_normalE.gml</script>
     </scripts>
-    <scripts name="Player ">
+    <scripts name="Player(old)">
       <script>scripts\scr_normal.gml</script>
       <script>scripts\scr_damage.gml</script>
       <script>scripts\scr_petrif.gml</script>
       <script>scripts\scr_roll.gml</script>
       <script>scripts\scr_time.gml</script>
-      <script>scripts\scr_getInput.gml</script>
     </scripts>
     <scripts name="Menus">
       <script>scripts\scr_startGame.gml</script>
@@ -87,6 +96,7 @@
   </fonts>
   <objects name="objects">
     <objects name="Player">
+      <object>objects\obj_playerTest</object>
       <object>objects\obj_player</object>
       <object>objects\obj_mAttack</object>
       <object>objects\obj_projectile</object>

@@ -9,24 +9,16 @@ if (key_shift) {
 rollVal = false;
 dash = false;
 
-//Player Movements
-var hMove;
+//Movement Inputs
 hMove = -key_left + key_right;
-var vMove;
 vMove = -key_up + key_down;
 
-if (hSpeed == 0) hSpeed = hMove * accl;
-else hSpeed = hMove * accl + hSpeed;
-if (vSpeed == 0) vSpeed = vMove * accl;
-else vSpeed = vMove * accl + vSpeed;
+//Walking
+hSpeed += hMove * accl;
+vSpeed += vMove * accl;
 
-//Inertia & Friction Handling
-if (hMove == 0) {
-    hSpeed = scr_approach(hSpeed, 0, frc);
-}
-if (vMove == 0) {
-    vSpeed = scr_approach(vSpeed, 0, frc);
-}
+scr_inertia();
+scr_moveCollide();
 
 //Melee Attacks
 if (!ranged && mouse_middle) {
@@ -47,5 +39,3 @@ if (key_space && !dashCD && global.stamina > 33) {
     state = pst.roll;
     image_index = 0;
 }
-
-scr_moveCollide();
