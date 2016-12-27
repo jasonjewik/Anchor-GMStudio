@@ -51,6 +51,8 @@ dashCD = false;
 roll = false;
 staminaCD = false;
 dir = "";
+dir2 = "";
+melee = false;
 global.hp = 100;
 global.maxhp = 100;
 
@@ -58,7 +60,9 @@ global.maxhp = 100;
 enum st {
     idle,
     walk,
-    dash
+    dash,
+    melee, 
+    range
 }
 global.pState = st.idle;
 </string>
@@ -134,6 +138,56 @@ global.pState = st.idle;
           <argument>
             <kind>4</kind>
             <string>2</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>3</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Melee Attacks
+global.pState = st.idle;
+melee = false;
+AnimReset(0);
+</string>
           </argument>
         </arguments>
       </action>
@@ -249,6 +303,12 @@ switch (global.pState) {
     case st.dash:
         Dash();
         break;
+    case st.melee:
+        Melee();
+        break;
+    case st.range:
+        Range();
+        break;
     default: break;
 }
 
@@ -276,7 +336,7 @@ if (!staminaCD &amp;&amp; global.stamina &lt; global.maxStamina &amp;&amp; globa
           <argument>
             <kind>1</kind>
             <string>///Debugging
-show_debug_message(maxSpeed);
+//show_debug_message(global.pState);
 </string>
           </argument>
         </arguments>
@@ -354,7 +414,7 @@ switch (global.pState) {
         AnimReset(1);
         image_speed = 0.5;
         sprite_index = spr_player_walk;
-        pXFace = sign(hSpeed);
+        pXFace = hMove;
         break;
     case st.dash: 
         AnimReset(0);
@@ -365,7 +425,9 @@ switch (global.pState) {
         else if (dir == "h") draw_sprite_ext(spr_player_dash_sil, image_index, x, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
         else if (dir == "hv") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
         break;
-    default: break;
+    default: 
+        sprite_index = spr_player_idle; 
+        break;
 }
 
 if (abs(pXFace) &gt; 0) image_xscale = pXFace;

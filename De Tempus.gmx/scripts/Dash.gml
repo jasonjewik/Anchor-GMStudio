@@ -28,27 +28,25 @@ if (!roll) {
 
 //Switch block to make sure dash is only done in one direction
 switch (dir) {
-    case "h": {
+    case "h": 
         if (y1 > y) vSpeed = scr_approach(vSpeed, 8, accl * 8);
         else if (y1 < y) vSpeed = scr_approach(vSpeed, -8, accl * 8);
-    break;
-    }
-    case "v": {
+        break;
+    case "v": 
         if (x1 < x) hSpeed = scr_approach(hSpeed, -8, accl * 8); 
         else if (x1 > x) hSpeed = scr_approach(hSpeed, 8, accl * 8);   
-    break;
-    }
-    case "hv": {
+        break;
+    case "hv": 
         hSpeed = scr_approach(hSpeed, sign(mouse_x - x) * 8, accl * 8);
         if (pXFace == 1) {
-            if (pYFace == 1) vSpeed = hSpeed; 
-            else if (pYFace == -1) vSpeed = -hSpeed;
-        }
-        else if (pXFace == -1) {
-            if (pYFace == 1) vSpeed = -hSpeed;
+            if (pYFace == 1) vSpeed = -hSpeed; 
             else if (pYFace == -1) vSpeed = hSpeed;
         }
-    }
+        else if (pXFace == -1) {
+            if (pYFace == 1) vSpeed = hSpeed;
+            else if (pYFace == -1) vSpeed = -hSpeed;
+        }
+        break;
     default: break;
 }
 

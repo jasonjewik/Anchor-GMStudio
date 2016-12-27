@@ -45,6 +45,7 @@ attack = false;
 ranged = false;
 rollVal = false;
 dir = ""
+dir2 = ""
 dash = false
 dashCD = false
 stamCD = false;

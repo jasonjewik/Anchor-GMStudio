@@ -11,3 +11,8 @@ if (global.stamina >= 25 && !dashCD && key_space) {
     global.pState = st.dash;
     AnimReset(0);
 }
+
+if (mouse_middle) {
+    global.pState = st.melee;
+    AnimReset(0);
+}
