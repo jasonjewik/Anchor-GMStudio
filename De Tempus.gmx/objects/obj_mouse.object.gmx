@@ -99,14 +99,14 @@
 x = mouse_x;
 y = mouse_y;
 
-if (instance_exists(obj_player)) {
-    if (obj_player.ammo &lt; 10) {
+if (instance_exists(obj_playerTest)) {
+    if (obj_playerTest.ammo &lt; 10) {
         //Auto Reload at 0 or manually reload at above 0
-        if (obj_player.ammo == 0 || key_reload) {
+        if (obj_playerTest.ammo == 0 || key_reload) {
             { do {
-                obj_player.ammo++;
+                obj_playerTest.ammo++;
             } until 
-                obj_player.ammo = 10;  
+                obj_playerTest.ammo = 10;  
             }
             reload = true;
             alarm_set(0, 60);
@@ -139,9 +139,9 @@ if (instance_exists(obj_player)) {
             <string>scr_getInput();
 
 //Aiming Line
-if (instance_exists(obj_player) &amp;&amp; obj_player.ranged) {
+if (instance_exists(obj_playerTest) &amp;&amp; global.pState = st.range) {
     draw_set_color(c_white);
-    draw_line(obj_player.x, obj_player.y, mouse_x, mouse_y);
+    draw_line(obj_playerTest.x, obj_playerTest.y, mouse_x, mouse_y);
 }
 
 //Set the Cursor Sprite

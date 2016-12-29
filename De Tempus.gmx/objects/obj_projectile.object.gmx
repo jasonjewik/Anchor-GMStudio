@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>obj_player.ammo -= 1
+            <string>obj_playerTest.ammo -= 1
 </string>
           </argument>
         </arguments>

@@ -75,7 +75,7 @@ if (!global.showInv) {
     view_wview[0] = 320;
     view_yview[0] = y - 90;
     view_hview[0] = 180;
-    /*
+    
     //Switch Block
     switch (state) {
         case "player": {
@@ -83,10 +83,10 @@ if (!global.showInv) {
             x = clamp(x, obj_playerTest.x - 32, obj_playerTest.x + 32);
             y = clamp(y, obj_playerTest.y - 32, obj_playerTest.y + 32);   
             
-            if (obj_playerTest.ranged) {
+            if (global.pState == st.range) {
                 prevX = x;
                 prevY = y;
-                //state = "aim";
+                state = "aim";
             }
             break;
         }
@@ -95,7 +95,7 @@ if (!global.showInv) {
             x = clamp(x, obj_playerTest.x - 64, obj_playerTest.x + 64);
             y = clamp(y, obj_playerTest.y - 64, obj_playerTest.y + 64);   
         
-            if (!obj_playerTest.ranged) state = "regress";
+            if (global.pState != st.range) state = "regress";
             break;
         }
         case "regress": {
@@ -113,7 +113,7 @@ if (!global.showInv) {
             break;
         }
         default: break;
-    }*/
+    }
 }
 </string>
           </argument>

@@ -4,9 +4,9 @@ if (!melee) {
     x1 = mouse_x;
     y1 = mouse_y;
     //Determine the direcion of the dash
-    if (abs(x1 - x) < 25) {
+    if (abs(y1 - y) < 25) {
         dir2 = "h";
-    } else if (abs(y1 - y) < 25) {
+    } else if (abs(x1 - x) < 25) {
         dir2 = "v";
     } else if (abs(x1 - x) - abs(y1 - y) < 25) {
         dir2 = "hv";
@@ -31,5 +31,7 @@ switch (dir2) {
     }
     default: break;
 }
+
+show_debug_message(string(dir2));
 
 alarm_set(3, 1);

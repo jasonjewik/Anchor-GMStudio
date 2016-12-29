@@ -55,6 +55,7 @@ dir2 = "";
 melee = false;
 global.hp = 100;
 global.maxhp = 100;
+ammo = 10;
 
 //States
 enum st {
@@ -162,6 +163,57 @@ global.pState = st.idle;
           <argument>
             <kind>4</kind>
             <string>3</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>4</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>projectile = instance_create(x,y,obj_projectile);
+projectile.direction = point_direction(x,y,mouse_x,mouse_y);
+projectile.image_angle = image_angle;
+projectile.speed = 8;
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -424,6 +476,14 @@ switch (global.pState) {
         if (dir == "v") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10 , y, image_xscale, image_yscale, image_angle, image_blend, 0.5);
         else if (dir == "h") draw_sprite_ext(spr_player_dash_sil, image_index, x, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
         else if (dir == "hv") draw_sprite_ext(spr_player_dash_sil, image_index, x + -sign(hSpeed) * 10, y + -sign(vSpeed) * 10, image_xscale, image_yscale, image_angle, image_blend, 0.5);
+        break;
+    //case st.melee:
+    case st.range: 
+        if (point_direction(x, y, mouse_x, mouse_y) &gt;= 180 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 270) {
+            draw_sprite_ext(spr_pistol, image_index, x, y, image_xscale, -image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
+        } else if (point_direction(x, y, mouse_x, mouse_y) &gt; 270 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 360) {
+            draw_sprite_ext(spr_pistol, image_index, x, y, -image_xscale, image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
+        }
         break;
     default: 
         sprite_index = spr_player_idle; 
