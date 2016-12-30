@@ -115,7 +115,7 @@ x5 = view_xview - 2;
             <string>///Main Logic
 //Check to see if the player has toggled their view
 scr_getInput();
-if ((key_int &amp;&amp; !global.talk &amp;&amp; global.pState = st.idle || global.pState = st.walk) || obj_playerTest.stamCD == true) {
+if ((key_int &amp;&amp; !global.talk &amp;&amp; (global.pState = st.idle || global.pState = st.walk)) || obj_playerTest.stamCD == true) {
     toggle = true;
     /*part_emitter_region(partSys, appear, view_xview - 2, view_xview + global.maxhp + 2, view_yview + 17, view_yview + 22, ps_shape_rectangle, ps_distr_gaussian); 
     part_emitter_burst(partSys, appear, p_line2, 5);*/

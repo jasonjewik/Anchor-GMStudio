@@ -58,6 +58,9 @@ ammo = 10;
 stamCD = false;
 enemyCon = noone;
 
+//NPC Interactions and Items
+global.talk = false;
+
 //States
 enum st {
     idle,
@@ -65,7 +68,8 @@ enum st {
     dash,
     melee, 
     range,
-    damage
+    damage,
+    petrified
 }
 global.pState = st.idle;
 </string>
@@ -367,6 +371,9 @@ switch (global.pState) {
     case st.damage:
         Damage();
         break;
+    case st.petrified: 
+        Petrified();
+        break;
     default: break;
 }
 
@@ -382,6 +389,9 @@ if (global.pState != st.dash) {
 //Item Pickup
 item = instance_position(x, y, obj_item)   
 if (instance_position(x, y, item)) scr_itemPick(item);
+
+//Petrify if inventory open
+if (global.showInv) global.pState = st.petrified;
 </string>
           </argument>
         </arguments>

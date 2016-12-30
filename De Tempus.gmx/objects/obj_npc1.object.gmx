@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>scr_getInput();
 
-if (distance_to_object(obj_player) &lt; 32) {
+if (distance_to_object(obj_playerTest) &lt; 32 &amp;&amp; !global.chatOpen) {
     global.talk = true;
     if (key_int) {
         with (instance_create(x, y, class_textBox)) {

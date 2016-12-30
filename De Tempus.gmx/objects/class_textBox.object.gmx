@@ -42,6 +42,9 @@ toggle = false;
 
 //Create the DataStructure to hold the text values
 text = ds_queue_create();
+
+//Check to see if a message is already open
+global.chatOpen = true;
 </string>
           </argument>
         </arguments>
@@ -112,7 +115,8 @@ text = ds_queue_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>visible = false;
+            <string>global.chatOpen = false;
+instance_destroy();
 </string>
           </argument>
         </arguments>
