@@ -56,6 +56,7 @@ global.hp = 100;
 global.maxhp = 100;
 ammo = 10;
 stamCD = false;
+enemyCon = noone;
 
 //States
 enum st {
@@ -63,7 +64,8 @@ enum st {
     walk,
     dash,
     melee, 
-    range
+    range,
+    damage
 }
 global.pState = st.idle;
 </string>
@@ -362,8 +364,24 @@ switch (global.pState) {
     case st.range:
         Range();
         break;
+    case st.damage:
+        Damage();
+        break;
     default: break;
 }
+
+//Collision with Enemy
+if (global.pState != st.dash) {
+    if (place_meeting(x, y, obj_enemy)) {
+        enemyCon = instance_place(x, y, obj_enemy);
+        global.hp -= 1;
+        global.pState = st.damage;
+    }
+}
+
+//Item Pickup
+item = instance_position(x, y, obj_item)   
+if (instance_position(x, y, item)) scr_itemPick(item);
 </string>
           </argument>
         </arguments>
@@ -415,6 +433,11 @@ switch (global.pState) {
         alarm_set(0, 10);
         alarm_set(1, 60);
         AnimReset(0);
+        break;
+    case st.damage: 
+        global.pState = st.idle;
+        AnimReset(0);
+        break;
     default: break;
 }
 </string>
@@ -481,6 +504,10 @@ switch (global.pState) {
         } else if (point_direction(x, y, mouse_x, mouse_y) &gt; 270 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 360) {
             draw_sprite_ext(spr_pistol, image_index, x, y, -image_xscale, image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
         }
+        break;
+    case st.damage: 
+        sprite_index = spr_player_dmg;
+        image_xscale = -sign(enemyCon.x - x); 
         break;
     default: 
         sprite_index = spr_player_idle; 

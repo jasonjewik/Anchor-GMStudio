@@ -1,5 +1,5 @@
-hSpeed = scr_approach(hSpeed, -sign(obj_player.x - x) * 6, accl * 4);
-vSpeed = scr_approach(vSpeed, -sign(obj_player.y - y) * 6, accl * 4);
+hSpeed = scr_approach(hSpeed, -sign(obj_playerTest.x - x) * 6, accl * 4);
+vSpeed = scr_approach(vSpeed, -sign(obj_playerTest.y - y) * 6, accl * 4);
 
 if (path_exists(path)) path_delete(path);
 

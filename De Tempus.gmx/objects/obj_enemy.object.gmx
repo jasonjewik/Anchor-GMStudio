@@ -3,7 +3,7 @@
   <spriteName>spr_roborat</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-4</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -28,7 +28,7 @@
             <string>///Initialize Variables
 
 if (place_meeting(x, y, obj_wall)) instance_destroy();
-if (distance_to_object(obj_player) &lt; 128) instance_destroy();
+if (distance_to_object(obj_playerTest) &lt; 128) instance_destroy();
 
 //Physics
 eSpeed = 0;
@@ -133,10 +133,10 @@ path = path_add();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (obj_player.x &gt; x) instance_create(x + 15, y, obj_eAttack);
-if (obj_player.x &lt; x) instance_create(x - 15, y, obj_eAttack);
-if (obj_player.y &gt; y) instance_create(x, y + 15, obj_eAttack);
-if (obj_player.y &lt; y) instance_create(x, y - 15, obj_eAttack);
+            <string>if (obj_playerTest.x &gt; x) instance_create(x + 15, y, obj_eAttack);
+if (obj_playerTest.x &lt; x) instance_create(x - 15, y, obj_eAttack);
+if (obj_playerTest.y &gt; y) instance_create(x, y + 15, obj_eAttack);
+if (obj_playerTest.y &lt; y) instance_create(x, y - 15, obj_eAttack);
 
 alarm_set(1, 15);
 </string>
@@ -161,7 +161,7 @@ alarm_set(1, 15);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (path_exists(path) &amp;&amp; mp_grid_path(global.grid, path, x, y, (obj_player.x div 32) * 32 + 16, (obj_player.y div 32) * 32 + 16, true)) {
+            <string>if (path_exists(path) &amp;&amp; mp_grid_path(global.grid, path, x, y, (obj_playerTest.x div 32) * 32 + 16, (obj_playerTest.y div 32) * 32 + 16, true)) {
     path_start(path, eSpeedFinal, path_action_stop, false);
 }
 
@@ -196,6 +196,12 @@ switch (state) {
 }
 
 if (hp &lt;= 0) state = est.dead;
+
+if (place_meeting(x, y, obj_mAttack)) {
+    hp -= 1;
+    state = est.damage;
+    alarm_set(0, -1);
+}
 </string>
           </argument>
         </arguments>
@@ -248,11 +254,11 @@ if (state = est.normal) {
     sprite_index = spr_roborat;
     if (abs(eSpeed) &gt; 0) sprite_index = spr_roborat_run;
 }
-if (place_meeting(x, y, obj_projectile)) {
+if (state = est.damage) {
     sprite_index = spr_roborat_hurt;
 }
 
-image_xscale = -sign(obj_player.x - x)
+image_xscale = -sign(obj_playerTest.x - x)
 
 scr_light();
 </string>

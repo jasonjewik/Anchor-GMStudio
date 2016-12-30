@@ -59,6 +59,7 @@
       <script>scripts\Melee.gml</script>
       <script>scripts\Idle.gml</script>
       <script>scripts\Walk.gml</script>
+      <script>scripts\Damage.gml</script>
       <script>scripts\Dash.gml</script>
       <script>scripts\scr_getInput.gml</script>
     </scripts>
