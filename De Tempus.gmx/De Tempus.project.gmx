@@ -61,6 +61,7 @@
       <script>scripts\TimeSlow.gml</script>
       <script>scripts\Walk.gml</script>
       <script>scripts\Damage.gml</script>
+      <script>scripts\Combo.gml</script>
       <script>scripts\Dash.gml</script>
       <script>scripts\Petrified.gml</script>
       <script>scripts\scr_getInput.gml</script>

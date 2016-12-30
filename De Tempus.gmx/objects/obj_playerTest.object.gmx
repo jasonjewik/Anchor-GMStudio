@@ -71,7 +71,8 @@ enum st {
     melee, 
     range,
     damage,
-    petrified
+    petrified,
+    combo
 }
 global.pState = st.idle;
 </string>
@@ -222,6 +223,59 @@ global.pState = st.idle;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>6</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.target = instance_nearest(x, y, obj_enemy); 
+instance_create(x, y, obj_mAttack);
+x = global.target.x;
+y = global.target.y;
+
+if (global.pState = st.combo) alarm_set(6, 5);
+else alarm_set(6, -1);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="5">
       <action>
@@ -244,6 +298,7 @@ global.pState = st.idle;
 with (obj_enemy) maxSpeed = 2;
 with (self) image_speed = image_speed/5;
 global.timeSlow = false;
+global.pState = st.idle;
 </string>
           </argument>
         </arguments>
@@ -426,11 +481,14 @@ switch (global.pState) {
     case st.petrified: 
         Petrified();
         break;
+    case st.combo:
+        Combo();
+        break;
     default: break;
 }
 
 //Collision with Enemy
-if (global.pState != st.dash) {
+if (global.pState != st.dash || global.pState != st.combo) {
     if (place_meeting(x, y, obj_enemy)) {
         enemyCon = instance_place(x, y, obj_enemy);
         global.hp -= 1;
@@ -451,6 +509,9 @@ if (key_slow) {
     global.slowActive = true;
     TimeSlow();
 }
+
+//Combo Attack
+if (global.timeSlow &amp;&amp; global.autoTargeting) global.pState = st.combo;
 </string>
           </argument>
         </arguments>

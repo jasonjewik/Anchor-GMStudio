@@ -50,6 +50,9 @@
           <argument>
             <kind>1</kind>
             <string>reload = false;
+global.autoTargeting = false;
+global.target = noone;
+initTrigger = false;
 </string>
           </argument>
         </arguments>
@@ -112,7 +115,14 @@ if (instance_exists(obj_playerTest)) {
             alarm_set(0, 60);
         }
     }
+    
+    if (global.timeSlow) {
+        if (mouse_left &amp;&amp; !initTrigger) global.target = instance_position(x, y, obj_enemy);
+        if (global.target != noone) global.autoTargeting = true;
+    }
 }
+
+
 
 </string>
           </argument>

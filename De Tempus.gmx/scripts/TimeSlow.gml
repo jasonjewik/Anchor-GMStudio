@@ -1,6 +1,6 @@
 scr_physics();
 
-alarm_set(5, 600);
+alarm_set(5, 90);
 
 with (all) {
     if (obj_playerTest.alarm[5] > -1 && global.slowActive) {

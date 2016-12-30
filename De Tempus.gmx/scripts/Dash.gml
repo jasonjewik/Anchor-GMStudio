@@ -1,4 +1,5 @@
 scr_physics();
+
 stamCD = true;
 alarm_set(2, 1);
 
@@ -51,5 +52,3 @@ switch (dir) {
         break;
     default: break;
 }
-
-
