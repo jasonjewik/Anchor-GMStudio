@@ -1,3 +1,5 @@
+stamCD = true;
+
 //Direction of Roll
 if (!melee) {
     //Gets mouse position at time of activation so it doesn't change in real-time
@@ -31,7 +33,5 @@ switch (dir2) {
     }
     default: break;
 }
-
-show_debug_message(string(dir2));
 
 alarm_set(3, 1);

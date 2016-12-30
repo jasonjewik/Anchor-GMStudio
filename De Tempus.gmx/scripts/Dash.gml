@@ -1,8 +1,10 @@
 scr_physics();
+stamCD = true;
 alarm_set(2, 1);
 
 maxSpeed = mass*8.0;
 dashCD = true;
+stamCD = true;
 
 key_right = 0;
 key_left = 0;

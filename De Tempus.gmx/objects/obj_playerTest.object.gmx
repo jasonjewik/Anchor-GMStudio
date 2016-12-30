@@ -49,13 +49,13 @@ global.stamina = 100;
 global.maxStamina = 100;
 dashCD = false;
 roll = false;
-staminaCD = false;
 dir = "";
 dir2 = "";
 melee = false;
 global.hp = 100;
 global.maxhp = 100;
 ammo = 10;
+stamCD = false;
 
 //States
 enum st {
@@ -238,6 +238,7 @@ projectile.speed = 8;
             <string>///Melee Attacks
 global.pState = st.idle;
 melee = false;
+stamCD = false;
 AnimReset(0);
 </string>
           </argument>
@@ -290,7 +291,7 @@ else alarm_set(2, -1);
           <argument>
             <kind>1</kind>
             <string>///Stamina CDs
-staminaCD = false;
+stamCD = false;
 </string>
           </argument>
         </arguments>
@@ -363,10 +364,6 @@ switch (global.pState) {
         break;
     default: break;
 }
-
-if (!staminaCD &amp;&amp; global.stamina &lt; global.maxStamina &amp;&amp; global.pState != st.dash) global.stamina++;
-
-
 </string>
           </argument>
         </arguments>
@@ -416,7 +413,7 @@ switch (global.pState) {
     case st.dash: 
         global.pState = st.idle;
         alarm_set(0, 10);
-        alarm_set(1, 90);
+        alarm_set(1, 60);
         AnimReset(0);
     default: break;
 }
