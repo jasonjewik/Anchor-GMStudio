@@ -57,6 +57,8 @@ global.maxhp = 100;
 ammo = 10;
 stamCD = false;
 enemyCon = noone;
+global.slowActive = false;
+global.timeSlow = false;
 
 //NPC Interactions and Items
 global.talk = false;
@@ -193,6 +195,56 @@ global.pState = st.idle;
           <argument>
             <kind>4</kind>
             <string>4</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>5</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with (all) image_speed = image_speed*5;
+with (obj_enemy) maxSpeed = 2;
+with (self) image_speed = image_speed/5;
+global.timeSlow = false;
+</string>
           </argument>
         </arguments>
       </action>
@@ -392,6 +444,13 @@ if (instance_position(x, y, item)) scr_itemPick(item);
 
 //Petrify if inventory open
 if (global.showInv) global.pState = st.petrified;
+
+//Activate Slows
+if (key_slow) {
+    global.timeSlow = true;
+    global.slowActive = true;
+    TimeSlow();
+}
 </string>
           </argument>
         </arguments>
@@ -413,7 +472,7 @@ if (global.showInv) global.pState = st.petrified;
           <argument>
             <kind>1</kind>
             <string>///Debugging
-//show_debug_message(global.pState);
+//show_debug_message(alarm[5]);
 </string>
           </argument>
         </arguments>

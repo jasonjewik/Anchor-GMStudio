@@ -56,10 +56,14 @@ speed = scr_approach(speed, 12, 1);
 hit = instance_place(x, y, obj_enemy);
 
 if (hit != noone) {
-    hit.hp -= 5;
-    hit.state = est.damage;
-    hit.alarm[0] = -1;
-    instance_destroy();
+    if (global.timeSlow) {
+        with (hit) instance_destroy();
+    } else {
+        hit.hp -= 5;
+        hit.state = est.damage;
+        hit.alarm[0] = -1;
+        instance_destroy();
+    }
 } 
 
 //Fade out

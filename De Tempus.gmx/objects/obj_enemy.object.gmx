@@ -198,9 +198,13 @@ switch (state) {
 if (hp &lt;= 0) state = est.dead;
 
 if (place_meeting(x, y, obj_mAttack)) {
-    hp -= 1;
-    state = est.damage;
-    alarm_set(0, -1);
+    if (global.timeSlow) {
+        instance_destroy();
+    } else {
+        hp -= 1;
+        state = est.damage;
+        alarm_set(0, -1);
+    }
 }
 </string>
           </argument>

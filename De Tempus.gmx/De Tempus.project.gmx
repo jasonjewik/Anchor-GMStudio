@@ -58,6 +58,7 @@
       <script>scripts\Range.gml</script>
       <script>scripts\Melee.gml</script>
       <script>scripts\Idle.gml</script>
+      <script>scripts\TimeSlow.gml</script>
       <script>scripts\Walk.gml</script>
       <script>scripts\Damage.gml</script>
       <script>scripts\Dash.gml</script>
