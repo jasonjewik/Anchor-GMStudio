@@ -1,3 +1,4 @@
+scr_physics();
 stamCD = true;
 
 //Direction of Roll
@@ -17,21 +18,28 @@ if (!melee) {
     melee = true;
 }
 
-//Switch block to allow margin of error
-switch (dir2) {
-    case "h": {
-        instance_create(x + 32*sign(mouse_x - x), y, obj_mAttack);
-        break;
+maxSpeed = mass * 4.0;
+if (!instance_exists(obj_mAttack)) {
+    //Switch block to allow margin of error
+    switch (dir2) {
+        case "h": {
+            instance_create(x + 32*sign(mouse_x - x), y, obj_mAttack);
+            hSpeed = scr_approach(hSpeed, 6*sign(mouse_x - x), accl*8);
+            break;
+        }
+        case "v": {
+            instance_create(x, y + 32*sign(mouse_y - y), obj_mAttack);   
+            vSpeed = scr_approach(vSpeed, 6*sign(mouse_y - y), accl*8);
+            break;
+        }
+        case "hv": {
+            instance_create(x + 32*sign(mouse_x - x), y + 32*sign(mouse_y - y), obj_mAttack); 
+            hSpeed = scr_approach(hSpeed, 6*sign(mouse_x - x), accl*8);
+            vSpeed = scr_approach(vSpeed, 6*sign(mouse_y - y), accl*8);
+            break;
+        }
+        default: break;
     }
-    case "v": {
-        instance_create(x, y + 32*sign(mouse_y - y), obj_mAttack);   
-        break;
-    }
-    case "hv": {
-        instance_create(x + 32*sign(mouse_x - x), y + 32*sign(mouse_y - y), obj_mAttack); 
-        break;
-    }
-    default: break;
 }
 
-alarm_set(3, 1);
+if (alarm[3] == -1) alarm_set(3, 5);

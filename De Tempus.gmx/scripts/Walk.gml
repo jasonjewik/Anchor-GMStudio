@@ -16,3 +16,8 @@ if (mouse_middle) {
     global.pState = st.melee;
     AnimReset(0);
 }
+
+if (mouse_right && ammo > 0 && obj_mouse.reload == false) {
+    global.pState = st.range;
+    AnimReset(0);
+}

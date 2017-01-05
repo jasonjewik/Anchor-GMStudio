@@ -69,8 +69,8 @@ enum st {
     walk,
     dash,
     melee, 
-    range,
     damage,
+    range,
     petrified,
     combo
 }
@@ -266,12 +266,13 @@ global.pState = st.idle;
           <argument>
             <kind>1</kind>
             <string>global.target = instance_nearest(x, y, obj_enemy); 
-instance_create(x, y, obj_mAttack);
-x = global.target.x;
-y = global.target.y;
+if (distance_to_object(global.target) &lt; 128) {
+    x = global.target.x;
+    y = global.target.y;
+    instance_create(x, y, obj_mAttack);
+}
 
 if (global.pState = st.combo) alarm_set(6, 5);
-else alarm_set(6, -1);
 </string>
           </argument>
         </arguments>
@@ -350,8 +351,9 @@ projectile.speed = 8;
             <kind>1</kind>
             <string>///Melee Attacks
 global.pState = st.idle;
-melee = false;
 stamCD = false;
+melee = false;
+with (obj_mAttack) instance_destroy();
 AnimReset(0);
 </string>
           </argument>
@@ -472,11 +474,12 @@ switch (global.pState) {
     case st.melee:
         Melee();
         break;
-    case st.range:
-        Range();
-        break;
     case st.damage:
         Damage();
+        break;
+    case st.range:
+        Range();
+        Walk();
         break;
     case st.petrified: 
         Petrified();
@@ -533,7 +536,7 @@ if (global.timeSlow &amp;&amp; global.autoTargeting) global.pState = st.combo;
           <argument>
             <kind>1</kind>
             <string>///Debugging
-//show_debug_message(alarm[5]);
+//show_debug_message(global.pState);
 </string>
           </argument>
         </arguments>

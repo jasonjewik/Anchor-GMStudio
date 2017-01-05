@@ -55,8 +55,8 @@
     <scripts name="Player">
       <script>scripts\scr_physics.gml</script>
       <script>scripts\AnimReset.gml</script>
-      <script>scripts\Range.gml</script>
       <script>scripts\Melee.gml</script>
+      <script>scripts\Range.gml</script>
       <script>scripts\Idle.gml</script>
       <script>scripts\TimeSlow.gml</script>
       <script>scripts\Walk.gml</script>
