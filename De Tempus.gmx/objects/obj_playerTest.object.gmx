@@ -266,6 +266,7 @@ global.pState = st.idle;
           <argument>
             <kind>1</kind>
             <string>global.target = instance_nearest(x, y, obj_enemy); 
+obj_mouse.initTrigger = false;
 if (distance_to_object(global.target) &lt; 128) {
     x = global.target.x;
     y = global.target.y;
@@ -515,6 +516,7 @@ if (key_slow) {
 
 //Combo Attack
 if (global.timeSlow &amp;&amp; global.autoTargeting) global.pState = st.combo;
+if (global.pState != st.combo) global.target = noone;
 </string>
           </argument>
         </arguments>
