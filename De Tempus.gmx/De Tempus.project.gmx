@@ -29,15 +29,20 @@
       <sprite>sprites\spr_player_dash_sil</sprite>
       <sprite>sprites\spr_player_walk</sprite>
       <sprite>sprites\spr_player_idle_back</sprite>
+      <sprite>sprites\spr_player_die</sprite>
+      <sprite>sprites\spr_walknbak</sprite>
       <sprite>sprites\spr_player_idle</sprite>
-      <sprite>sprites\spr_walkn_bak</sprite>
       <sprite>sprites\spr_player_dmg</sprite>
       <sprite>sprites\spr_mask</sprite>
       <sprite>sprites\spr_projectile</sprite>
     </sprites>
     <sprites name="NPCs">
-      <sprite>sprites\spr_npc1</sprite>
-      <sprite>sprites\spr_npc1head</sprite>
+      <sprite>sprites\spr_alady</sprite>
+      <sprite>sprites\spr_sumkid</sprite>
+      <sprite>sprites\spr_somgil</sprite>
+      <sprite>sprites\spr_gogglefrog</sprite>
+      <sprite>sprites\spr_sumdood</sprite>
+      <sprite>sprites\spr_sumdoodhead</sprite>
     </sprites>
     <sprites name="Cursor">
       <sprite>sprites\spr_cursorB</sprite>
