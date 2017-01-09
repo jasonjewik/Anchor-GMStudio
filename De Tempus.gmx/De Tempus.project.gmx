@@ -42,7 +42,7 @@
       <sprite>sprites\spr_somgil</sprite>
       <sprite>sprites\spr_gogglefrog</sprite>
       <sprite>sprites\spr_sumdood</sprite>
-      <sprite>sprites\spr_sumdoodhead</sprite>
+      <sprite>sprites\spr_npc1head</sprite>
     </sprites>
     <sprites name="Cursor">
       <sprite>sprites\spr_cursorB</sprite>
