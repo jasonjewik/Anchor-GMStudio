@@ -59,6 +59,8 @@ stamCD = false;
 enemyCon = noone;
 global.slowActive = false;
 global.timeSlow = false;
+global.time = 100;
+global.maxTime = 100;
 
 //NPC Interactions and Items
 global.talk = false;
@@ -301,6 +303,7 @@ with (obj_enemy) maxSpeed = 2;
 with (self) image_speed = image_speed/5;
 global.timeSlow = false;
 global.pState = st.idle;
+global.time -= 5;
 </string>
           </argument>
         </arguments>
@@ -492,12 +495,10 @@ switch (global.pState) {
 }
 
 //Collision with Enemy
-if (global.pState != st.dash || global.pState != st.combo) {
-    if (place_meeting(x, y, obj_enemy)) {
-        enemyCon = instance_place(x, y, obj_enemy);
-        global.hp -= 1;
-        global.pState = st.damage;
-    }
+if ((global.pState != st.dash || global.pState != st.combo) &amp;&amp; place_meeting(x, y, obj_enemy)) {
+    enemyCon = instance_place(x, y, obj_enemy);
+    global.hp -= 1;
+    global.pState = st.damage;
 }
 
 //Item Pickup
@@ -515,7 +516,7 @@ if (key_slow) {
 }
 
 //Combo Attack
-if (global.timeSlow &amp;&amp; global.autoTargeting) global.pState = st.combo;
+if (global.timeSlow &amp;&amp; global.autoTargeting &amp;&amp; global.time &gt; 5) global.pState = st.combo;
 if (global.pState != st.combo) global.target = noone;
 </string>
           </argument>
