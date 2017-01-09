@@ -1,5 +1,4 @@
 scr_physics();
-
 alarm_set(5, 90);
 
 with (all) {

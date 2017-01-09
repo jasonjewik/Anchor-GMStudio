@@ -61,6 +61,7 @@ global.slowActive = false;
 global.timeSlow = false;
 global.time = 100;
 global.maxTime = 100;
+global.invince = false;
 
 //NPC Interactions and Items
 global.talk = false;
@@ -249,6 +250,53 @@ global.pState = st.idle;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>7</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.invince = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="6">
       <action>
@@ -276,6 +324,7 @@ if (distance_to_object(global.target) &lt; 128) {
 }
 
 if (global.pState = st.combo) alarm_set(6, 5);
+else alarm_set(7, 15);
 </string>
           </argument>
         </arguments>
@@ -494,8 +543,11 @@ switch (global.pState) {
     default: break;
 }
 
+//Invincibility
+if (global.pState == st.combo || global.pState == st.dash) global.invince = true;
+
 //Collision with Enemy
-if ((global.pState != st.dash || global.pState != st.combo) &amp;&amp; place_meeting(x, y, obj_enemy)) {
+if (!global.invince &amp;&amp; place_meeting(x, y, obj_enemy)) {
     enemyCon = instance_place(x, y, obj_enemy);
     global.hp -= 1;
     global.pState = st.damage;
@@ -568,6 +620,7 @@ switch (global.pState) {
         global.pState = st.idle;
         alarm_set(0, 10);
         alarm_set(1, 60);
+        alarm_set(7, 15);
         AnimReset(0);
         break;
     case st.damage: 

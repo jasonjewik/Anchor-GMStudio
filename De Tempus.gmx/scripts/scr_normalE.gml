@@ -19,7 +19,6 @@ if (move == 1 && alarm[0] = -1) {
 
 if (distance_to_object(obj_playerTest) < 15) {
     eSpeed = scr_approach(eSpeed, 0, frc);
-    //alarm_set(1, 15);
 }
 
 scr_moveCollideE();
