@@ -57,10 +57,7 @@
     <sprite>sprites\spr_button</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\bg_grovel</background>
-    <background>background\bg_GODDAMNGRASS</background>
     <background>background\bg_tile</background>
-    <background>background\bg_sand</background>
     <background>background\background0</background>
     <background>background\bg_wall</background>
   </backgrounds>
