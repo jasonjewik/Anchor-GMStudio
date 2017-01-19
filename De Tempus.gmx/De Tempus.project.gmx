@@ -34,6 +34,12 @@
       <sprite>sprites\spr_player_idle</sprite>
       <sprite>sprites\spr_player_dmg</sprite>
       <sprite>sprites\spr_mask</sprite>
+      <sprite>sprites\spr_health</sprite>
+      <sprite>sprites\spr_healthFull</sprite>
+      <sprite>sprites\spr_health4</sprite>
+      <sprite>sprites\spr_health3</sprite>
+      <sprite>sprites\spr_health2</sprite>
+      <sprite>sprites\spr_health1</sprite>
       <sprite>sprites\spr_projectile</sprite>
     </sprites>
     <sprites name="NPCs">
@@ -120,6 +126,7 @@
       <object>objects\obj_camera</object>
       <object>objects\obj_mouse</object>
       <object>objects\obj_square</object>
+      <object>objects\obj_health</object>
       <object>objects\obj_stamHP</object>
     </objects>
     <objects name="Enemy">

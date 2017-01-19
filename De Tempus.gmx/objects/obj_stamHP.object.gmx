@@ -190,6 +190,7 @@ if (toggle) {
     /*Health*/
     //Background
     draw_roundrect_color_ext(view_xview - 2, view_yview + 4, view_xview + global.maxhp+ 2 , view_yview + 14, 3, 3, c_gray, c_gray, false);
+        
     //Health Value
     draw_roundrect_color_ext(view_xview - 2, view_yview + 2, view_xview + global.hp + 2 - 2, view_yview + 12, 3, 3, c_teal, c_teal, false);
     draw_text(view_xview - 2 + 10, view_yview + 2, string(global.hp));
