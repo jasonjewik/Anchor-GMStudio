@@ -62,6 +62,8 @@ global.timeSlow = false;
 global.time = 100;
 global.maxTime = 100;
 global.invince = false;
+xBounds = 99999;
+yBounds = 99999;
 
 //NPC Interactions and Items
 global.talk = false;
@@ -688,15 +690,28 @@ switch (global.pState) {
         break;
     //case st.melee:
     case st.range: 
+        pXFace = -sign(mouse_x - x);
+        
+        image_speed = 1;
+        if (pYFace == 1) {
+            AnimReset(1);
+            sprite_index = spr_player_idle;
+            AnimReset(0);
+        } else {
+            AnimReset(1);
+            sprite_index = spr_player_idle_back;
+            AnimReset(0);
+        }
+        
         if (point_direction(x, y, mouse_x, mouse_y) &gt;= 180 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 270) {
-            draw_sprite_ext(spr_pistol, image_index, x, y, image_xscale, -image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
+            draw_sprite_ext(spr_pistol, image_index, x, y, pXFace, -pYFace, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
         } else if (point_direction(x, y, mouse_x, mouse_y) &gt; 270 &amp;&amp; point_direction(x, y, mouse_x, mouse_y) &lt;= 360) {
-            draw_sprite_ext(spr_pistol, image_index, x, y, -image_xscale, image_yscale, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
+            draw_sprite_ext(spr_pistol, image_index, x, y, -pXFace, pYFace, point_direction(x, y, mouse_x, mouse_y), image_blend, image_alpha);
         }
         break;
     case st.damage: 
         sprite_index = spr_player_dmg;
-        image_xscale = -sign(enemyCon.x - x); 
+        //image_xscale = -sign(enemyCon.x - x); 
         break;
     default: 
         sprite_index = spr_player_idle; 
@@ -705,6 +720,10 @@ switch (global.pState) {
 
 if (abs(pXFace) &gt; 0) image_xscale = pXFace;
 else image_xscale = 1;
+
+draw_set_font(fnt_text);
+draw_text(x, y, x);
+draw_text(x, y + 10, y);
 
 scr_light();
 </string>

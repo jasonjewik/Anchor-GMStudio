@@ -3,7 +3,7 @@
   <spriteName>spr_cursor</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>2</depth>
+  <depth>-10</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -53,6 +53,8 @@
 global.autoTargeting = false;
 global.target = noone;
 initTrigger = false;
+targetX = mouse_x;
+targetY = mouse_y;
 </string>
           </argument>
         </arguments>
@@ -121,6 +123,24 @@ if (instance_exists(obj_playerTest)) {
         if (global.target != noone) global.autoTargeting = true;
     }
 }
+
+//Should the scope stop
+if (instance_exists(obj_playerTest)) {
+    collision = collision_line(obj_playerTest.x, obj_playerTest.y, mouse_x, mouse_y, obj_enemy, false, true)
+    if (collision == noone) {
+        targetX = mouse_x;
+        targetY = mouse_y;
+        obj_playerTest.xBounds = 99999;
+        obj_playerTest.yBounds = 99999;
+    } else {
+        obj_playerTest.xBounds = collision.x - obj_playerTest.x;
+        obj_playerTest.yBounds = collision.y - obj_playerTest.y;
+    }
+}
+
+if (instance_exists(obj_playerTest)) {
+    show_debug_message("(" + string(obj_playerTest.xBounds) + ", " + string(obj_playerTest.yBounds) + ")");
+}
 </string>
           </argument>
         </arguments>
@@ -148,8 +168,17 @@ if (instance_exists(obj_playerTest)) {
 //Aiming Line
 if (instance_exists(obj_playerTest) &amp;&amp; global.pState = st.range) {
     draw_set_color(c_white);
-    draw_line(obj_playerTest.x, obj_playerTest.y, mouse_x, mouse_y);
+    
+    if (lengthdir_x(x - obj_playerTest.x, point_direction(obj_playerTest.x, obj_playerTest.y, x, y)) &gt; obj_playerTest.xBounds) {
+        targetX = mouse_x - (mouse_x - obj_playerTest.x - obj_playerTest.xBounds);
+    } else targetX = mouse_x;
+    if (lengthdir_y(y - obj_playerTest.y, point_direction(obj_playerTest.x, obj_playerTest.y, x, y)) &gt; obj_playerTest.yBounds) {
+        targetY = mouse_y - (mouse_y - obj_playerTest.y - obj_playerTest.yBounds);
+    } else targetY = mouse_y; 
+    draw_line(obj_playerTest.x, obj_playerTest.y, targetX, targetY);
 }
+
+
 
 //Set the Cursor Sprite
 if (!reload) {

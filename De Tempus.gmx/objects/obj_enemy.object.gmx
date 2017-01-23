@@ -212,6 +212,10 @@ if (state = est.damage) {
 
 image_xscale = -sign(obj_playerTest.x - x)
 
+draw_set_font(fnt_text);
+draw_text(x, y, x);
+draw_text(x, y + 10, y);
+
 scr_light();
 </string>
           </argument>
