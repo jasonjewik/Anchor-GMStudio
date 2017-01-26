@@ -6,6 +6,10 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprites name="Bars">
+      <sprite>sprites\bar_health</sprite>
+      <sprite>sprites\bar_stamina</sprite>
+    </sprites>
     <sprites name="Logos">
       <sprite>sprites\spr_mainLogo</sprite>
     </sprites>
@@ -16,34 +20,50 @@
       <sprite>sprites\spr_cursor</sprite>
     </sprites>
     <sprites name="Player">
-      <sprite>sprites\player_default_idle</sprite>
+      <sprites name="Default">
+        <sprite>sprites\player_default_dash</sprite>
+        <sprite>sprites\player_default_walk</sprite>
+        <sprite>sprites\player_default_idle</sprite>
+      </sprites>
     </sprites>
-    <sprite>sprites\spr_wall</sprite>
+    <sprites name="Walls">
+      <sprite>sprites\spr_wall</sprite>
+    </sprites>
+    <sprites name="Weapons">
+      <sprites name="Ranged">
+        <sprite>sprites\spr_rifle</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_pause</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="Physics">
-      <script>scripts\Friction.gml</script>
-    </scripts>
-    <scripts name="Miscellaneous">
-      <script>scripts\Approach.gml</script>
-    </scripts>
     <scripts name="Inputs">
       <script>scripts\isMouseOver.gml</script>
       <script>scripts\input_key_right.gml</script>
       <script>scripts\input_key_up.gml</script>
       <script>scripts\input_key_down.gml</script>
       <script>scripts\input_key_left.gml</script>
+      <script>scripts\input_mouse_right_hold.gml</script>
       <script>scripts\input_mouse_left_click.gml</script>
       <script>scripts\input_key_escape.gml</script>
       <script>scripts\input_key_enter.gml</script>
+      <script>scripts\input_key_interact.gml</script>
+      <script>scripts\input_key_dash.gml</script>
+    </scripts>
+    <scripts name="Physics">
+      <script>scripts\Friction.gml</script>
+    </scripts>
+    <scripts name="Miscellaneous">
+      <script>scripts\range_finder.gml</script>
+      <script>scripts\Approach.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_title</font>
+    <font>fonts\fnt_text</font>
     <font>fonts\fnt_menu</font>
   </fonts>
   <objects name="objects">
@@ -56,13 +76,29 @@
       <object>objects\controller_settings_menu</object>
     </objects>
     <objects name="Classes">
+      <objects name="GUI">
+        <object>objects\class_textBox</object>
+        <object>objects\class_gui_fader</object>
+        <object>objects\class_gui_bar</object>
+      </objects>
       <objects name="Buttons">
         <object>objects\class_button</object>
         <object>objects\class_mainMenu_button</object>
       </objects>
-      <object>objects\class_solid</object>
-      <object>objects\class_player</object>
-      <object>objects\class_gui_fader</object>
+      <objects name="Solid Objects">
+        <object>objects\class_solid</object>
+        <object>objects\class_wall</object>
+        <object>objects\class_npc</object>
+        <object>objects\class_enemy</object>
+        <object>objects\class_player</object>
+      </objects>
+      <objects name="Weapons">
+        <object>objects\class_weapon</object>
+        <object>objects\class_ranged</object>
+      </objects>
+    </objects>
+    <objects name="NPCs">
+      <object>objects\npc_tutorial</object>
     </objects>
     <objects name="Player">
       <objects name="Characters">
@@ -79,12 +115,20 @@
         <object>objects\button_fullscreen</object>
       </objects>
     </objects>
+    <objects name="Weapons">
+      <objects name="Ranged">
+        <object>objects\weapon_rifle</object>
+      </objects>
+    </objects>
     <objects name="Environment">
       <object>objects\environ_wall</object>
     </objects>
     <objects name="GUI">
       <object>objects\gui_pause</object>
       <object>objects\gui_camera</object>
+      <object>objects\gui_health_bar</object>
+      <object>objects\gui_stamina_bar</object>
+      <object>objects\gui_time_bar</object>
     </objects>
     <objects name="FX">
       <object>objects\fx_fadeFromBlack</object>

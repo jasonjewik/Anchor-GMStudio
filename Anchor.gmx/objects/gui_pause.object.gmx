@@ -79,6 +79,8 @@ if (global.pause &amp;&amp; input_key_enter()) game_end();
     draw_set_font(fnt_title);
     draw_set_halign(fa_center);
     draw_text_colour(window_get_width()/2, window_get_height()/2, "Game Paused", c_white, c_white, c_white, c_white, 1.0);
+    draw_set_font(fnt_menu);
+    draw_text_colour(window_get_width()/2, window_get_height()/2 + 64, "Press Enter to Quit", c_white, c_white, c_white, c_white, 1.0);
 } 
 </string>
           </argument>

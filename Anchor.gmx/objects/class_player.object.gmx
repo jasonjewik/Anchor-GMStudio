@@ -31,19 +31,34 @@ hSpeedFrac = 0;
 vSpeedFrac = 0;
 hSpeedFinal = 0;
 vSpeedFinal = 0;
+init_maxSpeed = 1.0;
 maxSpeed = 1.0;
-frc = 0.2;
+init_accl = 0.4;
 accl = 0.4;
+frc = accl/2;
 
 name = "";
-hp = 100;
-stamina = 100;
-timeEssence = 100;
+maxHp = 100;
+hp = maxHp;
+maxStamina = 100;
+stamina = maxStamina;
+max_timeEssence = 100;
+timeEssence = max_timeEssence;
 inventory = instance_create(x, y, data_inventory);
 
 isAiming = false;
 global.isDashing = false;
 global.timeSlow = false;
+global.xFace = image_xscale;
+global.yFace = 0;
+
+sprite_idle = player_default_idle;
+sprite_walk = player_default_walk;
+sprite_dash = player_default_dash;
+
+//Test code
+rifle = instance_create(x, y, weapon_rifle);
+rifle.owner = self;
 </string>
           </argument>
         </arguments>
@@ -118,6 +133,8 @@ vSpeed = clamp(vSpeed, -maxSpeed, maxSpeed);
 hSpeed+=hMove*accl;
 vSpeed+=vMove*accl;
 
+frc = accl/2;
+
 hSpeed = Friction(hSpeed, frc);
 vSpeed = Friction(vSpeed, frc);
 
@@ -151,6 +168,197 @@ y+=vSpeedFinal;
       </action>
       <action>
         <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Dash
+if (input_key_dash()) {
+    maxSpeed *= 8;
+    accl *= 5;
+    dir = "h";
+    
+    //Direction of Roll
+    if (!global.isDashing) {
+        //Gets mouse position at time of activation so it doesn't change in real-time
+        x1 = mouse_x;
+        y1 = mouse_y;
+        //Determine the direcion of the dash
+        if (abs(x1 - x) &lt; 25) {
+            dir = "h";
+        } else if (abs(y1 - y) &lt; 25) {
+            dir = "v";
+        } else if (abs(x1 - x) - abs(y1 - y) &lt; 25) {
+            dir = "hv";
+        }
+        //Ensures that this code only runs once
+        global.isDashing = true;
+    }
+    
+    //Switch block to make sure dash is only done in one direction
+    switch (dir) {
+        case "h": 
+            if (y1 &gt; y) vSpeed = Approach(vSpeed, 8, accl * 8);
+            else if (y1 &lt; y) vSpeed = Approach(vSpeed, -8, accl * 8);
+            break;
+        case "v": 
+            if (x1 &lt; x) hSpeed = Approach(hSpeed, -8, accl * 8); 
+            else if (x1 &gt; x) hSpeed = Approach(hSpeed, 8, accl * 8);   
+            break;
+        case "hv": 
+            hSpeed = Approach(hSpeed, sign(mouse_x - x) * 8, accl * 8);
+            if (global.xFace == 1) {
+                if (global.yFace == 1) vSpeed = -hSpeed; 
+                else if (global.yFace == -1) vSpeed = hSpeed;
+            }
+            else if (global.xFace == -1) {
+                if (global.yFace == 1) vSpeed = hSpeed;
+                else if (global.yFace == -1) vSpeed = -hSpeed;
+            }
+            break;
+        default: break;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Animation
+if (abs(mouse_x - x) &gt; 0) {
+    image_xscale = -sign(mouse_x - x);
+    global.xFace = image_xscale;
+} else image_xscale = global.xFace;
+
+if (mouse_y - y &gt; 0) global.yFace = 1;
+else global.yFace = -1;
+
+if (hSpeedFinal == 0 &amp;&amp; vSpeedFinal == 0) {
+    image_speed = 1;
+    sprite_index = sprite_idle;
+}
+else if (global.isDashing) {
+    image_speed = 1.2;
+    sprite_index = sprite_dash;
+}
+else {
+    image_speed = 0.7;
+    sprite_index = sprite_walk;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Weapons
+if (input_mouse_right_hold()) isAiming = true;
+else isAiming = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Pulling up the HUD
+if (input_key_interact()) {
+    if (!instance_exists(gui_health_bar)) {
+        healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
+        healthBar.owner = class_player;
+        healthBar.barMaxValue = hp;
+    }
+    if (!instance_exists(gui_stamina_bar)) {
+        staminaBar = instance_create(view_xview + 2, view_yview + 6, gui_stamina_bar);
+        staminaBar.owner = class_player;
+        staminaBar.barMaxValue = stamina;
+    }
+    if (!instance_exists(gui_time_bar)) {
+        timeBar = instance_create(view_xview + 2, view_yview + 18, gui_time_bar);
+        timeBar.owner = class_player;
+        timeBar.barMaxValue = timeEssence;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Test || Debug Code
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>424</id>
         <kind>2</kind>
         <userelative>0</userelative>
@@ -162,6 +370,35 @@ y+=vSpeedFinal;
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (global.isDashing) {
+    maxSpeed = init_maxSpeed;
+    accl = init_accl;
+    hSpeed = Friction(hSpeed, frc);
+    vSpeed = Friction(vSpeed, frc);
+    global.isDashing = false;
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>

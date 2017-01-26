@@ -1,0 +1,2 @@
+///AnimReset(image_index)
+

@@ -51,7 +51,7 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="controller_main_menu" x="160" y="160" name="inst_4D1E9213" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="controller_main_menu" x="1088" y="672" name="inst_4D1E9213" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="button_start" x="32" y="192" name="inst_625F8A1A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="player_cursor" x="64" y="160" name="inst_66FFC691" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="button_settings" x="32" y="256" name="inst_E71C64F1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
