@@ -28,6 +28,15 @@
             <string>event_inherited();
 
 name = "Pulse Rifle";
+damageAmount = 10;
+damageVariance = 2;
+damageDropOff = 1;
+critChance = 0.2;
+
+canBounce = true;
+spd = 32;
+dropOffSpeed = 0.2;
+
 bounds = 7;
 </string>
           </argument>

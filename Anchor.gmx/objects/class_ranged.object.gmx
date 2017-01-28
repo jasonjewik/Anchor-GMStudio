@@ -32,6 +32,10 @@ ammoPerShot = 5;
 auto = false;
 currentAmmo = maxAmmo;
 ammoType = "light";
+damageAmount = 0;
+damageVariance = 0;
+damageDropOff = 0;
+critChance = 0.5;
 
 isActive = true;
 
@@ -39,14 +43,22 @@ reloadTime = room_speed * 2;
 reloading = false;
 current_reloadTime = 0;
 
-range = 100;
+range = 200;
 draw_range = range;
 projectile_range = range;
-goesThroughWalls = false;
 aiming_direction = 0;
+
+piercing = false;
+canBounce = false;
+bounceMax = 5;
+bounceNumber = irandom_range(2, bounceMax);
+spd = 0; //pixels per second
+dropOffSpeed = 0; //should be a decimal value
+dropOffTime = room_speed * 2; //should be a factor of the room speed
 
 beam_width = 1;
 beam_color = c_white;
+sprite = spr_bullet_light;
 
 bounds = 0;
 </string>
@@ -146,12 +158,39 @@ if (instance_exists(owner) &amp;&amp; isActive) {
         if (!range_to_wall) range_to_wall = 9999999;
         if (!range_to_enemy) range_to_enemy = 9999999;
 
-        if (!goesThroughWalls) draw_range = min(range_to_wall, range_to_enemy, projectile_range);
+        if (!piercing) draw_range = min(range_to_wall, range_to_enemy, projectile_range);
         else draw_range = projectile_range;
         
         lineX = x+lengthdir_x(draw_range, aiming_direction);
         lineY = y+lengthdir_y(draw_range, aiming_direction);
 
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Shooting
+if (global.isAiming) {
+    if (input_mouse_left_click()) {
+        projectile = instance_create(x, y, class_projectile);
+        projectile.owner = weapon_rifle;   
     }
 }
 </string>

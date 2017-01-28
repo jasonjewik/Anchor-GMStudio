@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9999</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,26 +25,36 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialize Variables
-var width, height;
+            <string>owner = weapon_rifle;
+image_angle = owner.aiming_direction;
+sprite_index = owner.sprite;
 
-//source = ini_open("Text Interactions");
-message = ""
-output = ""
+damage = owner.damageAmount;
+damageVariance = owner.damageVariance; 
+damage = irandom_range(damage - damageVariance, damage + damageVariance);
+damageDropOff = owner.damageDropOff;
 
-lastSpace = 0;
-textPos = 1;
-maxHeight = false;
-line = 0;
-spaceCheck = false;
-sprite = noone;
-toggle = false;
+critChance = owner.critChance;
+critRoll = irandom_range(0, 1);
+if (critRoll &lt;= critChance) crit = true;
+else crit = false;
+if (crit = true) damage *= 1.5;
+damage = round(damage);
 
-//Create the DataStructure to hold the text values
-text = ds_queue_create();
+bounced = 0;
+canBounce = owner.canBounce;
+bounceNumber = owner.bounceNumber;
 
-//Check to see if a message is already open
-global.chatOpen = true;
+dropOffSpeed = owner.dropOffSpeed;
+dropOffTime = owner.dropOffTime;
+piercing = owner.piercing;
+range = owner.range;
+spd = owner.spd;
+
+initX = x;
+initY = y;
+
+move_towards_point(mouse_x, mouse_y, spd);
 </string>
           </argument>
         </arguments>
@@ -65,7 +75,37 @@ global.chatOpen = true;
         <arguments>
           <argument>
             <kind>0</kind>
-            <string>1</string>
+            <string>room_speed * 20</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>612</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>global.pause</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>false</string>
           </argument>
           <argument>
             <kind>4</kind>
@@ -75,30 +115,18 @@ global.chatOpen = true;
       </action>
       <action>
         <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
+        <id>422</id>
+        <kind>1</kind>
+        <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>-1</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>1</string>
-          </argument>
-        </arguments>
       </action>
-    </event>
-    <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -115,16 +143,39 @@ global.chatOpen = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Reset and Destroy
-global.chatOpen = false;
-ds_queue_destroy(text);
-instance_destroy();
+            <string>///Collisions
+
+//With Enemy
+if (place_meeting(x, y, class_enemy)) {
+    hit = instance_position(x, y, class_enemy);
+    hit.hp -= damage;
+    if (!piercing) instance_destroy();
+    else {
+        if (crit) damage = irandom_range(owner.damageAmount - damageVariance, owner.damageAmount + damageVariance);
+        damage -= damageDropOff;
+    }
+}
+
+//With Walls
+if (place_meeting(x, y, class_wall)) {
+    if (!canBounce) instance_destroy();
+    else {
+        if (alarm[0] &gt; room_speed * 10) alarm_set(0, dropOffTime);
+        if (bounced &lt; bounceNumber) {
+            targetX = irandom_range(x, initX);
+            targetY = irandom_range(y, initY);
+            move_towards_point(targetX, targetY, spd);
+            
+            image_angle = point_direction(x, y, targetX, targetY);
+            initX = targetX;
+            initY = targetY;
+        } else instance_destroy();
+    }
+} 
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -141,128 +192,27 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Insert Text Logic
-//Check for Spaces
-if (spaceCheck) {
-    textPos++;
-    spaceCheck = false;
-}
+            <string>///Drop off
+if (distance_to_point(initX, initY) &gt; range || alarm[0] == -1) image_alpha -= dropOffSpeed;
 
-//Data Queue
-ds_queue_enqueue(text, string_copy(message, textPos, 1));
-
-//Check to see if a space was added
-if (string_copy(message, textPos, 1) == " ") {
-    lastSpace = textPos;
-}
-    
-//Set the Output
-output = string_insert(ds_queue_head(text), output, textPos + 1);
-
-//Determine if the width of the string has gone past the sides of the textbox
-if (string_width(output) &gt; view_xview + view_wview - 7) {
-    line++;
-    output = string_delete(output, lastSpace, 1);
-    output = string_insert("#", output, lastSpace);
-}
-
-//Move the queue forward
-ds_queue_dequeue(text);
-textPos++;
-
-//Determine if the height of the string has gone past the bottom of the textbox
-if (line == 2) {
-    maxHeight = true;
-    output = string_delete(output, textPos-1, 1);
-    textPos-=2;
-    alarm_set(0, -1);
-    exit;
-}
-
-//Set the alarm
-if (textPos &lt; string_length(message) + 1) alarm_set(0, 1);
+if (image_alpha == 0) instance_destroy();
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>424</id>
+        <kind>2</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
         <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Move the string up
-if (maxHeight &amp;&amp; input_key_enter()) {
-    output = string_delete(output, 1, string_length(output));
-    maxHeight = false;
-    line = 0;
-    spaceCheck = true;
-    alarm_set(0, 1);
-}
-
-//Turn off the view
-if (textPos == string_length(message) + 1 &amp;&amp; !toggle) {
-    alarm_set(1, 90);
-    toggle = true;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Set Box Values
-draw_set_color(c_black);
-draw_set_alpha(0.6);
-//Draw the box
-draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8, view_xview + view_wview * 0.99, view_yview + view_hview - 5, false);
-
-//Draw the person talking
-//draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8 - 17, view_xview + 24, view_yview + view_hview * 0.8, false);
-//draw_sprite_ext(sprite, image_index, view_xview + 17, view_yview + view_hview * 0.8 - 10, -image_xscale * 2, image_yscale * 2, image_angle, image_blend, image_alpha);
-
-//Set Text Values
-draw_set_alpha(1);
-draw_set_color(c_white);
-texture_set_interpolation(false);
-draw_set_font(fnt_text);
-draw_set_halign(fa_left);
-draw_set_valign(fa_top); 
-
-//Draw the text
-//See alarm[0] for the actual text logic
-draw_text(view_xview + 7, view_yview + view_hview * 0.8 + 5, output);
-</string>
-          </argument>
-        </arguments>
       </action>
     </event>
   </events>

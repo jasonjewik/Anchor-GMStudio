@@ -19,6 +19,9 @@
     <sprites name="Cursor">
       <sprite>sprites\spr_cursor</sprite>
     </sprites>
+    <sprites name="NPCs">
+      <sprite>sprites\spr_npc_tutorial</sprite>
+    </sprites>
     <sprites name="Player">
       <sprites name="Default">
         <sprite>sprites\player_default_dash</sprite>
@@ -30,6 +33,9 @@
       <sprite>sprites\spr_wall</sprite>
     </sprites>
     <sprites name="Weapons">
+      <sprites name="Projectiles">
+        <sprite>sprites\spr_bullet_light</sprite>
+      </sprites>
       <sprites name="Ranged">
         <sprite>sprites\spr_rifle</sprite>
       </sprites>
@@ -95,6 +101,7 @@
       <objects name="Weapons">
         <object>objects\class_weapon</object>
         <object>objects\class_ranged</object>
+        <object>objects\class_projectile</object>
       </objects>
     </objects>
     <objects name="NPCs">
@@ -118,6 +125,9 @@
     <objects name="Weapons">
       <objects name="Ranged">
         <object>objects\weapon_rifle</object>
+      </objects>
+      <objects name="Projectiles">
+        <object>objects\bullet_light_rapid</object>
       </objects>
     </objects>
     <objects name="Environment">

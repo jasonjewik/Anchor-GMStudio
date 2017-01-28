@@ -50,7 +50,9 @@ barColor = orange;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>barMaxValue = owner.timeEssence;
+
+event_inherited();
 
 if (owner == class_player) {
     x = view_xview + 2;
