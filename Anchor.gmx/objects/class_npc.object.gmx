@@ -58,8 +58,7 @@ else global.canTalk = false;
 
 if (global.canTalk &amp;&amp; !global.chatOpen) {
     if (input_key_interact()) {
-        textBox = instance_create(x, y, class_textBox);
-        textBox.message = message;
+        with (instance_create(x, y, class_textBox)) message = other.message;
     }
 }
 </string>

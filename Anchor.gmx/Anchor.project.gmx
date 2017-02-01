@@ -17,6 +17,7 @@
       <sprite>sprites\start_menu_button</sprite>
     </sprites>
     <sprites name="Cursor">
+      <sprite>sprites\spr_continue</sprite>
       <sprite>sprites\spr_cursor</sprite>
     </sprites>
     <sprites name="NPCs">
@@ -54,6 +55,7 @@
       <script>scripts\input_key_left.gml</script>
       <script>scripts\input_mouse_right_hold.gml</script>
       <script>scripts\input_mouse_left_click.gml</script>
+      <script>scripts\input_mouse_left_hold.gml</script>
       <script>scripts\input_key_escape.gml</script>
       <script>scripts\input_key_enter.gml</script>
       <script>scripts\input_key_interact.gml</script>
@@ -64,6 +66,7 @@
     </scripts>
     <scripts name="Miscellaneous">
       <script>scripts\range_finder.gml</script>
+      <script>scripts\Shooting.gml</script>
       <script>scripts\Approach.gml</script>
     </scripts>
   </scripts>

@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>event_inherited();
 
-name = "Random";
-message = "Hello there and welcome to " + global.version + " of Anchor! There's not much but feel free to explore.";
+name = "Tutorial NPC v1";
+message = "Hello there and welcome to " + global.version + " of Anchor! There's not much but feel free to explore. Please let me, " + name + ", know if there is anything you need.";
 </string>
           </argument>
         </arguments>

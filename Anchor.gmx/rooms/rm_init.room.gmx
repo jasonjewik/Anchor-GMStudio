@@ -11,6 +11,7 @@
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>draw_texture_flush();
+texture_set_interpolation(false);
 randomize();
 
 global.gameStart = true;

@@ -30,14 +30,19 @@
 maxAmmo = 100;
 ammoPerShot = 5;
 auto = false;
+initFireDelay = 0;
+fireDelay = initFireDelay;
+
 currentAmmo = maxAmmo;
 ammoType = "light";
 damageAmount = 0;
 damageVariance = 0;
 damageDropOff = 0;
 critChance = 0.5;
+trigger = input_mouse_left_click();
 
 isActive = true;
+projectile = noone;
 
 reloadTime = room_speed * 2;
 reloading = false;
@@ -47,6 +52,7 @@ range = 200;
 draw_range = range;
 projectile_range = range;
 aiming_direction = 0;
+shotVariance = 0; 
 
 piercing = false;
 canBounce = false;
@@ -58,9 +64,55 @@ dropOffTime = room_speed * 2; //should be a factor of the room speed
 
 beam_width = 1;
 beam_color = c_white;
-sprite = spr_bullet_light;
 
 bounds = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>fireDelay = 0;
 </string>
           </argument>
         </arguments>
@@ -125,7 +177,7 @@ bounds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>event_inherited()
 </string>
           </argument>
         </arguments>
@@ -186,13 +238,9 @@ if (instance_exists(owner) &amp;&amp; isActive) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Shooting
-if (global.isAiming) {
-    if (input_mouse_left_click()) {
-        projectile = instance_create(x, y, class_projectile);
-        projectile.owner = weapon_rifle;   
-    }
-}
+            <string>///Shooting handled in child objects
+if (auto) trigger = input_mouse_left_hold();
+else trigger = input_mouse_left_click();
 </string>
           </argument>
         </arguments>

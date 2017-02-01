@@ -80,7 +80,7 @@ if (input_key_escape()) game_end();
             <kind>1</kind>
             <string>draw_set_halign(fa_left);
 draw_set_font(fnt_menu);
-draw_text_colour(x, y, global.version, c_white, c_white, c_white, c_white, 1.0);
+draw_text_colour(window_get_width() - 256, window_get_height() - 64, global.version, c_white, c_white, c_white, c_white, 1.0);
 </string>
           </argument>
         </arguments>

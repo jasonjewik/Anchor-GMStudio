@@ -144,7 +144,7 @@ instance_destroy();
             <string>///Insert Text Logic
 //Check for Spaces
 if (spaceCheck) {
-    textPos++;
+    textPos+=2;
     spaceCheck = false;
 }
 
@@ -159,19 +159,20 @@ if (string_copy(message, textPos, 1) == " ") {
 //Set the Output
 output = string_insert(ds_queue_head(text), output, textPos + 1);
 
+//Move the queue forward
+ds_queue_dequeue(text);
+textPos++;
+
 //Determine if the width of the string has gone past the sides of the textbox
-if (string_width(output) &gt; view_xview + view_wview - 7) {
+if (string_width(output) &gt; view_wview * 0.98) {
     line++;
     output = string_delete(output, lastSpace, 1);
     output = string_insert("#", output, lastSpace);
 }
 
-//Move the queue forward
-ds_queue_dequeue(text);
-textPos++;
-
 //Determine if the height of the string has gone past the bottom of the textbox
 if (line == 2) {
+    show_debug_message(line);
     maxHeight = true;
     output = string_delete(output, textPos-1, 1);
     textPos-=2;
@@ -205,11 +206,11 @@ if (textPos &lt; string_length(message) + 1) alarm_set(0, 1);
             <kind>1</kind>
             <string>///Move the string up
 if (maxHeight &amp;&amp; input_key_enter()) {
-    output = string_delete(output, 1, string_length(output));
-    maxHeight = false;
+    output = "";
     line = 0;
     spaceCheck = true;
     alarm_set(0, 1);
+    maxHeight = false;
 }
 
 //Turn off the view

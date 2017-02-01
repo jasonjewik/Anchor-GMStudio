@@ -349,7 +349,7 @@ else {
           <argument>
             <kind>1</kind>
             <string>///Weapons
-if (input_mouse_right_hold()) isAiming = true;
+if (input_mouse_right_hold() &amp;&amp; !global.chatOpen) isAiming = true;
 else isAiming = false;
 
 global.isAiming = isAiming;
