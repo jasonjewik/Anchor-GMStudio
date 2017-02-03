@@ -172,7 +172,6 @@ if (string_width(output) &gt; view_wview * 0.98) {
 
 //Determine if the height of the string has gone past the bottom of the textbox
 if (line == 2) {
-    show_debug_message(line);
     maxHeight = true;
     output = string_delete(output, textPos-1, 1);
     textPos-=2;
@@ -261,6 +260,8 @@ draw_set_valign(fa_top);
 //Draw the text
 //See alarm[0] for the actual text logic
 draw_text(view_xview + 7, view_yview + view_hview * 0.8 + 5, output);
+
+if (maxHeight) draw_sprite(spr_continue, image_index, view_wview * 0.98, view_hview * 0.8);
 </string>
           </argument>
         </arguments>

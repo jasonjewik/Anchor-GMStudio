@@ -71,6 +71,11 @@
     <instance objName="environ_wall" x="192" y="352" name="inst_5B551A72" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="224" y="352" name="inst_BD648B42" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="256" y="352" name="inst_1B664B02" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="data_inventory" x="96" y="224" name="inst_0F07ECE4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="npc_tutorial2" x="64" y="160" name="inst_8FB01FA5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_roborat" x="480" y="352" name="inst_592434B3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_roborat" x="544" y="224" name="inst_E9D3CE7F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="controller_grid" x="32" y="256" name="inst_9A937329" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

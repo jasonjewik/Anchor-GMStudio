@@ -41,6 +41,9 @@
         <sprite>sprites\spr_rifle</sprite>
       </sprites>
     </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\spr_roborat</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_pause</background>
@@ -76,14 +79,6 @@
     <font>fonts\fnt_menu</font>
   </fonts>
   <objects name="objects">
-    <objects name="Data Holders">
-      <object>objects\data_inventory</object>
-    </objects>
-    <objects name="Controllers">
-      <object>objects\controller_splash</object>
-      <object>objects\controller_main_menu</object>
-      <object>objects\controller_settings_menu</object>
-    </objects>
     <objects name="Classes">
       <objects name="GUI">
         <object>objects\class_textBox</object>
@@ -107,8 +102,21 @@
         <object>objects\class_projectile</object>
       </objects>
     </objects>
+    <objects name="Controllers">
+      <object>objects\controller_splash</object>
+      <object>objects\controller_main_menu</object>
+      <object>objects\controller_settings_menu</object>
+      <object>objects\controller_grid</object>
+    </objects>
+    <objects name="Data Holders">
+      <object>objects\data_inventory</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\enemy_roborat</object>
+    </objects>
     <objects name="NPCs">
       <object>objects\npc_tutorial</object>
+      <object>objects\npc_tutorial2</object>
     </objects>
     <objects name="Player">
       <objects name="Characters">
