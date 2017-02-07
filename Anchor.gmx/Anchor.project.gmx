@@ -40,6 +40,9 @@
       <sprites name="Ranged">
         <sprite>sprites\spr_rifle</sprite>
       </sprites>
+      <sprites name="mHitbox">
+        <sprite>sprites\melee_blunt</sprite>
+      </sprites>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_roborat</sprite>
@@ -63,6 +66,7 @@
       <script>scripts\input_key_enter.gml</script>
       <script>scripts\input_key_interact.gml</script>
       <script>scripts\input_key_dash.gml</script>
+      <script>scripts\input_mouse_middle_click.gml</script>
     </scripts>
     <scripts name="Physics">
       <script>scripts\Friction.gml</script>
@@ -100,6 +104,8 @@
         <object>objects\class_weapon</object>
         <object>objects\class_ranged</object>
         <object>objects\class_projectile</object>
+        <object>objects\class_melee</object>
+        <object>objects\class_mHitbox</object>
       </objects>
     </objects>
     <objects name="Controllers">
@@ -139,6 +145,12 @@
       </objects>
       <objects name="Projectiles">
         <object>objects\bullet_light_rapid</object>
+      </objects>
+      <objects name="Melee">
+        <object>objects\weapon_riflestock</object>
+      </objects>
+      <objects name="Hitbox">
+        <object>objects\blunt</object>
       </objects>
     </objects>
     <objects name="Environment">
