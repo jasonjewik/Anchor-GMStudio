@@ -49,6 +49,7 @@
     </sprites>
   </sprites>
   <backgrounds name="background">
+    <background>background\wall_temple</background>
     <background>background\bg_pause</background>
   </backgrounds>
   <paths name="paths"/>
