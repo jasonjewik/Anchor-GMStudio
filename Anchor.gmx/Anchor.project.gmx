@@ -40,8 +40,8 @@
       <sprites name="Ranged">
         <sprite>sprites\spr_rifle</sprite>
       </sprites>
-      <sprites name="mHitbox">
-        <sprite>sprites\melee_blunt</sprite>
+      <sprites name="HitBoxes">
+        <sprite>sprites\spr_melee_default</sprite>
       </sprites>
     </sprites>
     <sprites name="Enemies">
@@ -63,11 +63,11 @@
       <script>scripts\input_mouse_right_hold.gml</script>
       <script>scripts\input_mouse_left_click.gml</script>
       <script>scripts\input_mouse_left_hold.gml</script>
+      <script>scripts\input_mouse_middle_click.gml</script>
       <script>scripts\input_key_escape.gml</script>
       <script>scripts\input_key_enter.gml</script>
       <script>scripts\input_key_interact.gml</script>
       <script>scripts\input_key_dash.gml</script>
-      <script>scripts\input_mouse_middle_click.gml</script>
     </scripts>
     <scripts name="Physics">
       <script>scripts\Friction.gml</script>
@@ -104,8 +104,8 @@
       <objects name="Weapons">
         <object>objects\class_weapon</object>
         <object>objects\class_ranged</object>
-        <object>objects\class_projectile</object>
         <object>objects\class_melee</object>
+        <object>objects\class_projectile</object>
         <object>objects\class_mHitbox</object>
       </objects>
     </objects>
@@ -148,10 +148,10 @@
         <object>objects\bullet_light_rapid</object>
       </objects>
       <objects name="Melee">
-        <object>objects\weapon_riflestock</object>
+        <object>objects\weapon_melee_rifle</object>
       </objects>
       <objects name="Hitbox">
-        <object>objects\blunt</object>
+        <object>objects\hitbox_default</object>
       </objects>
     </objects>
     <objects name="Environment">

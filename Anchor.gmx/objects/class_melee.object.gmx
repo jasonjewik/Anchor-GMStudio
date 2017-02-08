@@ -28,11 +28,36 @@
             <string>event_inherited();
 
 hitDirection = 0;
-attack = input_mouse_middle_click();
 isActive = true;
+
 damageAmount = 0;
 damageVariance = 0;
 critChance = 0.5;
+trigger = input_mouse_left_click();
+
+hitbox = hitbox_default;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Debug || Test Code
+show_debug_message("Created!");
 </string>
           </argument>
         </arguments>
@@ -118,10 +143,12 @@ critChance = 0.5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Direction of Melee
-if (instance_exists(owner) &amp;&amp; isActive) {
-    hitDirection = point_direction(x, y, mouse_x, mouse_y);
-    }
+            <string>///Attacks
+trigger = input_mouse_left_click();
+
+if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
+    instance_create(x + 32 * sign(mouse_x - x), y, hitbox);
+}
 </string>
           </argument>
         </arguments>
@@ -142,8 +169,10 @@ if (instance_exists(owner) &amp;&amp; isActive) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Melee handled in child objects
-attack = input_mouse_middle_click();
+            <string>///Debug || Test Code
+if (trigger) {
+    show_debug_message("Triggered!");
+}
 </string>
           </argument>
         </arguments>

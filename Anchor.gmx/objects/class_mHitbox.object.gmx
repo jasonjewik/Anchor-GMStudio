@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Initiate Variables
-owner = instance_position(x, y, class_melee);
+owner = instance_nearest(x, y, class_melee);
 
 damage = owner.damageAmount;
 damageVariance = owner.damageVariance; 
