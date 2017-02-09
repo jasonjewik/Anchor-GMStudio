@@ -28,7 +28,7 @@
             <string>event_inherited();
 
 name = "Pulse Rifle";
-damageAmount = 5;
+damageAmount = 10;
 damageVariance = 1;
 critChance = 0.2;
 hitbox = hitbox_default;

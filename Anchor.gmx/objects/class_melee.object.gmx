@@ -170,9 +170,6 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
           <argument>
             <kind>1</kind>
             <string>///Debug || Test Code
-if (trigger) {
-    show_debug_message("Triggered!");
-}
 </string>
           </argument>
         </arguments>

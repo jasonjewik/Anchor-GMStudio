@@ -36,7 +36,7 @@ critChance = owner.critChance;
 critRoll = irandom_range(0, 1);
 if (critRoll &lt;= critChance) crit = true;
 else crit = false;
-if (crit = true) damage *= 1.5;
+if (crit) damage *= 1.5;
 damage = round(damage);
 </string>
           </argument>
@@ -62,6 +62,46 @@ damage = round(damage);
 </string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>room_speed * 0.1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="3" enumb="0">
@@ -129,7 +169,6 @@ damage = round(damage);
 if (place_meeting(x, y, class_enemy)) {
     hit = instance_position(x, y, class_enemy);
     hit.hp -= damage;
-        if (crit) damage = irandom_range(owner.damageAmount - damageVariance, owner.damageAmount + damageVariance);
 }
 
 //With Walls

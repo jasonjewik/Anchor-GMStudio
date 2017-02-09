@@ -330,6 +330,7 @@ if (distance_to_object(class_player) &lt; 15) eSpeed = Approach(eSpeed, 0, frc);
           <argument>
             <kind>1</kind>
             <string>///Taking Damage
+
 </string>
           </argument>
         </arguments>
@@ -404,6 +405,31 @@ if (distance_to_object(class_player) &lt; 15) eSpeed = Approach(eSpeed, 0, frc);
           <argument>
             <kind>1</kind>
             <string>if (path_exists(path)) path_delete(path);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+
+draw_text(x, y - 16, hp);
 </string>
           </argument>
         </arguments>
