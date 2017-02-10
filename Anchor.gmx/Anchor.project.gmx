@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprites name="Bars">
       <sprite>sprites\bar_health</sprite>
+      <sprite>sprites\bar_time</sprite>
       <sprite>sprites\bar_stamina</sprite>
     </sprites>
     <sprites name="Logos">
@@ -21,10 +22,19 @@
       <sprite>sprites\spr_cursor</sprite>
     </sprites>
     <sprites name="NPCs">
+      <sprite>sprites\spr_npc_alady</sprite>
+      <sprite>sprites\spr_npc_somgil</sprite>
       <sprite>sprites\spr_npc_tutorial</sprite>
     </sprites>
     <sprites name="Player">
       <sprites name="Default">
+        <sprite>sprites\player_default_swordslash</sprite>
+        <sprite>sprites\player_default_walkingback</sprite>
+        <sprite>sprites\player_default_walkingforward</sprite>
+        <sprite>sprites\player_default_dashback</sprite>
+        <sprite>sprites\player_default_dashtowalkside</sprite>
+        <sprite>sprites\player_default_dashtowalkforward</sprite>
+        <sprite>sprites\player_default_die</sprite>
         <sprite>sprites\player_default_dash</sprite>
         <sprite>sprites\player_default_walk</sprite>
         <sprite>sprites\player_default_idle</sprite>
@@ -45,11 +55,33 @@
       </sprites>
     </sprites>
     <sprites name="Enemies">
+      <sprite>sprites\spr_clyd_idle</sprite>
+      <sprite>sprites\spr_rob_idle</sprite>
       <sprite>sprites\spr_roborat</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
-    <background>background\wall_temple</background>
+    <background>background\tile_deserthouse</background>
+    <background>background\tile_tremans</background>
+    <background>background\tile_trogs</background>
+    <background>background\tile_ICECREAMTREE</background>
+    <background>background\tile_prettysmalloasis</background>
+    <background>background\tile_JUSTKIDDINGLARGEOASISBISH</background>
+    <background>background\tile_stone_faces3</background>
+    <background>background\tile_stone_faces2</background>
+    <background>background\tile_stone_faces1</background>
+    <background>background\tile_stone_faces</background>
+    <background>background\tile_corner_WALL</background>
+    <background>background\tile_temple_WALL</background>
+    <background>background\temple_foor</background>
+    <background>background\tile_flippn_sand</background>
+    <background>background\tile_grovel</background>
+    <background>background\tile_GODDAMNGRASS3</background>
+    <background>background\tile_GODDAMNGRASS2</background>
+    <background>background\tile_GODDAMNGRASS1</background>
+    <background>background\tile_GODDAMNGRASS</background>
+    <background>background\tile_temple_STAIR_CORNER</background>
+    <background>background\tile_temple_STAIR</background>
     <background>background\bg_pause</background>
   </backgrounds>
   <paths name="paths"/>
