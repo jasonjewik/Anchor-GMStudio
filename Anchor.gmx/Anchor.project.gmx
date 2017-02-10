@@ -165,16 +165,6 @@
       </objects>
       <object>objects\player_cursor</object>
     </objects>
-    <objects name="Buttons">
-      <objects name="Main Menu">
-        <object>objects\button_start</object>
-        <object>objects\button_settings</object>
-      </objects>
-      <objects name="Settings Menu">
-        <object>objects\button_fullscreen</object>
-        <object>objects\button_sensitivity</object>
-      </objects>
-    </objects>
     <objects name="Weapons">
       <objects name="Ranged">
         <object>objects\weapon_rifle</object>
@@ -198,6 +188,16 @@
       <object>objects\gui_health_bar</object>
       <object>objects\gui_stamina_bar</object>
       <object>objects\gui_time_bar</object>
+      <objects name="Buttons">
+        <objects name="Main Menu">
+          <object>objects\button_start</object>
+          <object>objects\button_settings</object>
+        </objects>
+        <objects name="Settings Menu">
+          <object>objects\button_fullscreen</object>
+          <object>objects\button_sensitivity</object>
+        </objects>
+      </objects>
     </objects>
     <objects name="FX">
       <object>objects\fx_fadeFromBlack</object>

@@ -35,7 +35,6 @@ damageVariance = 0;
 critChance = 0.5;
 trigger = input_mouse_left_click();
 
-global.sensitivity = 1.0;
 min_sensitivity = 0.1; //actually more sensitive
 max_sensitivity = 2.0; //vice versa
 
@@ -152,14 +151,24 @@ trigger = input_mouse_left_click();
 if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
     global.sensitivity = clamp(global.sensitivity, min_sensitivity, max_sensitivity);
     
-    if (mouse_x - x &gt; global.sensitivity * 32) {
-        if (mouse_y - y &gt; global.sensitivity * 32) instance_create(x + 32, y + 32, hitbox);
-        else if (y - mouse_y &gt; global.sensitivity * 32) instance_create(x + 32, y - 32, hitbox);
+    /*Old Unused Code
+    if (mouse_x - x &lt; global.sensitivity * 32) {
+        if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x + 32, y + 32, hitbox);
+        else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x + 32, y - 32, hitbox);
         else instance_create(x + 32, y, hitbox);
-    } else if (x - mouse_x &gt; global.sensitivity * 32) {
-        if (mouse_y - y &gt; global.sensitivity * 32) instance_create(x - 32, y + 32, hitbox);
-        else if (y - mouse_y &gt; global.sensitivity * 32) instance_create(x - 32, y - 32, hitbox);        
+    } else if (x - mouse_x &lt; global.sensitivity * 32) {
+        if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x - 32, y + 32, hitbox);
+        else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x - 32, y - 32, hitbox);        
         else instance_create(x - 32, y, hitbox);
+    }
+    */
+    
+    if (abs(mouse_x - x) &lt; global.sensitivity * 32) {
+        if (mouse_y &lt; y) instance_create(x, y - 32, hitbox);
+        else if (mouse_y &gt; y) instance_create(x, y + 32, hitbox);
+    } else if (abs(mouse_y - y) &lt; global.sensitivity * 32) {
+        if (mouse_x &lt; x) instance_create(x - 32, y, hitbox);
+        else if (mouse_x &gt; x) instance_create(x + 32, y, hitbox);
     }
 }
 </string>

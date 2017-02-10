@@ -62,6 +62,8 @@ sprite_walk = player_default_walk;
 sprite_dash = player_default_dash;
 sprite_idle_back = player_default_idle_back;
 
+instance_create(x, y, gui_camera);
+
 //Test code
 rifle = instance_create(x, y, weapon_melee_rifle);
 rifle.owner = self;

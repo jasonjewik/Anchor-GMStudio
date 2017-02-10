@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-global.sensitivity = 1.0;
 name = global.sensitivity;
 active = true;
 xBuffer = 8;
@@ -55,10 +54,12 @@ yBuffer = 0;
             <kind>1</kind>
             <string>event_inherited(); 
 
+name = global.sensitivity;
+
 //if (!instance_exists(fx_fadeFromBlack)) active = true;
 if (lightUp) {
     if (input_mouse_left_click()) global.sensitivity+=0.1;
-    else if (input_mouse_right_click()) global.sensitivy-=0.1;
+    else if (input_mouse_right_click()) global.sensitivity-=0.1;
 }
 </string>
           </argument>

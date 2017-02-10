@@ -122,36 +122,6 @@ if (barActualValue &lt; barMaxValue) {
       </action>
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Destroy Instance
-if (owner == class_player &amp;&amp; (input_key_interact() || global.chatOpen) &amp;&amp; global.hudOpen) toggle = true;
-
-if (toggle) {
-    image_speed = -1;
-    if (image_index == 0) {
-        global.hudOpen = false;
-        instance_destroy();
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>424</id>
         <kind>2</kind>
         <userelative>0</userelative>
