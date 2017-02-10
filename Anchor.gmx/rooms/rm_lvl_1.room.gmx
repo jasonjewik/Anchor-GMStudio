@@ -60,7 +60,6 @@
     <instance objName="npc_tutorial" x="736" y="608" name="inst_5FC91274" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="gui_pause" x="672" y="512" name="inst_048A550B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="gui_camera" x="704" y="512" name="inst_BDF3CBFB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_roborat" x="832" y="544" name="inst_E30FF58E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_temple_STAIR" x="576" y="448" w="32" h="32" xo="0" yo="0" id="10000023" name="inst_B7C85965" depth="-99999" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

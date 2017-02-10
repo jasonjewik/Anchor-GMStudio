@@ -47,6 +47,7 @@ staminaRegen = 2;
 dashCost = maxStamina/4;
 max_timeEssence = 100;
 timeEssence = max_timeEssence;
+global.hudOpen = false;
 inventory = instance_create(x, y, data_inventory);
 
 isAiming = false;
@@ -59,6 +60,7 @@ global.yFace = 0;
 sprite_idle = player_default_idle;
 sprite_walk = player_default_walk;
 sprite_dash = player_default_dash;
+sprite_idle_back = player_default_idle_back;
 
 //Test code
 rifle = instance_create(x, y, weapon_melee_rifle);
@@ -308,17 +310,27 @@ if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
           <argument>
             <kind>1</kind>
             <string>///Animation
+//Determine the xFace
 if (abs(mouse_x - x) &gt; 0) {
     image_xscale = -sign(mouse_x - x);
     global.xFace = image_xscale;
 } else image_xscale = global.xFace;
 
-if (mouse_y - y &gt; 0) global.yFace = 1;
-else global.yFace = -1;
+//Determine the yFace
+if (mouse_y - y &gt; 0) {
+    global.yFace = 1;
+    depth = 0;
+}
+else {
+    global.yFace = -1;
+    depth = class_weapon.depth - 1;
+}
 
+//Sprites
 if (hSpeedFinal == 0 &amp;&amp; vSpeedFinal == 0) {
     image_speed = 1;
-    sprite_index = sprite_idle;
+    if (global.yFace == 1) sprite_index = sprite_idle;
+    else sprite_index = sprite_idle_back;
 }
 else if (global.isDashing) {
     image_speed = 0.5;
@@ -349,7 +361,7 @@ else {
           <argument>
             <kind>1</kind>
             <string>///Weapons
-if (input_mouse_right_hold() &amp;&amp; !global.chatOpen) isAiming = true;
+if (instance_exists(class_ranged) &amp;&amp; input_mouse_right_hold() &amp;&amp; !global.chatOpen) isAiming = true;
 else isAiming = false;
 
 global.isAiming = isAiming;
@@ -374,25 +386,23 @@ global.isAiming = isAiming;
           <argument>
             <kind>1</kind>
             <string>///Pulling up the HUD
-if (input_key_interact() &amp;&amp; !global.canTalk) {
-    if (!instance_exists(gui_health_bar)) {
-        healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
-        healthBar.owner = class_player;
-        healthBar.barMaxValue = hp;
-        healthBar.barTotalValue = maxHp;
-    }
-    if (!instance_exists(gui_stamina_bar)) {
-        staminaBar = instance_create(view_xview + 2, view_yview + 6, gui_stamina_bar);
-        staminaBar.owner = class_player;
-        staminaBar.barMaxValue = stamina;
-        staminaBar.barTotalValue = maxStamina;
-    }
-    if (!instance_exists(gui_time_bar)) {
-        timeBar = instance_create(view_xview + 2, view_yview + 18, gui_time_bar);
-        timeBar.owner = class_player;
-        timeBar.barMaxValue = timeEssence;
-        timeBar.barTotalValue = max_timeEssence;
-    }
+if (input_key_interact() &amp;&amp; !global.canTalk &amp;&amp; !global.hudOpen) {
+    healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
+    healthBar.owner = class_player;
+    healthBar.barMaxValue = hp;
+    healthBar.barTotalValue = maxHp;
+        
+    staminaBar = instance_create(view_xview + 2, view_yview + 6, gui_stamina_bar);
+    staminaBar.owner = class_player;
+    staminaBar.barMaxValue = stamina;
+    staminaBar.barTotalValue = maxStamina;
+
+    timeBar = instance_create(view_xview + 2, view_yview + 18, gui_time_bar);
+    timeBar.owner = class_player;
+    timeBar.barMaxValue = timeEssence;
+    timeBar.barTotalValue = max_timeEssence;
+    
+    global.hudOpen = true;
 }
 </string>
           </argument>

@@ -51,7 +51,10 @@
             <string>if (input_key_escape() &amp;&amp; global.pause) global.pause = false;
 else if (input_key_escape() &amp;&amp; !global.pause) global.pause = true;
 
-if (global.pause &amp;&amp; input_key_enter()) game_end();
+if (global.pause &amp;&amp; input_key_enter()) {
+    room_goto(rm_menu);
+    global.pause = false;
+}
 </string>
           </argument>
         </arguments>

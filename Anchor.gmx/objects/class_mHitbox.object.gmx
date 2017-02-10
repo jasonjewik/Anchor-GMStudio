@@ -168,7 +168,7 @@ damage = round(damage);
 //With Enemy
 if (place_meeting(x, y, class_enemy)) {
     hit = instance_position(x, y, class_enemy);
-    hit.hp -= damage;
+    with (hit) hp -= other.damage;
 }
 
 //With Walls

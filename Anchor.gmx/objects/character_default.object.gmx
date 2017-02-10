@@ -31,6 +31,7 @@ name = "Chito";
 sprite_idle = player_default_idle;
 sprite_walk = player_default_walk;
 sprite_dash = player_default_dash;
+sprite_idle_back = player_default_idle_back;
 </string>
           </argument>
         </arguments>

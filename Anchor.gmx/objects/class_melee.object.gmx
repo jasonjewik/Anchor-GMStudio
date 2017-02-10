@@ -35,6 +35,10 @@ damageVariance = 0;
 critChance = 0.5;
 trigger = input_mouse_left_click();
 
+global.sensitivity = 1.0;
+min_sensitivity = 0.1; //actually more sensitive
+max_sensitivity = 2.0; //vice versa
+
 hitbox = hitbox_default;
 </string>
           </argument>
@@ -57,7 +61,6 @@ hitbox = hitbox_default;
           <argument>
             <kind>1</kind>
             <string>///Debug || Test Code
-show_debug_message("Created!");
 </string>
           </argument>
         </arguments>
@@ -147,7 +150,17 @@ show_debug_message("Created!");
 trigger = input_mouse_left_click();
 
 if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
-    instance_create(x + 32 * sign(mouse_x - x), y, hitbox);
+    global.sensitivity = clamp(global.sensitivity, min_sensitivity, max_sensitivity);
+    
+    if (mouse_x - x &gt; global.sensitivity * 32) {
+        if (mouse_y - y &gt; global.sensitivity * 32) instance_create(x + 32, y + 32, hitbox);
+        else if (y - mouse_y &gt; global.sensitivity * 32) instance_create(x + 32, y - 32, hitbox);
+        else instance_create(x + 32, y, hitbox);
+    } else if (x - mouse_x &gt; global.sensitivity * 32) {
+        if (mouse_y - y &gt; global.sensitivity * 32) instance_create(x - 32, y + 32, hitbox);
+        else if (y - mouse_y &gt; global.sensitivity * 32) instance_create(x - 32, y - 32, hitbox);        
+        else instance_create(x - 32, y, hitbox);
+    }
 }
 </string>
           </argument>

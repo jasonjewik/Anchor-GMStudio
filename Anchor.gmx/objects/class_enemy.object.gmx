@@ -35,9 +35,17 @@ frc = 0.3;
 maxSpeed = 2;
 
 //Combat
-hp = 10;
+max_hp = 10;
+hp = max_hp;
 attack = false;
 damage = false;
+
+//Health Bars
+healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
+healthBar.owner = self;
+healthBar.barMaxValue = hp;
+healthBar.barActualValue = hp;
+healthBar.barTotalValue = max_hp;
 
 //Misc
 image_speed = 0.2;
@@ -428,8 +436,6 @@ if (distance_to_object(class_player) &lt; 15) eSpeed = Approach(eSpeed, 0, frc);
           <argument>
             <kind>1</kind>
             <string>draw_self();
-
-draw_text(x, y - 16, hp);
 </string>
           </argument>
         </arguments>

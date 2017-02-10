@@ -37,6 +37,7 @@
         <sprite>sprites\player_default_die</sprite>
         <sprite>sprites\player_default_dash</sprite>
         <sprite>sprites\player_default_walk</sprite>
+        <sprite>sprites\player_default_idle_back</sprite>
         <sprite>sprites\player_default_idle</sprite>
       </sprites>
     </sprites>
@@ -93,6 +94,7 @@
       <script>scripts\input_key_down.gml</script>
       <script>scripts\input_key_left.gml</script>
       <script>scripts\input_mouse_right_hold.gml</script>
+      <script>scripts\input_mouse_right_click.gml</script>
       <script>scripts\input_mouse_left_click.gml</script>
       <script>scripts\input_mouse_left_hold.gml</script>
       <script>scripts\input_mouse_middle_click.gml</script>
@@ -170,6 +172,7 @@
       </objects>
       <objects name="Settings Menu">
         <object>objects\button_fullscreen</object>
+        <object>objects\button_sensitivity</object>
       </objects>
     </objects>
     <objects name="Weapons">
