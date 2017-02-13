@@ -26,6 +26,9 @@
       <sprite>sprites\spr_npc_somgil</sprite>
       <sprite>sprites\spr_npc_tutorial</sprite>
     </sprites>
+    <sprites name="Items">
+      <sprite>sprites\spr_inventory</sprite>
+    </sprites>
     <sprites name="Player">
       <sprites name="Default">
         <sprite>sprites\player_default_swordslash</sprite>
@@ -99,6 +102,7 @@
       <script>scripts\input_mouse_left_hold.gml</script>
       <script>scripts\input_mouse_middle_click.gml</script>
       <script>scripts\input_key_escape.gml</script>
+      <script>scripts\input_key_tab.gml</script>
       <script>scripts\input_key_enter.gml</script>
       <script>scripts\input_key_interact.gml</script>
       <script>scripts\input_key_dash.gml</script>

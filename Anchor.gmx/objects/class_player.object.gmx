@@ -65,7 +65,7 @@ sprite_idle_back = player_default_idle_back;
 instance_create(x, y, gui_camera);
 
 //Test code
-rifle = instance_create(x, y, weapon_melee_rifle);
+rifle = instance_create(x, y, weapon_rifle);
 rifle.owner = self;
 </string>
           </argument>
