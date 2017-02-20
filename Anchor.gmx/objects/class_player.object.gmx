@@ -31,6 +31,7 @@ hSpeedFrac = 0;
 vSpeedFrac = 0;
 hSpeedFinal = 0;
 vSpeedFinal = 0;
+dashSpeed = 0;
 init_maxSpeed = 1.0;
 maxSpeed = 1.0;
 init_accl = 0.4;
@@ -242,8 +243,22 @@ y+=vSpeedFinal;
             <kind>1</kind>
             <string>///Dash
 if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
-    maxSpeed *= 8;
-    accl *= 5;
+    maxSpeed *= 20;
+    accl *= 10;
+    
+    if (!global.isDashing) {
+        //Get mouse coordinates at initial cast
+        tarX = mouse_x;
+        tarY = mouse_y;
+        
+        //Set the cooldown
+        alarm_set(0, room_speed * 2);
+        
+        global.isDashing = true;
+    }
+    
+   
+    /*Old Code -- only works in 8 directions
     dir = "h";
     
     //Direction of Roll
@@ -289,7 +304,13 @@ if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
             }
             break;
         default: break;
-    }
+    }*/
+}
+
+if (global.isDashing) {
+    dashSpeed = Approach(dashSpeed, maxSpeed, accl);
+    dashSpeed = clamp(dashSpeed, 0, maxSpeed);
+    move_towards_point(tarX, tarY, dashSpeed);
 }
 </string>
           </argument>
@@ -363,10 +384,10 @@ else {
           <argument>
             <kind>1</kind>
             <string>///Weapons
-if (instance_exists(class_ranged) &amp;&amp; input_mouse_right_hold() &amp;&amp; !global.chatOpen) isAiming = true;
+/*if (instance_exists(class_ranged) &amp;&amp; input_mouse_right_hold() &amp;&amp; !global.chatOpen) isAiming = true;
 else isAiming = false;
 
-global.isAiming = isAiming;
+global.isAiming = isAiming;*/
 </string>
           </argument>
         </arguments>
@@ -464,12 +485,11 @@ if (input_key_interact() &amp;&amp; !global.canTalk &amp;&amp; !global.hudOpen) 
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.isDashing) {
+            <string>if (sprite_index == sprite_dash) {
     maxSpeed = init_maxSpeed;
     accl = init_accl;
     stamina -= dashCost;
-    hSpeed = Friction(hSpeed, frc);
-    vSpeed = Friction(vSpeed, frc);
+    dashSpeed = Friction(dashSpeed, frc);
     global.isDashing = false;
 }
 </string>

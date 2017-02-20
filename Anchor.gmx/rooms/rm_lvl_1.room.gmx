@@ -65,8 +65,7 @@
     <instance objName="environ_wall" x="896" y="544" name="inst_98771693" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="886" y="682" name="inst_7A2BC05A" locked="0" code="" scaleX="0.5625" scaleY="0.875" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="928" y="672" name="inst_AEA0BB4A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_roborat" x="736" y="512" name="inst_FC8F9708" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="data_inventory" x="1120" y="576" name="inst_4AF31AB4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="data_inventory" x="832" y="800" name="inst_4AF31AB4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="temple_foor" x="608" y="448" w="64" h="64" xo="0" yo="0" id="10000219" name="inst_7A1C6932" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

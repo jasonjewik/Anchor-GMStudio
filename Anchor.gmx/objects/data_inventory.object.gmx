@@ -3,7 +3,7 @@
   <spriteName>spr_inventory</spriteName>
   <solid>0</solid>
   <visible>0</visible>
-  <depth>0</depth>
+  <depth>-9999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -30,8 +30,6 @@ maxItems = 20;
 
 global.itemEquip1 = noone;
 global.itemEquip2 = noone;
-
-toggle = false;
 
 currentSelect = noone;
 </string>
@@ -100,9 +98,8 @@ currentSelect = noone;
             <kind>1</kind>
             <string>///Toggling the Inventory View
 if (input_key_tab()) {
-    if (!toggle) toggle = true;
-    else toggle = false;
-    show_debug_message(toggle);
+    if (!visible) visible = true;
+    else visible = false;
 }
 </string>
           </argument>
@@ -124,8 +121,8 @@ if (input_key_tab()) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = class_player.x;
-y = class_player.y;
+            <string>x = view_xview + view_wview/2;
+y = view_yview + view_hview/2;
 </string>
           </argument>
         </arguments>
@@ -163,8 +160,6 @@ y = class_player.y;
           <argument>
             <kind>1</kind>
             <string>draw_self();
-if (toggle) visible = true;
-else visible = false;
 </string>
           </argument>
         </arguments>

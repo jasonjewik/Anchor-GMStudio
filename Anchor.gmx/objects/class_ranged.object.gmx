@@ -39,7 +39,7 @@ damageAmount = 0;
 damageVariance = 0;
 damageDropOff = 0;
 critChance = 0.5;
-trigger = input_mouse_left_click();
+trigger = input_mouse_right_click();
 
 isActive = true;
 projectile = noone;
@@ -198,7 +198,7 @@ bounds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Line of Sight Calculations
+            <string>/*Line of Sight Calculations
 if (instance_exists(owner) &amp;&amp; isActive) {
     if (owner.isAiming)
     {
@@ -239,8 +239,8 @@ if (instance_exists(owner) &amp;&amp; isActive) {
           <argument>
             <kind>1</kind>
             <string>///Shooting handled in child objects
-if (auto) trigger = input_mouse_left_hold();
-else trigger = input_mouse_left_click();
+if (auto) trigger = input_mouse_right_hold();
+else trigger = input_mouse_right_click();
 </string>
           </argument>
         </arguments>
@@ -282,10 +282,10 @@ else trigger = input_mouse_left_click();
     //image_angle = aiming_direction;
     
     //Aim
-    if (isActive) &amp;&amp; (owner.isAiming) {    
+    /*if (isActive) &amp;&amp; (owner.isAiming) {    
         draw_line_width_colour(x + (image_xscale * (bounds)), y, lineX, lineY, beam_width, beam_color, beam_color);
         if (draw_range &lt; projectile_range) draw_circle_colour(lineX, lineY, beam_width, beam_color, beam_color, false);
-    }
+    }*/
 }
 </string>
           </argument>
