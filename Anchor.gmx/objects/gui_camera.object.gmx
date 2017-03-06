@@ -31,13 +31,13 @@ move = false;
 
 initLeash = 32;
 leash = initLeash;
-rangeMultiplier = 1.5;
-cameraMultiplier = 1.2;
+//rangeMultiplier = 1.5;
+cameraMult = 0.6;
 
-default_xBuffer = 140;
-default_yBuffer = 90;
-default_xRange = 320;
-default_yRange = 180;
+default_xBuffer = 280 * cameraMult;
+default_yBuffer = 180 * cameraMult;
+default_xRange = 640 * cameraMult;
+default_yRange = 360 * cameraMult;
 
 xBuffer = default_xBuffer;
 yBuffer = default_yBuffer;
@@ -149,7 +149,7 @@ if (instance_exists(class_player)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Player is Aiming
+            <string>/*Player is Aiming
 if (global.isAiming) {
     leash = initLeash * rangeMultiplier; 
     xBuffer = default_xBuffer * cameraMultiplier;

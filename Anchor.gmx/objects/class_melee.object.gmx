@@ -228,9 +228,8 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_exists(owner)) {
+            <string>
     draw_self();
-}
 </string>
           </argument>
         </arguments>

@@ -277,8 +277,7 @@ else trigger = input_mouse_right_click();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_exists(owner)) {
-    draw_self();
+            <string>    draw_self();
     //image_angle = aiming_direction;
     
     //Aim
@@ -286,7 +285,7 @@ else trigger = input_mouse_right_click();
         draw_line_width_colour(x + (image_xscale * (bounds)), y, lineX, lineY, beam_width, beam_color, beam_color);
         if (draw_range &lt; projectile_range) draw_circle_colour(lineX, lineY, beam_width, beam_color, beam_color, false);
     }*/
-}
+
 </string>
           </argument>
         </arguments>

@@ -28,6 +28,20 @@
     </sprites>
     <sprites name="Items">
       <sprite>sprites\spr_inventory</sprite>
+      <sprites name="Weapons">
+        <sprites name="Projectiles">
+          <sprite>sprites\spr_bullet_light</sprite>
+        </sprites>
+        <sprites name="Ranged">
+          <sprite>sprites\spr_rifle</sprite>
+        </sprites>
+        <sprites name="Melee">
+          <sprite>sprites\spr_pipe</sprite>
+        </sprites>
+        <sprites name="HitBoxes">
+          <sprite>sprites\spr_melee_default</sprite>
+        </sprites>
+      </sprites>
     </sprites>
     <sprites name="Player">
       <sprites name="Default">
@@ -46,17 +60,6 @@
     </sprites>
     <sprites name="Walls">
       <sprite>sprites\spr_wall</sprite>
-    </sprites>
-    <sprites name="Weapons">
-      <sprites name="Projectiles">
-        <sprite>sprites\spr_bullet_light</sprite>
-      </sprites>
-      <sprites name="Ranged">
-        <sprite>sprites\spr_rifle</sprite>
-      </sprites>
-      <sprites name="HitBoxes">
-        <sprite>sprites\spr_melee_default</sprite>
-      </sprites>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_clyd_idle</sprite>
@@ -106,6 +109,8 @@
       <script>scripts\input_key_enter.gml</script>
       <script>scripts\input_key_interact.gml</script>
       <script>scripts\input_key_dash.gml</script>
+      <script>scripts\input_mouse_scroll_up.gml</script>
+      <script>scripts\input_mouse_scroll_down.gml</script>
     </scripts>
     <scripts name="Physics">
       <script>scripts\Friction.gml</script>
@@ -139,12 +144,15 @@
         <object>objects\class_enemy</object>
         <object>objects\class_player</object>
       </objects>
-      <objects name="Weapons">
-        <object>objects\class_weapon</object>
-        <object>objects\class_ranged</object>
-        <object>objects\class_melee</object>
-        <object>objects\class_projectile</object>
-        <object>objects\class_mHitbox</object>
+      <objects name="Items">
+        <object>objects\class_item</object>
+        <objects name="Weapons">
+          <object>objects\class_weapon</object>
+          <object>objects\class_ranged</object>
+          <object>objects\class_melee</object>
+          <object>objects\class_projectile</object>
+          <object>objects\class_mHitbox</object>
+        </objects>
       </objects>
     </objects>
     <objects name="Controllers">
@@ -177,7 +185,7 @@
         <object>objects\bullet_light_rapid</object>
       </objects>
       <objects name="Melee">
-        <object>objects\weapon_melee_rifle</object>
+        <object>objects\weapon_melee_pipe</object>
       </objects>
       <objects name="Hitbox">
         <object>objects\hitbox_default</object>

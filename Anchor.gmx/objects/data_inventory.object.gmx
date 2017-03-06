@@ -31,7 +31,7 @@ maxItems = 20;
 global.itemEquip1 = noone;
 global.itemEquip2 = noone;
 
-currentSelect = noone;
+global.currentSelect = global.itemEquip1;
 </string>
           </argument>
         </arguments>
@@ -101,6 +101,9 @@ if (input_key_tab()) {
     if (!visible) visible = true;
     else visible = false;
 }
+
+x = view_xview + view_wview/2;
+y = view_yview + view_hview/2;
 </string>
           </argument>
         </arguments>
@@ -121,8 +124,17 @@ if (input_key_tab()) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = view_xview + view_wview/2;
-y = view_yview + view_hview/2;
+            <string>///Switching Items
+if (input_mouse_scroll_up() || input_mouse_scroll_down) {
+    if (global.currentSelect == global.itemEquip1) {
+        with (global.currentSelect) instance_destroy();
+        global.currentSelect = global.itemEquip2;
+    }
+    if (global.currentSelect == global.itemEquip2) {
+        with (global.currentSelect) instance_destroy();
+        global.currentSelect = global.itemEquip1;
+    }
+}
 </string>
           </argument>
         </arguments>

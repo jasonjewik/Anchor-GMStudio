@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>owner = noone;
 image_speed = 1;
-barActualValue = 0;
 barMaxValue = 0;
+barActualValue = 0;
 barTotalValue = 0;
 toggle = false;
 buffer = 12;
@@ -42,6 +42,7 @@ blue = make_colour_rgb(107, 190, 238);
 red = make_colour_rgb(246, 56, 113);
 orange = make_colour_rgb(255, 178, 102);
 
+image_speed = 0.5;
 barColor = green;
 depth = -9999;
 </string>
@@ -108,13 +109,39 @@ depth = -9999;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Fill Up || Decrement the Bar
+            <string>///Opening the HUD
 if (barActualValue &lt; barMaxValue) {
-    dist = barMaxValue - barActualValue;
-    barActualValue += fillMultiplier * (dist/barMaxValue);
+    barActualValue = barMaxValue;
+    //dist = barMaxValue - barActualValue;
+    //barActualValue += fillMultiplier * (dist/barMaxValue);
     decrease = false;
 } else if (barActualValue &gt; barMaxValue) {
     barActualValue -= decConstant;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Close the HUD
+if (!global.hudOpen) {
+    image_speed = -0.5;
+    if (image_index == 0) instance_destroy();
 }
 </string>
           </argument>

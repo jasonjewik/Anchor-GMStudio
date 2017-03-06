@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-1</depth>
   <persistent>0</persistent>
-  <parentName>class_item</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,10 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-
-tier = 0;
-owner = noone;
+            <string>name = "";
 </string>
           </argument>
         </arguments>
@@ -51,11 +48,11 @@ owner = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = -global.xFace;
-
-if (instance_exists(owner)) {
-    x = owner.x + (image_xscale * 5);
-    y = owner.y;
+            <string>if (distance_to_object(class_player) &lt; 32 &amp;&amp; input_key_interact()) {
+    ds_list_add(global.inventory, self);
+    
+    if (global.itemEquip1 == noone) global.itemEquip1 = self;
+    else global.itemEquip2 = self;
 }
 </string>
           </argument>
