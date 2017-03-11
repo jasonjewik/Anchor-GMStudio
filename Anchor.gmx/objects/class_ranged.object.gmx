@@ -41,7 +41,7 @@ damageDropOff = 0;
 critChance = 0.5;
 trigger = input_mouse_right_click();
 
-isActive = true;
+isActive = false;
 projectile = noone;
 
 reloadTime = room_speed * 2;
@@ -177,7 +177,8 @@ bounds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited()
+            <string>event_inherited();
+
 </string>
           </argument>
         </arguments>
@@ -198,7 +199,8 @@ bounds = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*Line of Sight Calculations
+            <string>///Line of Sight Calculations (unused) 
+/*
 if (instance_exists(owner) &amp;&amp; isActive) {
     if (owner.isAiming)
     {

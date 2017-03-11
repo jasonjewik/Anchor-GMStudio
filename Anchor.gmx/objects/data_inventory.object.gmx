@@ -125,14 +125,15 @@ y = view_yview + view_hview/2;
           <argument>
             <kind>1</kind>
             <string>///Switching Items
-if (input_mouse_scroll_up() || input_mouse_scroll_down) {
+if (input_mouse_scroll_up() || input_mouse_scroll_down()) {
     if (global.currentSelect == global.itemEquip1) {
-        with (global.currentSelect) instance_destroy();
+        with (global.currentSelect) isActive = false;
         global.currentSelect = global.itemEquip2;
-    }
-    if (global.currentSelect == global.itemEquip2) {
-        with (global.currentSelect) instance_destroy();
+        with (global.currentSelect) isActive = true;
+    } else if (global.currentSelect == global.itemEquip2) {
+        with (global.currentSelect) isActive = false;
         global.currentSelect = global.itemEquip1;
+        with (global.currentSelect) isActive = true;
     }
 }
 </string>

@@ -28,15 +28,18 @@
             <string>event_inherited();
 
 hitDirection = 0;
-isActive = true;
+isActive = false;
 
 damageAmount = 0;
 damageVariance = 0;
 critChance = 0.5;
 trigger = input_mouse_left_click();
+diag1 = false;
+diag2 = false;
 
 min_sensitivity = 0.1; //actually more sensitive
 max_sensitivity = 2.0; //vice versa
+//recommended sensitivty setting of 1.2
 
 hitbox = hitbox_default;
 </string>
@@ -163,12 +166,20 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
     }
     */
     
-    if (abs(mouse_x - x) &lt; global.sensitivity * 32) {
+    if (abs(mouse_x - x) &lt; global.sensitivity * 32) diag1 = true;
+    if (abs(mouse_y - y) &lt; global.sensitivity * 32) diag2 = true;
+    
+    if (diag1 &amp;&amp; !diag2) {
         if (mouse_y &lt; y) instance_create(x, y - 32, hitbox);
-        else if (mouse_y &gt; y) instance_create(x, y + 32, hitbox);
-    } else if (abs(mouse_y - y) &lt; global.sensitivity * 32) {
+        else if (mouse_y &gt; y) instance_create(x, y + 32, hitbox); 
+    } else if (!diag1 &amp;&amp; diag2) {
         if (mouse_x &lt; x) instance_create(x - 32, y, hitbox);
         else if (mouse_x &gt; x) instance_create(x + 32, y, hitbox);
+    } else if (diag1 &amp;&amp; diag2) {
+        if (mouse_x &lt; x &amp;&amp; mouse_y &lt; y) instance_create(x - 32, y - 32, hitbox);
+        else if (mouse_x &gt; x &amp;&amp; mouse_y &gt; y) instance_create(x + 32, y + 32, hitbox);
+        else if (mouse_x &lt; x &amp;&amp; mouse_y &gt; y) instance_create(x - 32, y + 32, hitbox);
+        else if (mouse_x &gt; x &amp;&amp; mouse_y &lt; y) instance_create(x + 32, y - 32, hitbox);
     }
 }
 </string>

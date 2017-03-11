@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,50 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>name = "";
-owner = noone;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Picking item up
-if (distance_to_object(class_player) &lt; 32 &amp;&amp; owner == noone) {
-    global.canTalk = true;
-    if (input_key_interact()) {
-        ds_list_add(global.inventory, self);
-    
-        owner = class_player; 
-        
-        if (global.itemEquip1 == noone) global.itemEquip1 = self;
-        else global.itemEquip2 = self;
-        
-        if (global.currentSelect == noone) {
-            if (global.itemEquip1 != noone) global.currentSelect = global.itemEquip1;
-            else if (global.itemEquip2 != noone) global.currentSelect = global.itemEquip2;
-        }
-    
-        global.canTalk = false;
-        //instance_deactivate_object(self);
-    }
-}
+            <string>global.collisionList = ds_list_create();
 </string>
           </argument>
         </arguments>

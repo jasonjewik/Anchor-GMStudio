@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>class_solid</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -33,12 +33,16 @@ eSpeedFrac = .0;
 accl = 0.4;
 frc = 0.3;
 maxSpeed = 2;
+speedCap = maxSpeed * 10;
+acclCap = accl * 4;
 
 //Combat
 max_hp = 10;
 hp = max_hp;
+attack_dmg = 10;
 attack = false;
 damage = false;
+dir = noone;
 
 //Health Bars
 healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
@@ -81,6 +85,56 @@ path = path_add();
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (damage &amp;&amp; path_exists(path)) {
+    path_delete(path);
+    damage = false;    
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -99,11 +153,16 @@ path = path_add();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (path_exists(path) &amp;&amp; mp_grid_path(global.grid, path, x, y, (class_player.x div 32) * 32 + 16, (class_player.y div 32) * 32 + 16, true)) {
-    path_start(path, eSpeedFinal, path_action_stop, false);
+            <string>if (!damage) {
+    if (path_exists(path) &amp;&amp; mp_grid_path(global.grid, path, x, y, (class_player.x div 32) * 32 + 16, (class_player.y div 32) * 32 + 16, true)) {
+        path_start(path, eSpeedFinal, path_action_stop, false);
+    }
+    
+    if (move == 1) {
+        if (!path_exists(path)) path = path_add();
+        alarm_set(0, 15);
+    }
 }
-
-if (move == 1) alarm_set(0, 15);
 </string>
           </argument>
         </arguments>
@@ -168,62 +227,27 @@ if (move == 1) alarm_set(0, 15);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Superceding Functions
+            <string>///Enemy Movements
+move = 0;
 
-if (hp &lt;= 0) instance_destroy();
+if (distance_to_object(class_player) &lt; 150 || damage) move = 1;
 
-//Clamp Movement Values
-eSpeed = clamp(eSpeed, -maxSpeed, maxSpeed);
+if (eSpeed == 0) eSpeed = move * accl;
+else eSpeed = move * accl + eSpeed;
 
-//Fractional Movement Handling
-eSpeedFinal = eSpeed + eSpeedFrac;
-eSpeedFrac = eSpeedFinal - floor(abs(eSpeedFinal)) * sign(eSpeedFinal);
-eSpeedFinal -= eSpeedFrac;
+if (move == 0) {
+    if (path_exists(path)) path_delete(path);
+    eSpeed = Approach(eSpeed, 0, frc);
+}
+
+if (move == 1 &amp;&amp; alarm[0] = -1) {
+    //Grid Navigation 
+    if (!pathExist) path = path_add();
+    alarm_set(0, 15);
+}
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>612</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>-1</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_variable</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>damage </string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>false</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>
@@ -241,85 +265,60 @@ eSpeedFinal -= eSpeedFrac;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Enemy Movements
-move = 0;
+            <string>///Superceding Functions
 
-if (distance_to_object(class_player) &lt; 150) move = 1;
+if (hp &lt;= 0) instance_destroy();
 
-if (eSpeed == 0) eSpeed = move * accl;
-else eSpeed = move * accl + eSpeed;
+//Clamp Movement Values
+eSpeed = clamp(eSpeed, -maxSpeed, maxSpeed);
 
-if (move == 0) {
-    if (path_exists(path)) path_delete(path);
-    eSpeed = Approach(eSpeed, 0, frc);
-}
-
-if (move == 1 &amp;&amp; alarm[0] = -1) {
-    //Grid Navigation 
-    if (!pathExist) path = path_add();
-    alarm_set(0, 15);
-}
-
-if (distance_to_object(class_player) &lt; 15) eSpeed = Approach(eSpeed, 0, frc);
+//Fractional Movement Handling
+eSpeedFinal = eSpeed + eSpeedFrac;
+eSpeedFrac = eSpeedFinal - floor(abs(eSpeedFinal)) * sign(eSpeedFinal);
+eSpeedFinal -= eSpeedFrac;
 </string>
           </argument>
         </arguments>
       </action>
       <action>
         <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>612</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>-1</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_variable</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
-            <kind>0</kind>
-            <string>damage</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>true</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
+            <kind>1</kind>
+            <string>///Combat
+if (place_meeting(x + eSpeed, y, class_player)) {
+    with (class_player) {
+        if (!global.isDashing &amp;&amp; !damage) {
+            x1 = x + other.eSpeedFinal * 5;
+            damage = true;
+            hp -= other.attack_dmg;
+        }
+    }
+} else if (place_meeting(x, y + eSpeed, class_player)) {
+    with (class_player) {
+        if (!global.isDashing &amp;&amp; !damage) {
+            y1 = y + other.eSpeedFinal * 5;
+            damage = true;
+            hp -= other.attack_dmg;
+        }
+    }
+} else {
+    with (class_player) damage = false;
+}
+</string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>
@@ -338,24 +337,27 @@ if (distance_to_object(class_player) &lt; 15) eSpeed = Approach(eSpeed, 0, frc);
           <argument>
             <kind>1</kind>
             <string>///Taking Damage
-
+if (damage) {
+    path_delete(path);
+    
+    maxSpeed = speedCap;
+    accl = acclCap;
+    
+     //Resets
+    alarm_set(1, room_speed/2);
+    
+    x1 = x + sign(x - class_player.x) * 5;
+    y1 = y + sign(y - class_player.y) * 5;
+    
+    path = path_add();
+    if (path_exists(path) &amp;&amp; mp_grid_path(global.grid, path, x, y, x1, y1, true)) {
+        path_start(path, eSpeedFinal, path_action_stop, false);
+    }
+    
+}
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>

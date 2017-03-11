@@ -28,7 +28,6 @@
             <string>event_inherited();
 
 tier = 0;
-owner = noone;
 </string>
           </argument>
         </arguments>
@@ -51,11 +50,15 @@ owner = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = -global.xFace;
+            <string>event_inherited();
 
 if (instance_exists(owner)) {
+    image_xscale = -global.xFace;
     x = owner.x + (image_xscale * 5);
     y = owner.y;
+    
+    if (!isActive) visible = false;
+    else visible = true;
 }
 </string>
           </argument>

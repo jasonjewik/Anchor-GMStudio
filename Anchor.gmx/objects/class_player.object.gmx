@@ -38,6 +38,8 @@ init_accl = 0.4;
 accl = init_accl;
 acclCap = init_accl * 10;
 frc = accl/2;
+damage = false;
+dir = noone;
 
 name = "";
 maxHp = 100;
@@ -52,6 +54,8 @@ timeEssence = max_timeEssence;
 global.hudOpen = false;
 inventory = instance_create(x, y, data_inventory);
 
+x1 = mouse_x;
+y1 = mouse_y;
 isAiming = false;
 global.isAiming = isAiming;
 global.isDashing = false;
@@ -90,6 +94,58 @@ instance_create(x, y, gui_camera);
           <argument>
             <kind>4</kind>
             <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>maxSpeed = init_maxSpeed;
+accl = init_accl;
+dir = noone;
+x1 = noone;
+y1 = noone;
+global.isDashing = false;
+</string>
           </argument>
         </arguments>
       </action>
@@ -180,7 +236,7 @@ instance_create(x, y, gui_camera);
           <argument>
             <kind>1</kind>
             <string>///Movement
-if (!global.isDashing) {
+if (!global.isDashing &amp;&amp; !damage) {
     hMove = input_key_right() + -input_key_left();
     vMove = input_key_down() + -input_key_up();
 }
@@ -240,11 +296,15 @@ y+=vSpeedFinal;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Dash
-if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
+            <string>///Dash/Damage
+if ((input_key_dash() &amp;&amp; stamina &gt;= dashCost &amp;&amp; !global.isDashing) || damage) {
     maxSpeed = speedCap;
     accl = acclCap;
     
+    //Resets
+    if (!damage) alarm_set(1, room_speed/2); 
+    else if (damage) alarm_set(1, room_speed/4);
+        
     /*if (!global.isDashing) {
         //Get mouse coordinates at initial cast
         tarX = mouse_x;
@@ -258,16 +318,20 @@ if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
     
    
     //Old Code -- only works in 8 directions
-    dir = "h";
     
     //Direction of Roll
     if (!global.isDashing) {
-        //Cooldown
-        alarm_set(0, room_speed * 2);
-        
-        //Gets mouse position at time of activation so it doesn't change in real-time
-        x1 = mouse_x;
-        y1 = mouse_y;
+        if (!damage) {
+            //Cooldown
+            alarm_set(0, room_speed * 2);
+            
+            stamina -= dashCost;
+            
+            //Gets mouse position at time of activation so it doesn't change in real-time
+            x1 = mouse_x;
+            y1 = mouse_y;
+        } 
+                
         //Determine the direcion of the dash
         if (abs(x1 - x) &lt; 25) {
             dir = "h";
@@ -276,7 +340,7 @@ if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
         } else if (abs(x1 - x) - abs(y1 - y) &lt; 25) {
             dir = "hv";
         }
-        
+              
         //Ensures that this code only runs once
         global.isDashing = true;
     }
@@ -306,7 +370,14 @@ if (input_key_dash() &amp;&amp; stamina &gt;= dashCost) {
     }
 }
 
-if (global.isDashing &amp;&amp; place_meeting(x + hSpeedFinal, y + vSpeedFinal, class_wall)) global.isDashing = false;
+if (place_meeting(x + hSpeedFinal, y, class_wall)) {
+    inc = sign(hSpeedFinal);
+    if (place_meeting(x + inc, y, class_wall)) global.isDashing = false;
+}
+if (place_meeting(x, y + vSpeedFinal, class_wall)) {
+    inc = sign(vSpeedFinal);
+    if (place_meeting(x, y + inc, class_wall)) global.isDashing = false;
+}
 </string>
           </argument>
         </arguments>
@@ -328,8 +399,8 @@ if (global.isDashing &amp;&amp; place_meeting(x + hSpeedFinal, y + vSpeedFinal, 
           <argument>
             <kind>1</kind>
             <string>///Weapons
-if ((global.itemEquip1 != noone || global.itemEquip2 != noone) &amp;&amp; !instance_exists(global.currentItem)) {
-    with (instance_create(x, y, global.currentItem)) owner = other;
+if (global.currentSelect != noone) {
+    with (global.currentSelect) isActive = true;
 }
 </string>
           </argument>
@@ -414,14 +485,10 @@ if (hSpeedFinal == 0 &amp;&amp; vSpeedFinal == 0) {
     image_speed = 1;
     if (global.yFace == 1) sprite_index = sprite_idle;
     else sprite_index = sprite_idle_back;
-}
-else if (global.isDashing) {
-    image_speed = 1;
-    sprite_index = sprite_dash;
-}
-else {
+} else {
     image_speed = 0.7;
-    sprite_index = sprite_walk;
+    if (global.isDashing) sprite_index = sprite_dash;
+    else sprite_index = sprite_walk;
 }
 </string>
           </argument>
@@ -462,34 +529,6 @@ else {
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-      </action>
-    </event>
-    <event eventtype="7" enumb="7">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (sprite_index == sprite_dash) {
-    maxSpeed = init_maxSpeed;
-    accl = init_accl;
-    stamina -= dashCost;
-    global.isDashing = false;
-}
-</string>
-          </argument>
-        </arguments>
       </action>
     </event>
   </events>

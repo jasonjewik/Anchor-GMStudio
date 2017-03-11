@@ -124,7 +124,7 @@ for (var j = 0; j &lt; room_height; j+= 32) {
 
 draw_set_alpha(1);
 
-if (instance_exists(obj_enemy) &amp;&amp; path_exists(obj_enemy.path)) draw_path(obj_enemy.path, x, y, true);
+if (instance_exists(class_enemy) &amp;&amp; path_exists(class_enemy.path)) draw_path(class_enemy.path, x, y, true);
 </string>
           </argument>
         </arguments>
