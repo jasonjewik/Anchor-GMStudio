@@ -56,8 +56,7 @@
     <instance objName="environ_wall" x="1504" y="1664" name="inst_1F01F3A4" locked="0" code="" scaleX="75.5625" scaleY="-10.96875" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="1472" y="288" name="inst_5845FED8" locked="0" code="" scaleX="75.5625" scaleY="-10.96875" colour="4294967295" rotation="0"/>
     <instance objName="controller_grid" x="640" y="512" name="inst_4F9C349A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="character_default" x="672" y="608" name="inst_0F7E7C19" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="npc_tutorial" x="736" y="608" name="inst_5FC91274" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="character_default" x="640" y="512" name="inst_0F7E7C19" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="gui_pause" x="672" y="512" name="inst_048A550B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="928" y="608" name="inst_47B19E9A" locked="0" code="" scaleX="-0.5" scaleY="0.5" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="864" y="640" name="inst_4CBC6E98" locked="0" code="" scaleX="-0.5" scaleY="0.5" colour="4294967295" rotation="0"/>
@@ -65,9 +64,9 @@
     <instance objName="environ_wall" x="896" y="544" name="inst_98771693" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="886" y="682" name="inst_7A2BC05A" locked="0" code="" scaleX="0.5625" scaleY="0.875" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="928" y="672" name="inst_AEA0BB4A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="weapon_melee_pipe" x="736" y="544" name="inst_2A8D7C05" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="weapon_rifle" x="736" y="640" name="inst_6FD6D297" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_roborat" x="768" y="672" name="inst_6CD6F0E7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="weapon_melee_pipe" x="672" y="544" name="inst_2A8D7C05" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="weapon_rifle" x="640" y="544" name="inst_65091E4E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="npc_tutorial" x="768" y="512" name="inst_1A66C21F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="temple_foor" x="608" y="448" w="64" h="64" xo="0" yo="0" id="10000219" name="inst_7A1C6932" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

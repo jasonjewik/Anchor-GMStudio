@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9999</depth>
+  <depth>-99</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -28,15 +28,18 @@
             <string>///Initialize Variables
 var width, height;
 
+xBuffer = 10;
+yBuffer = 30;
+
 //source = ini_open("Text Interactions");
-message = ""
+//init_message = "";
+message = "";
 output = ""
 
 lastSpace = 0;
 textPos = 1;
 maxHeight = false;
-line = 0;
-spaceCheck = false;
+line = 1;
 sprite = noone;
 toggle = false;
 
@@ -142,19 +145,11 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>///Insert Text Logic
-//Check for Spaces
-if (spaceCheck) {
-    textPos+=2;
-    spaceCheck = false;
-}
-
 //Data Queue
 ds_queue_enqueue(text, string_copy(message, textPos, 1));
 
 //Check to see if a space was added
-if (string_copy(message, textPos, 1) == " ") {
-    lastSpace = textPos;
-}
+if (string_copy(message, textPos, 1) == " ") lastSpace = textPos;
     
 //Set the Output
 output = string_insert(ds_queue_head(text), output, textPos + 1);
@@ -164,17 +159,17 @@ ds_queue_dequeue(text);
 textPos++;
 
 //Determine if the width of the string has gone past the sides of the textbox
-if (string_width(output) &gt; view_wview * 0.98) {
+if ((window_get_width() - 20) - string_width(output) &lt; 64) {
     line++;
     output = string_delete(output, lastSpace, 1);
     output = string_insert("#", output, lastSpace);
 }
 
 //Determine if the height of the string has gone past the bottom of the textbox
-if (line == 2) {
+if (line &gt; 2) {
+    output = string_delete(output, lastSpace, string_length(output));
+    textPos = lastSpace + 1;
     maxHeight = true;
-    output = string_delete(output, textPos-1, 1);
-    textPos-=2;
     alarm_set(0, -1);
     exit;
 }
@@ -203,11 +198,11 @@ if (textPos &lt; string_length(message) + 1) alarm_set(0, 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Move the string up
+            <string>///Other Functions
+//Move the string up
 if (maxHeight &amp;&amp; input_key_enter()) {
     output = "";
-    line = 0;
-    spaceCheck = true;
+    line = 1;
     alarm_set(0, 1);
     maxHeight = false;
 }
@@ -222,7 +217,7 @@ if (textPos == string_length(message) + 1 &amp;&amp; !toggle) {
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -243,7 +238,7 @@ if (textPos == string_length(message) + 1 &amp;&amp; !toggle) {
 draw_set_color(c_black);
 draw_set_alpha(0.6);
 //Draw the box
-draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8, view_xview + view_wview * 0.99, view_yview + view_hview - 5, false);
+draw_roundrect(20, window_get_height() - 130, window_get_width() - 20, window_get_height() - 20, false);
 
 //Draw the person talking
 //draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8 - 17, view_xview + 24, view_yview + view_hview * 0.8, false);
@@ -252,16 +247,15 @@ draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8, view_xview + view_
 //Set Text Values
 draw_set_alpha(1);
 draw_set_color(c_white);
-texture_set_interpolation(false);
-draw_set_font(fnt_text);
+draw_set_font(fnt_message);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top); 
 
 //Draw the text
 //See alarm[0] for the actual text logic
-draw_text(view_xview + 7, view_yview + view_hview * 0.8 + 5, output);
+draw_text(20 + xBuffer, window_get_height() - 130 + yBuffer, output);
 
-if (maxHeight) draw_sprite(spr_continue, image_index, view_wview * 0.98, view_hview * 0.8);
+if (maxHeight) draw_sprite(spr_continue, image_index, window_get_width() - 40, window_get_height() - 120);
 </string>
           </argument>
         </arguments>

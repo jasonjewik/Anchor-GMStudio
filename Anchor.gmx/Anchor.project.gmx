@@ -124,6 +124,7 @@
   <fonts name="fonts">
     <font>fonts\fnt_title</font>
     <font>fonts\fnt_text</font>
+    <font>fonts\fnt_message</font>
     <font>fonts\fnt_menu</font>
   </fonts>
   <objects name="objects">

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>class_weapon</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,27 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>///Initialize Variables
+message = "Hello and welcome to Anchor! The current version number is " + global.version;
+output = "";
+line = 0;
+transfer = false;
+xBuffer = 12;
+yBuffer = 2;
 
-hitDirection = 0;
-isActive = false;
-
-damageAmount = 0;
-damageVariance = 0;
-critChance = 0.5;
-trigger = input_mouse_left_click();
-diag1 = false;
-diag2 = false;
-
-min_sensitivity = 0.1; //actually more sensitive
-max_sensitivity = 2.0; //vice versa
-//recommended sensitivty setting of 1.2
-
-hitbox = hitbox_default;
+textQueue = ds_queue_create();
 </string>
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -62,13 +56,16 @@ hitbox = hitbox_default;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Debug || Test Code
+            <string>///Break up text into individual chars 
+for (var pos = 1; pos &lt; string_length(message) + 2; pos++) {
+    ds_queue_enqueue(textQueue, string_char_at(message, pos));
+    if (pos == string_length(message) + 1) transfer = true;
+}
+
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>612</id>
@@ -85,11 +82,11 @@ hitbox = hitbox_default;
         <arguments>
           <argument>
             <kind>0</kind>
-            <string>global.pause</string>
+            <string>transfer</string>
           </argument>
           <argument>
             <kind>0</kind>
-            <string>false</string>
+            <string>true</string>
           </argument>
           <argument>
             <kind>4</kind>
@@ -127,82 +124,13 @@ hitbox = hitbox_default;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Attacks
-trigger = input_mouse_left_click();
+            <string>///Read the queue
+output = string_insert(ds_queue_head(textQueue), output, string_length(output) + 1);
 
-if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
-    global.sensitivity = clamp(global.sensitivity, min_sensitivity, max_sensitivity);
-    
-    //Old Unused Code
-    if (mouse_x - x &lt; global.sensitivity * 32) {
-        if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x + 32, y + 32, hitbox);
-        else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x + 32, y - 32, hitbox);
-        else instance_create(x + 32, y, hitbox);
-    } else if (x - mouse_x &lt; global.sensitivity * 32) {
-        if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x - 32, y + 32, hitbox);
-        else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x - 32, y - 32, hitbox);        
-        else instance_create(x - 32, y, hitbox);
-    }
-    
-    
-    /*if (abs(mouse_x - x) &lt; global.sensitivity * 32) diag1 = true;
-    if (abs(mouse_y - y) &lt; global.sensitivity * 32) diag2 = true;
-    
-    if (diag1 &amp;&amp; !diag2) {
-        if (mouse_y &lt; y) instance_create(x, y - 32, hitbox);
-        else if (mouse_y &gt; y) instance_create(x, y + 32, hitbox); 
-    } else if (!diag1 &amp;&amp; diag2) {
-        if (mouse_x &lt; x) instance_create(x - 32, y, hitbox);
-        else if (mouse_x &gt; x) instance_create(x + 32, y, hitbox);
-    } else if (diag1 &amp;&amp; diag2) {
-        if (mouse_x &lt; x &amp;&amp; mouse_y &lt; y) instance_create(x - 32, y - 32, hitbox);
-        else if (mouse_x &gt; x &amp;&amp; mouse_y &gt; y) instance_create(x + 32, y + 32, hitbox);
-        else if (mouse_x &lt; x &amp;&amp; mouse_y &gt; y) instance_create(x - 32, y + 32, hitbox);
-        else if (mouse_x &gt; x &amp;&amp; mouse_y &lt; y) instance_create(x + 32, y - 32, hitbox);
-    }*/
+for (var pos = 1; pos &lt; ds_queue_size(textQueue); pos++) {
+    ds_queue_dequeue(textQueue);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Debug || Test Code
+
 </string>
           </argument>
         </arguments>
@@ -222,7 +150,7 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
         <isnot>0</isnot>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -239,8 +167,11 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-    draw_self();
+            <string>draw_set_font(fnt_text);
+draw_set_color(c_white);
+draw_set_halign(fa_left);
+
+draw_text(x, y, output);
 </string>
           </argument>
         </arguments>
