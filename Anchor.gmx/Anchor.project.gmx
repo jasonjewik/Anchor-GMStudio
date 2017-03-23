@@ -53,7 +53,10 @@
         <sprite>sprites\player_default_dashtowalkforward</sprite>
         <sprite>sprites\player_default_die</sprite>
         <sprite>sprites\player_default_dash</sprite>
-        <sprite>sprites\player_default_walk</sprite>
+        <sprite>sprites\player_default_walk_right</sprite>
+        <sprite>sprites\player_default_walk_left</sprite>
+        <sprite>sprites\player_default_idle_right</sprite>
+        <sprite>sprites\player_default_idle_left</sprite>
         <sprite>sprites\player_default_idle_back</sprite>
         <sprite>sprites\player_default_idle</sprite>
       </sprites>
@@ -143,6 +146,7 @@
         <object>objects\class_wall</object>
         <object>objects\class_npc</object>
         <object>objects\class_enemy</object>
+        <object>objects\class_enemyNew</object>
         <object>objects\class_player</object>
       </objects>
       <objects name="Items">
@@ -160,6 +164,7 @@
       <object>objects\controller_splash</object>
       <object>objects\controller_main_menu</object>
       <object>objects\controller_settings_menu</object>
+      <object>objects\controller_shadow</object>
       <object>objects\controller_grid</object>
     </objects>
     <objects name="Data Holders">

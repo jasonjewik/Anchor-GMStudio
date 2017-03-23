@@ -25,13 +25,35 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Fade from black
-if (global.gameStart) {
-    fadeIn = instance_create(x, y, fx_fadeFromBlack);
-    fadeIn.fadeDuration = room_speed * 1.5;
-}
+            <string>///Initialize Variables
+//Physics
+hSpeed = 0;
+hSpeedFinal = 0;
+hSpeedFrac = .0;
+vSpeed = 0;
+vSpeedFinal = 0;
+vSpeedFrac = .0;
+accl = 0.4;
+frc = 0.3;
+maxSpeed = 2;
+speedCap = maxSpeed * 10;
+acclCap = accl * 4;
 
-global.version = "Alpha 1.0.6";
+//Combat
+max_hp = 10;
+hp = max_hp;
+attack_dmg = 10;
+attack = false;
+damage = false;
+dir = noone;
+
+/*Health Bars
+healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
+healthBar.owner = self;
+healthBar.barMaxValue = hp;
+healthBar.barActualValue = hp;
+healthBar.barTotalValue = max_hp;
+
 </string>
           </argument>
         </arguments>
@@ -54,33 +76,9 @@ global.version = "Alpha 1.0.6";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.gameStart = false;
-if (input_key_escape()) game_end();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_halign(fa_left);
-draw_set_font(fnt_menu);
-draw_text_colour(window_get_width() - 256, window_get_height() - 64, global.version, c_white, c_white, c_white, c_white, 1.0);
+            <string>if (distance_to_object(class_player) &lt; 128) {
+        
+}
 </string>
           </argument>
         </arguments>

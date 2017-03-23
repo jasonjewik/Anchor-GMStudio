@@ -139,7 +139,7 @@ if (barActualValue &lt; barMaxValue) {
           <argument>
             <kind>1</kind>
             <string>///Close the HUD
-if (!global.hudOpen) {
+if (owner == class_player &amp;&amp; !global.hudOpen) {
     image_speed = -0.5;
     if (image_index == 0) instance_destroy();
 }
