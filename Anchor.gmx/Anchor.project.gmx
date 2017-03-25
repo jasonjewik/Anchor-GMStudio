@@ -47,17 +47,17 @@
       <sprites name="Default">
         <sprite>sprites\player_default_swordslash</sprite>
         <sprite>sprites\player_default_walkingback</sprite>
+        <sprite>sprites\player_default_walkingleft</sprite>
+        <sprite>sprites\player_default_walkingright</sprite>
         <sprite>sprites\player_default_walkingforward</sprite>
         <sprite>sprites\player_default_dashback</sprite>
         <sprite>sprites\player_default_dashtowalkside</sprite>
         <sprite>sprites\player_default_dashtowalkforward</sprite>
         <sprite>sprites\player_default_die</sprite>
         <sprite>sprites\player_default_dash</sprite>
-        <sprite>sprites\player_default_walk_right</sprite>
-        <sprite>sprites\player_default_walk_left</sprite>
-        <sprite>sprites\player_default_idle_right</sprite>
-        <sprite>sprites\player_default_idle_left</sprite>
         <sprite>sprites\player_default_idle_back</sprite>
+        <sprite>sprites\player_default_idle_left</sprite>
+        <sprite>sprites\player_default_idle_right</sprite>
         <sprite>sprites\player_default_idle</sprite>
       </sprites>
     </sprites>
@@ -120,7 +120,6 @@
     </scripts>
     <scripts name="Miscellaneous">
       <script>scripts\range_finder.gml</script>
-      <script>scripts\Shooting.gml</script>
       <script>scripts\Approach.gml</script>
     </scripts>
   </scripts>
@@ -144,6 +143,7 @@
       <objects name="Solid Objects">
         <object>objects\class_solid</object>
         <object>objects\class_wall</object>
+        <object>objects\class_shadowed</object>
         <object>objects\class_npc</object>
         <object>objects\class_enemy</object>
         <object>objects\class_enemyNew</object>
@@ -164,11 +164,11 @@
       <object>objects\controller_splash</object>
       <object>objects\controller_main_menu</object>
       <object>objects\controller_settings_menu</object>
-      <object>objects\controller_shadow</object>
       <object>objects\controller_grid</object>
     </objects>
     <objects name="Data Holders">
       <object>objects\data_inventory</object>
+      <object>objects\data_shadow</object>
     </objects>
     <objects name="Enemies">
       <object>objects\enemy_roborat</object>
@@ -201,6 +201,7 @@
       <object>objects\environ_wall</object>
     </objects>
     <objects name="GUI">
+      <object>objects\gui_equip</object>
       <object>objects\gui_pause</object>
       <object>objects\gui_camera</object>
       <object>objects\gui_health_bar</object>

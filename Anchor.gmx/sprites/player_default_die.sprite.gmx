@@ -7,9 +7,9 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>8</bbox_left>
-  <bbox_right>22</bbox_right>
-  <bbox_top>2</bbox_top>
+  <bbox_left>2</bbox_left>
+  <bbox_right>27</bbox_right>
+  <bbox_top>7</bbox_top>
   <bbox_bottom>31</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
@@ -27,5 +27,19 @@
     <frame index="4">images\player_default_die_4.png</frame>
     <frame index="5">images\player_default_die_5.png</frame>
     <frame index="6">images\player_default_die_6.png</frame>
+    <frame index="7">images\player_default_die_7.png</frame>
+    <frame index="8">images\player_default_die_8.png</frame>
+    <frame index="9">images\player_default_die_9.png</frame>
+    <frame index="10">images\player_default_die_10.png</frame>
+    <frame index="11">images\player_default_die_11.png</frame>
+    <frame index="12">images\player_default_die_12.png</frame>
+    <frame index="13">images\player_default_die_13.png</frame>
+    <frame index="14">images\player_default_die_14.png</frame>
+    <frame index="15">images\player_default_die_15.png</frame>
+    <frame index="16">images\player_default_die_16.png</frame>
+    <frame index="17">images\player_default_die_17.png</frame>
+    <frame index="18">images\player_default_die_18.png</frame>
+    <frame index="19">images\player_default_die_19.png</frame>
+    <frame index="20">images\player_default_die_20.png</frame>
   </frames>
 </sprite>

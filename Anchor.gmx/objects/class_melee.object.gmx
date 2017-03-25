@@ -67,6 +67,53 @@ hitbox = hitbox_default;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -152,9 +199,11 @@ hitbox = hitbox_default;
 trigger = input_mouse_left_click();
 
 if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
+    alarm_set(0, room_speed * 3);
+    visible = true;
     global.sensitivity = clamp(global.sensitivity, min_sensitivity, max_sensitivity);
     
-    //Old Unused Code
+    /*Old Unused Code
     if (mouse_x - x &lt; global.sensitivity * 32) {
         if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x + 32, y + 32, hitbox);
         else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x + 32, y - 32, hitbox);
@@ -163,10 +212,10 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
         if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x - 32, y + 32, hitbox);
         else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x - 32, y - 32, hitbox);        
         else instance_create(x - 32, y, hitbox);
-    }
+    }*/
     
     
-    /*if (abs(mouse_x - x) &lt; global.sensitivity * 32) diag1 = true;
+    if (abs(mouse_x - x) &lt; global.sensitivity * 32) diag1 = true;
     if (abs(mouse_y - y) &lt; global.sensitivity * 32) diag2 = true;
     
     if (diag1 &amp;&amp; !diag2) {
@@ -180,7 +229,7 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
         else if (mouse_x &gt; x &amp;&amp; mouse_y &gt; y) instance_create(x + 32, y + 32, hitbox);
         else if (mouse_x &lt; x &amp;&amp; mouse_y &gt; y) instance_create(x - 32, y + 32, hitbox);
         else if (mouse_x &gt; x &amp;&amp; mouse_y &lt; y) instance_create(x + 32, y - 32, hitbox);
-    }*/
+    }
 }
 </string>
           </argument>
@@ -239,8 +288,17 @@ if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-    draw_self();
+            <string>event_inherited();
+
+if (owner == class_player) {
+    if (mouse_x &gt; class_player.x) {
+        image_xscale = -1;
+        //image_angle = point_direction(x, y, mouse_x, mouse_y);
+    } else {
+        image_xscale = 1;
+        //-image_angle = point_direction(x, y, mouse_x, mouse_y);
+    }
+}
 </string>
           </argument>
         </arguments>

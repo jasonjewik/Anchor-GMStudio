@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>class_solid</parentName>
+  <parentName>class_shadowed</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -31,13 +31,13 @@ hSpeedFrac = 0;
 vSpeedFrac = 0;
 hSpeedFinal = 0;
 vSpeedFinal = 0;
-init_maxSpeed = 2.0;
+init_maxSpeed = 3.5;
 maxSpeed = init_maxSpeed;
 speedCap = init_maxSpeed * 10;
 init_accl = 0.4;
 accl = init_accl;
 acclCap = init_accl * 10;
-frc = accl/2;
+frc = accl * 0.8;
 damage = false;
 dir = noone;
 
@@ -60,13 +60,18 @@ isAiming = false;
 global.isAiming = isAiming;
 global.isDashing = false;
 global.timeSlow = false;
-global.xFace = image_xscale;
+global.xFace = 0;
 global.yFace = 0;
 
 sprite_idle = player_default_idle;
-sprite_walk = player_default_walk;
-sprite_dash = player_default_dash;
 sprite_idle_back = player_default_idle_back;
+sprite_idle_left = player_default_idle_left;
+sprite_idle_right = player_default_idle_right;
+sprite_walk = player_default_walkingforward;
+sprite_walk_back = player_default_walkingback;
+sprite_walk_left = player_default_walkingleft;
+sprite_walk_right = player_default_walkingright;
+sprite_dash = player_default_dash;
 
 instance_create(x, y, gui_camera);
 </string>
@@ -465,10 +470,8 @@ if (input_key_interact() &amp;&amp; !global.canTalk &amp;&amp; !global.hudOpen) 
             <kind>1</kind>
             <string>///Animation
 //Determine the xFace
-if (abs(mouse_x - x) &gt; 0) {
-    image_xscale = -sign(mouse_x - x);
-    global.xFace = image_xscale;
-} else image_xscale = global.xFace;
+if (abs(mouse_x - x) &gt; 0) global.xFace = 1;
+else global.xFace = -1;
 
 //Determine the yFace
 if (mouse_y - y &gt; 0) {
@@ -480,15 +483,21 @@ else {
     if (instance_exists(class_weapon)) depth = class_weapon.depth - 1;
 }
 
+image_speed = 0.2;
+
 //Sprites
-if (hSpeedFinal == 0 &amp;&amp; vSpeedFinal == 0) {
-    image_speed = 1;
-    if (global.yFace == 1) sprite_index = sprite_idle;
-    else sprite_index = sprite_idle_back;
-} else {
-    image_speed = 0.7;
+if (keyboard_check_released(ord("S"))) sprite_index = sprite_idle;
+else if (keyboard_check_released(ord("W"))) sprite_index = sprite_idle_back
+else if (keyboard_check_released(ord("D"))) sprite_index = sprite_idle_right;
+else if (keyboard_check_released(ord("A"))) sprite_index = sprite_idle_left;
+else {
     if (global.isDashing) sprite_index = sprite_dash;
-    else sprite_index = sprite_walk;
+    else {
+        if (input_key_down()) sprite_index = sprite_walk;
+        else if (input_key_up()) sprite_index = sprite_walk_back;
+        else if (input_key_right()) sprite_index = sprite_walk_right;
+        else if (input_key_left()) sprite_index = sprite_walk_left;
+    }
 }
 </string>
           </argument>

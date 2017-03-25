@@ -32,7 +32,7 @@ move = false;
 initLeash = 32;
 leash = initLeash;
 //rangeMultiplier = 1.5;
-cameraMult = 0.6;
+cameraMult = 0.5;
 
 default_xBuffer = 280 * cameraMult;
 default_yBuffer = 180 * cameraMult;

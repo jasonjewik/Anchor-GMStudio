@@ -67,7 +67,8 @@
     <instance objName="weapon_melee_pipe" x="672" y="544" name="inst_2A8D7C05" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_rifle" x="640" y="544" name="inst_65091E4E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="npc_tutorial" x="768" y="512" name="inst_1A66C21F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_roborat" x="832" y="640" name="inst_7329FD9C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="data_shadow" x="704" y="640" name="inst_77B47DC9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="gui_equip" x="704" y="576" name="inst_38404DFE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="temple_foor" x="608" y="448" w="64" h="64" xo="0" yo="0" id="10000219" name="inst_7A1C6932" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
