@@ -48,10 +48,10 @@ reloadTime = room_speed * 2;
 reloading = false;
 current_reloadTime = 0;
 
-range = 200;
+/*range = 200;
 draw_range = range;
 projectile_range = range;
-aiming_direction = 0;
+aiming_direction = 0;*/
 shotVariance = 0; 
 
 piercing = false;
