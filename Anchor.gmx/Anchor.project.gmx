@@ -165,6 +165,7 @@
       <object>objects\controller_main_menu</object>
       <object>objects\controller_settings_menu</object>
       <object>objects\controller_grid</object>
+      <object>objects\controller_deathscreen</object>
     </objects>
     <objects name="Data Holders">
       <object>objects\data_inventory</object>
@@ -229,6 +230,7 @@
     <room>rooms\rm_menu</room>
     <room>rooms\rm_settings</room>
     <room>rooms\rm_lvl_1</room>
+    <room>rooms\rm_death</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
