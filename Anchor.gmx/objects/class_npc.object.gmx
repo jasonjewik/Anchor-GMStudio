@@ -26,11 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>name = "";
-hasItem = false;
+item = "";
 message = "";
-
-global.chatOpen = false;
-global.canTalk = false;
 </string>
           </argument>
         </arguments>
@@ -58,7 +55,11 @@ else global.canTalk = false;
 
 if (global.canTalk &amp;&amp; !global.chatOpen) {
     if (input_key_interact()) {
-        with (instance_create(x, y, class_textBox)) message = other.message;
+        with (instance_create(x, y, class_textBox)) {
+            owner = other.id;
+            message = other.message;
+            item = other.item;
+        }
     }
 }
 </string>

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>class_damage</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,7 +28,7 @@
             <string>///Init Variables
 owner = instance_position(x, y, class_ranged);
 with (owner) alarm_set(0, initFireDelay);
-image_angle = owner.aiming_direction;
+image_angle = point_direction(x, y, mouse_x, mouse_y);
 
 damage = owner.damageAmount;
 damageVariance = owner.damageVariance; 

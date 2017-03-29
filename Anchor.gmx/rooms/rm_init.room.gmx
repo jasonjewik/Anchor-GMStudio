@@ -16,6 +16,8 @@ randomize();
 
 global.gameStart = true;
 global.sensitivity = 1;
+global.chatOpen = false;
+global.canTalk = false;
 
 room_goto_next();</code>
   <enableViews>0</enableViews>

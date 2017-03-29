@@ -27,48 +27,30 @@
             <kind>1</kind>
             <string>///Initialize Variables
 //Physics
-hSpeed = 0;
-hSpeedFinal = 0;
-hSpeedFrac = .0;
-hMove = 0;
-vSpeed = 0;
-vSpeedFinal = 0;
-vSpeedFrac = .0;
-vMove = 0;
-accl = 0.4;
-frc = 0.3;
+move_speed = 2;
 maxSpeed = 2;
 speedCap = maxSpeed * 10;
+accl = 0.4;
 acclCap = accl * 4;
 
 //Combat
-max_hp = 10;
-hp = max_hp;
-attack_dmg = 10;
-attack = false;
-damage = false;
-detect_range = 256;
-line_of_sight = 0;          
-range_to_wall = 0;
-range_to_player = 0;
+detection_range = 150;
+wander_range = 32;
+leash_range = 300;
+activated = false;
 
 //States
 enum state {
     idle, 
-    pathing, 
+    wander,
+    chase,
+    patrol, 
     combat, 
     dead    
 }
 state = state.idle;
-randMove = false;
 
-/*Health Bars
-healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
-healthBar.owner = self;
-healthBar.barMaxValue = hp;
-healthBar.barActualValue = hp;
-healthBar.barTotalValue = max_hp;
-
+path = path_add();
 </string>
           </argument>
         </arguments>
@@ -115,22 +97,50 @@ healthBar.barTotalValue = max_hp;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!randMove) {
-    roll = random(3)
-    if (roll &gt;= 2) {
-        hMove = choose(-1, 0, 1);
-        vMove = choose(-1, 0, 1);
-        randMove = true;
-    }
-    else randMove = false;
-} else {
-    hMove = 0;
-    vMove = 0;
-    randMove = false;
-}
+            <string>randRoll = random(4);
 
-if (state == state.idle) alarm_set(0, room_speed * irandom_range(1, 3));
-else alarm_set(0, -1); 
+if (randRoll &lt; 3) {
+    target_random_x = x + irandom_range(-wander_range, wander_range);
+    target_random_y = y + irandom_range(-wander_range, wander_range);
+    
+    check = instance_create(target_random_x, target_random_y, environ_wander_check);
+    check.owner = id;
+} 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (state = state.wander) {
+    distance_to_target = point_distance(x, y, target_random_x, target_random_y);
+} else {
+    target = class_player;
+    distance_to_target = point_distance(x, y, target.x, target.y);
+}
+hit = place_meeting(x, y, class_damage);
+
+if (distance_to_target &lt; detection_range) {
+    wallCheck = collision_line(x, y, target.x, target.y, class_wall, true, true);
+    if (wallCheck == noone) activated = true;
+} 
+if (hit) activated = true;
 </string>
           </argument>
         </arguments>
@@ -195,84 +205,46 @@ else alarm_set(0, -1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Physics Handling
-hSpeed+=hMove*accl;
-vSpeed+=vMove*accl;
-
-hSpeed = clamp(hSpeed, -maxSpeed, maxSpeed);
-vSpeed = clamp(vSpeed, -maxSpeed, maxSpeed);
-
-frc = accl/2;
-
-hSpeed = Friction(hSpeed, frc);
-vSpeed = Friction(vSpeed, frc);
-
-hSpeedFinal = hSpeed + hSpeedFrac;
-hSpeedFrac = hSpeedFinal - floor(abs(hSpeedFinal)) * sign(hSpeedFinal);
-hSpeedFinal -= hSpeedFrac;
-
-vSpeedFinal = vSpeed + vSpeedFrac;
-vSpeedFrac = vSpeedFinal - floor(abs(vSpeedFinal)) * sign(vSpeedFinal);
-vSpeedFinal -= vSpeedFrac;
-
-if (place_meeting(x + hSpeedFinal, y, class_solid)) {
-    inc = sign(hSpeedFinal);
-    while (!place_meeting(x + inc, y, class_solid)) x+=inc;
-    hSpeed = 0;
-    hSpeedFinal = 0;
-}
-x+=hSpeedFinal;
-
-if (place_meeting(x, y + vSpeedFinal, class_solid)) {
-    inc = sign(vSpeedFinal);
-    while (!place_meeting(x, y + inc, class_solid)) y+=inc;
-    vSpeed = 0;
-    vSpeedFinal = 0;
-}
-y+=vSpeedFinal;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>switch (state) {
-    case state.idle:
-        if (alarm[0] == -1) alarm_set(0, room_speed * irandom_range(1, 3)); 
-        if (abs(hMove) &gt; 0) image_xscale = -hMove;
+    case state.idle:              
+        if (path_exists(path)) path_delete(path);
+        if (alarm[0] == -1) alarm_set(0, room_speed * random_range(2, 4)); 
         
-        //Line of sight calculations
-        line_of_sight = point_direction(x, y, x + -image_xscale * 100, y);
-          
-        range_to_wall = range_finder(x, y, line_of_sight, detect_range, class_wall, false, true);
-        range_to_player = range_finder(x, y, line_of_sight, detect_range, class_player, false, true);
-        
-        if (!range_to_wall) range_to_wall = 9999999;
-        if (!range_to_player) range_to_player = 9999999;
-        
-        if (range_to_player &lt; range_to_wall) state = state.pathing;
-        
+        if (activated) state = state.chase;
         break;
-    case state.pathing:  
-    
+    case state.wander:        
+        alarm_set(0, -1);
+        
+        if (path_exists(path)) path_delete(path);
+        if (!path_exists(path)) path = path_add();
+        
+        pathCandidate = mp_grid_path(global.grid, path, x, y, target_random_x, target_random_y, true);
+        if (pathCandidate) path_start(path, move_speed, 0, false);
+        
+        if (distance_to_target &lt; 16) {
+            if (path_exists(path)) path_delete(path);
+            state = state.idle;
+        } 
+        break;
+    case state.chase:
+        if (path_exists(path)) path_delete(path);
+        if (!path_exists(path)) path = path_add();
+        pathCandidate = mp_grid_path(global.grid, path, x, y, target.x, target.y, true);
+        if (pathCandidate) path_start(path, move_speed, 0, false);
+        
+        if (distance_to_target &gt; leash_range || distance_to_target == 0) {
+            if (path_exists(path)) path_delete(path);
+            state = state.idle;
+        }
+        break;
+    case state.patrol:
+        
         break;
     case state.combat:
+        
         break;
     case state.dead:
+        
         break;
     default:
         break;
@@ -294,6 +266,27 @@ y+=vSpeedFinal;
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (global.pause &amp;&amp; path_exists(path)) path_delete(path);
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>

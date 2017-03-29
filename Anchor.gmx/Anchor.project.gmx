@@ -155,6 +155,7 @@
           <object>objects\class_weapon</object>
           <object>objects\class_ranged</object>
           <object>objects\class_melee</object>
+          <object>objects\class_damage</object>
           <object>objects\class_projectile</object>
           <object>objects\class_mHitbox</object>
         </objects>
@@ -176,7 +177,7 @@
     </objects>
     <objects name="NPCs">
       <object>objects\npc_tutorial</object>
-      <object>objects\npc_tutorial2</object>
+      <object>objects\npc_tutorial_2</object>
     </objects>
     <objects name="Player">
       <objects name="Characters">
@@ -199,6 +200,7 @@
       </objects>
     </objects>
     <objects name="Environment">
+      <object>objects\environ_wander_check</object>
       <object>objects\environ_wall</object>
     </objects>
     <objects name="GUI">

@@ -27,9 +27,9 @@
             <kind>1</kind>
             <string>event_inherited();
 
-name = "Tutorial NPC v1";
+name = "Tutorial NPC v2";
 message = "Hello there! My name is " + name + " and I have an item to give you! Will you accept it? (Enter/Esc)";
-item = weapon_rifle;
+item = weapon_melee_pipe;
 </string>
           </argument>
         </arguments>

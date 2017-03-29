@@ -30,6 +30,7 @@ var width, height;
 
 xBuffer = 10;
 yBuffer = 30;
+owner = "";
 
 //source = ini_open("Text Interactions");
 //init_message = "";
@@ -42,6 +43,7 @@ maxHeight = false;
 line = 1;
 sprite = noone;
 toggle = false;
+item = noone;
 
 //Create the DataStructure to hold the text values
 text = ds_queue_create();
@@ -207,10 +209,34 @@ if (maxHeight &amp;&amp; input_key_enter()) {
     maxHeight = false;
 }
 
-//Turn off the view
-if (textPos == string_length(message) + 1 &amp;&amp; !toggle) {
-    alarm_set(1, 90);
-    toggle = true;
+//Turn off the view &amp;&amp; item
+if (item == noone) {
+    if (textPos == string_length(message) + 1 &amp;&amp; !toggle) {
+        alarm_set(1, 90);
+        toggle = true;
+    }
+} else {
+    if (input_key_enter()) {
+        pickUp = instance_create(x, y, item);
+        with (pickUp) visible = false;
+        owner.item = noone;
+        
+        ds_list_add(global.inventory, pickUp);
+    
+        pickUp.owner = class_player; 
+        
+        if (global.itemEquip1 == noone) global.itemEquip1 = pickUp;
+        else global.itemEquip2 = pickUp;
+        
+        if (global.currentSelect == noone) {
+            if (global.itemEquip1 != noone) global.currentSelect = global.itemEquip1;
+            else if (global.itemEquip2 != noone) global.currentSelect = global.itemEquip2;
+        }
+        alarm_set(1, 90);
+    } else if (input_key_escape()) {
+        instance_destroy();
+        global.canTalk = false;
+    }
 }
 </string>
           </argument>
