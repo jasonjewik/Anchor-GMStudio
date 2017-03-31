@@ -27,6 +27,8 @@
       <sprite>sprites\spr_npc_tutorial</sprite>
     </sprites>
     <sprites name="Items">
+      <sprite>sprites\spr_nonSelect</sprite>
+      <sprite>sprites\spr_select</sprite>
       <sprite>sprites\spr_inventory</sprite>
       <sprites name="Weapons">
         <sprites name="Projectiles">
@@ -120,6 +122,7 @@
     </scripts>
     <scripts name="Miscellaneous">
       <script>scripts\range_finder.gml</script>
+      <script>scripts\on_screen.gml</script>
       <script>scripts\Approach.gml</script>
     </scripts>
   </scripts>

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9999</depth>
+  <depth>-9998</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,12 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>owner = noone;
-image_speed = 1;
 barMaxValue = 0;
 barActualValue = 0;
 barTotalValue = 0;
 toggle = false;
-buffer = 12;
+buffer = 4;
 fillMultiplier = 3;
 valueTracking = noone;
 
@@ -44,7 +43,6 @@ orange = make_colour_rgb(255, 178, 102);
 
 image_speed = 0.5;
 barColor = green;
-depth = -9999;
 </string>
           </argument>
         </arguments>
@@ -204,11 +202,13 @@ image_index = image_number - 1;
           <argument>
             <kind>1</kind>
             <string>///Main Bar
-draw_rectangle_colour(x, y + buffer, x + ((barActualValue/barTotalValue) * sprite_width) - 2, y + sprite_height - (buffer + 2), barColor, barColor, barColor, barColor, false);
+draw_rectangle_colour(x, y + buffer * image_xscale, x + ((barActualValue/barTotalValue) * sprite_width) - 2, y + sprite_height - buffer * image_xscale, barColor, barColor, barColor, barColor, false);
 draw_self();
-draw_set_font(fnt_text);
-draw_set_halign(fa_left);
-draw_text_colour(x + sprite_width + 2, y + buffer, string(round(barActualValue)) + "/" + string(barTotalValue), c_white, c_white, c_white, c_white, 1.0);
+if (owner == class_player) {
+    draw_set_font(fnt_text);
+    draw_set_halign(fa_left);
+    draw_text_colour(x + sprite_width + 2, y + buffer * image_xscale, string(round(barActualValue)) + "/" + string(barTotalValue), c_white, c_white, c_white, c_white, 1.0);
+}
 </string>
           </argument>
         </arguments>

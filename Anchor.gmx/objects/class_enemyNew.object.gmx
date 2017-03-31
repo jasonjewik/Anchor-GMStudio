@@ -35,9 +35,21 @@ acclCap = accl * 4;
 
 //Combat
 detection_range = 150;
-wander_range = 32;
+wander_range = 48;
 leash_range = 300;
 activated = false;
+max_hp = 10;
+hp = max_hp;
+
+//Healthbar
+healthBar = instance_create(x, y, gui_health_bar);
+with (healthBar) {
+    owner = other.id;
+    barMaxValue = other.hp;
+    barTotalValue = other.max_hp;
+    barColor = red;
+    //instance_deactivate_object(id);
+}
 
 //States
 enum state {
@@ -97,15 +109,16 @@ path = path_add();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>randRoll = random(4);
+            <string>//randRoll = random(4);
 
-if (randRoll &lt; 3) {
+//if (randRoll &lt; 3) {
+    if (state != state.idle) exit;
     target_random_x = x + irandom_range(-wander_range, wander_range);
     target_random_y = y + irandom_range(-wander_range, wander_range);
     
     check = instance_create(target_random_x, target_random_y, environ_wander_check);
     check.owner = id;
-} 
+//} 
 </string>
           </argument>
         </arguments>
@@ -208,7 +221,7 @@ if (hit) activated = true;
             <string>switch (state) {
     case state.idle:              
         if (path_exists(path)) path_delete(path);
-        if (alarm[0] == -1) alarm_set(0, room_speed * random_range(2, 4)); 
+        if (alarm[0] == -1) alarm_set(0, room_speed * random_range(1, 3)); 
         
         if (activated) state = state.chase;
         break;
@@ -249,6 +262,28 @@ if (hit) activated = true;
     default:
         break;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*if (on_screen(x, y)) instance_activate_object(healthBar);
+else instance_deactivate_object(healthBar);
 </string>
           </argument>
         </arguments>

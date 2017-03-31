@@ -36,6 +36,7 @@ owner = "";
 //init_message = "";
 message = "";
 output = ""
+seconds = 1.5;
 
 lastSpace = 0;
 textPos = 1;
@@ -122,6 +123,8 @@ global.chatOpen = true;
             <kind>1</kind>
             <string>///Reset and Destroy
 global.chatOpen = false;
+owner.npc_state = npc_state.idle;
+//class_player.faceMe = noone;
 ds_queue_destroy(text);
 instance_destroy();
 </string>
@@ -232,11 +235,8 @@ if (item == noone) {
             if (global.itemEquip1 != noone) global.currentSelect = global.itemEquip1;
             else if (global.itemEquip2 != noone) global.currentSelect = global.itemEquip2;
         }
-        alarm_set(1, 90);
-    } else if (input_key_escape()) {
-        instance_destroy();
-        global.canTalk = false;
-    }
+        alarm_set(1, room_speed * seconds);
+    } else if (input_key_escape()) alarm_set(1, room_speed * seconds);
 }
 </string>
           </argument>

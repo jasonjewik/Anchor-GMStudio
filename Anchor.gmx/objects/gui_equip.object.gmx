@@ -25,15 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_exists(data_inventory) &amp;&amp; instance_exists(class_player)) {
+            <string>if (instance_exists(data_inventory) &amp;&amp; instance_exists(class_player)) { 
     if (global.itemEquip1 != noone) {
+        if (global.currentSelect != noone &amp;&amp; global.itemEquip1 == global.currentSelect) draw_sprite_ext(spr_select, image_index, window_get_width() - 180, 64, 2, 2, image_angle, image_blend, image_alpha);
+        else draw_sprite_ext(spr_nonSelect, image_index, window_get_width() - 180, 64, 2, 2, image_angle, image_blend, image_alpha);
         spr1 = global.itemEquip1.sprite_index;
         draw_sprite_ext(spr1, image_index, window_get_width() - 180, 64, 5, 5, image_angle, image_blend, image_alpha);
-    }
+    } else draw_sprite_ext(spr_nonSelect, image_index, window_get_width() - 180, 64, 2, 2, image_angle, image_blend, image_alpha);
+    
     if (global.itemEquip2 != noone) {
+        if (global.currentSelect != noone &amp;&amp; global.itemEquip2 == global.currentSelect) draw_sprite_ext(spr_select, image_index, window_get_width() - 80, 64, 2, 2, image_angle, image_blend, image_alpha);
+        else draw_sprite_ext(spr_nonSelect, image_index, window_get_width() - 80, 64, 2, 2, image_angle, image_blend, image_alpha);
         spr2 = global.itemEquip2.sprite_index;
         draw_sprite_ext(spr2, image_index, window_get_width() - 80, 64, 5, 5, image_angle, image_blend, image_alpha);
-    }
+    } else draw_sprite_ext(spr_nonSelect, image_index, window_get_width() - 80, 64, 2, 2, image_angle, image_blend, image_alpha);
 }
 </string>
           </argument>

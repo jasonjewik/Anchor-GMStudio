@@ -27,9 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 
-if (owner == class_player) barColor = green;
-else if (owner == class_enemy) barColor = red;
-else barColor = green;
+barColor = green;
 </string>
           </argument>
         </arguments>
@@ -58,10 +56,12 @@ else barColor = green;
     event_inherited();
     
     if (owner == class_player) {
+        image_xscale = 1;
+        image_yscale = image_xscale;
         x = view_xview + 2;
         y = view_yview - 6;
     } else {
-        image_xscale = 0.4;
+        image_xscale = 0.5;
         image_yscale = image_xscale;
         x = owner.x - owner.sprite_width/2;
         y = owner.y - owner.sprite_height/2 + 3;

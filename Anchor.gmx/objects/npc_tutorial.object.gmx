@@ -29,7 +29,8 @@
 
 name = "Tutorial NPC v1";
 message = "Hello there! My name is " + name + " and I have an item to give you! Will you accept it? (Enter/Esc)";
-item = weapon_rifle;
+init_item = weapon_rifle;
+item = init_item;
 </string>
           </argument>
         </arguments>

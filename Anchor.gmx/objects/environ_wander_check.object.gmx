@@ -71,8 +71,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (place_meeting(x, y, class_solid)) owner.state = state.idle; 
-else owner.state = state.wander;
+            <string>if (owner == class_enemy) {
+    if (place_meeting(x, y, class_solid)) owner.state = state.idle; 
+    else owner.state = state.wander;
+} else if (owner == class_npc) {
+    if (place_meeting(x, y, class_solid)) owner.npc_state = npc_state.idle; 
+    else owner.npc_state = npc_state.wander;
+}
 </string>
           </argument>
         </arguments>

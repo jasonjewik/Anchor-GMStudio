@@ -26,14 +26,125 @@
           <argument>
             <kind>1</kind>
             <string>name = "";
-item = "";
+init_item = "";
+item = init_item;
 message = "";
+wander_range = 48;
+move_speed = 2;
+
+enum npc_state {
+    idle, 
+    wander, 
+    talk
+}
+npc_state = npc_state.idle;
+npc_path = path_add();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>-1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//randRoll = random(4);
+
+//if (randRoll &lt; 3) {
+    if (npc_state != npc_state.idle) exit;
+    target_random_x = x + irandom_range(-wander_range, wander_range);
+    target_random_y = y + irandom_range(-wander_range, wander_range);
+    
+    check = instance_create(target_random_x, target_random_y, environ_wander_check);
+    check.owner = id;
+    
+    npc_state = npc_state.wander;
+//} 
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>612</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>global.pause</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>false</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>422</id>
+        <kind>1</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -55,6 +166,8 @@ else global.canTalk = false;
 
 if (global.canTalk &amp;&amp; !global.chatOpen) {
     if (input_key_interact()) {
+        npc_state = npc_state.talk;
+        //with (class_player) faceMe = other.id;
         with (instance_create(x, y, class_textBox)) {
             owner = other.id;
             message = other.message;
@@ -62,9 +175,76 @@ if (global.canTalk &amp;&amp; !global.chatOpen) {
         }
     }
 }
+
+if (init_item != item) {
+    message = choose("Sorry! I've nothing left to give you!", "You already got the " + init_item.name + "! Go fight monsters or something!", "I... I no longer serve a purpose in this world.");
+}
 </string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>switch (npc_state) {
+    case npc_state.idle:
+        if (path_exists(npc_path)) path_delete(npc_path);
+        if (alarm[0] == -1) alarm_set(0, room_speed * random_range(1, 3)); 
+        break;
+    case npc_state.wander:
+        alarm_set(0, -1);
+        
+        if (path_exists(npc_path)) path_delete(npc_path);
+        if (!path_exists(npc_path)) npc_path = path_add();
+        
+        pathCandidate = mp_grid_path(global.grid, npc_path, x, y, target_random_x, target_random_y, true);
+        if (pathCandidate) path_start(npc_path, move_speed, 0, false);
+        
+        if (collision_line(x, y, target_random_x, target_random_y, class_solid, true, true)) {
+            path_delete(npc_path);
+            npc_state = npc_state.idle;
+        }
+        distance_to_target = point_distance(x, y, target_random_x, target_random_y);
+        if (distance_to_target &lt; 8) {
+            if (path_exists(npc_path)) path_delete(npc_path);
+            npc_state = npc_state.idle;
+        } 
+        break;
+    case npc_state.talk:
+        if (path_exists(npc_path)) path_delete(npc_path);        
+        break;
+    default: break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>424</id>
+        <kind>2</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="7" enumb="5">
