@@ -32,7 +32,9 @@ x2 = noone;
 y2 = noone;
 xBuffer = 4;
 yBuffer = 8;
-space = 18;
+space = 36;
+
+
 </string>
           </argument>
         </arguments>
@@ -104,12 +106,12 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>//Moving up and down
- move = 0;
+move = 0;
 move -= max(keyboard_check_pressed(ord("W")), 0);
 move += max(keyboard_check_pressed(ord("S")), 0);
 if (move != 0) {
     position += move;
-    if (position &lt; 1) position = ds_list_size(menuList) - 1;
+    if (position &lt; 0) position = ds_list_size(menuList) - 1;
     if (position &gt; ds_list_size(menuList) -  1) position = 0;
 }
 
@@ -191,7 +193,7 @@ if (input_key_enter()) {
 draw_set_color(c_black);
 draw_set_alpha(0.6);
 //Draw the box
-draw_roundrect(x, x2, y, y2, false);
+draw_roundrect(x, y, x2, y2, false);
 
 //Set Text Values
 draw_set_alpha(1);
@@ -202,12 +204,13 @@ draw_set_valign(fa_top);
 
 //Draw
 for (var i = 0; i &lt; ds_list_size(menuList); i++) {
-    message[i] = ds_list_find_value(menuList, i);
-    draw_text(x + xBuffer, y + yBuffer + (i * space), string_copy(message[i], 1, string_length(message[i]) - string_pos("\", message[i])));
+    initMessage = string(ds_list_find_value(menuList, i));
+    convertedMessage = (string_copy(initMessage, 1, string_pos("\", initMessage) - 1));
+    draw_text(x + (xBuffer * 3), y + yBuffer + (i * space), convertedMessage);
 }
 
 //Draw the cursor
-draw_sprite_ext(spr_arrow, image_index, x, y + yBuffer * (position * space), image_xscale, image_yscale, 90, image_blend, image_alpha);
+draw_sprite_ext(spr_arrow, image_index, x - (xBuffer * 2), y + (yBuffer * 2.5) + (position * space), image_xscale, image_yscale, 90, image_blend, image_alpha);
 
 
 </string>

@@ -214,14 +214,17 @@ if (maxHeight &amp;&amp; input_key_enter()) {
 
 //Turn off the view &amp;&amp; item
 if (textPos == string_length(message) + 1) {
-    if (item == noone) alarm_set(1, 90);
+    if (item == noone &amp;&amp; !toggle) {
+        alarm_set(1, 90);
+        toggle = true;
+    }
     else {
         if (!instance_exists(class_menu) &amp;&amp; !toggle) {
-            menu = instance_create(window_get_width() - 80, window_get_height() - 170, class_menu);
+            menu = instance_create(window_get_width() - 180, window_get_height() - 220, class_menu);
             with (menu) {
                 owner = other.id;
-                x2 = window_get_width() - 20;
-                y2 = window_get_height() - 130;
+                x2 = window_get_width() - 80;
+                y2 = window_get_height() - 145;
                 if (ds_exists(menuList, ds_type_list)) ds_list_add(menuList, "Yes\menu_acceptItem", "No\menu_declineItem");
             }
         }
