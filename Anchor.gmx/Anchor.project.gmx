@@ -18,7 +18,7 @@
       <sprite>sprites\start_menu_button</sprite>
     </sprites>
     <sprites name="Cursor">
-      <sprite>sprites\spr_continue</sprite>
+      <sprite>sprites\spr_arrow</sprite>
       <sprite>sprites\spr_cursor</sprite>
     </sprites>
     <sprites name="NPCs">
@@ -120,6 +120,10 @@
     <scripts name="Physics">
       <script>scripts\Friction.gml</script>
     </scripts>
+    <scripts name="Menus">
+      <script>scripts\menu_declineItem.gml</script>
+      <script>scripts\menu_acceptItem.gml</script>
+    </scripts>
     <scripts name="Miscellaneous">
       <script>scripts\range_finder.gml</script>
       <script>scripts\on_screen.gml</script>
@@ -135,6 +139,7 @@
   <objects name="objects">
     <objects name="Classes">
       <objects name="GUI">
+        <object>objects\class_menu</object>
         <object>objects\class_textBox</object>
         <object>objects\class_gui_fader</object>
         <object>objects\class_gui_bar</object>
@@ -148,9 +153,12 @@
         <object>objects\class_wall</object>
         <object>objects\class_shadowed</object>
         <object>objects\class_npc</object>
-        <object>objects\class_enemy</object>
-        <object>objects\class_enemyNew</object>
         <object>objects\class_player</object>
+        <objects name="Enemies">
+          <object>objects\class_enemy</object>
+          <object>objects\class_enemyNew</object>
+          <object>objects\class_standardEnemy</object>
+        </objects>
       </objects>
       <objects name="Items">
         <object>objects\class_item</object>

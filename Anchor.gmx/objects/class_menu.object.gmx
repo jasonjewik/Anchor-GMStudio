@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-99</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,57 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialize Variables
-var width, height;
-
-xBuffer = 10;
-yBuffer = 30;
-owner = "";
-
-//source = ini_open("Text Interactions");
-//init_message = "";
-message = "";
-output = ""
-seconds = 1.5;
-
-lastSpace = 0;
-textPos = 1;
-maxHeight = false;
-line = 1;
-sprite = noone;
-toggle = false;
-item = noone;
-
-//Create the DataStructure to hold the text values
-text = ds_queue_create();
-
-//Check to see if a message is already open
-global.chatOpen = true;
+            <string>menuList = ds_list_create();
+owner = noone;
+position = 0;
+x2 = noone;
+y2 = noone;
+xBuffer = 4;
+yBuffer = 8;
+space = 18;
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>1</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
           </argument>
         </arguments>
       </action>
@@ -99,35 +57,7 @@ global.chatOpen = true;
           </argument>
           <argument>
             <kind>4</kind>
-            <string>1</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Reset and Destroy
-global.chatOpen = false;
-owner.npc_state = npc_state.idle;
-//class_player.faceMe = noone;
-ds_queue_destroy(text);
-instance_destroy();
-</string>
+            <string>0</string>
           </argument>
         </arguments>
       </action>
@@ -149,38 +79,8 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Insert Text Logic
-//Data Queue
-ds_queue_enqueue(text, string_copy(message, textPos, 1));
-
-//Check to see if a space was added
-if (string_copy(message, textPos, 1) == " ") lastSpace = textPos;
-    
-//Set the Output
-output = string_insert(ds_queue_head(text), output, textPos + 1);
-
-//Move the queue forward
-ds_queue_dequeue(text);
-textPos++;
-
-//Determine if the width of the string has gone past the sides of the textbox
-if ((window_get_width() - 20) - string_width(output) &lt; 64) {
-    line++;
-    output = string_delete(output, lastSpace, 1);
-    output = string_insert("#", output, lastSpace);
-}
-
-//Determine if the height of the string has gone past the bottom of the textbox
-if (line &gt; 2) {
-    output = string_delete(output, lastSpace, string_length(output));
-    textPos = lastSpace + 1;
-    maxHeight = true;
-    alarm_set(0, -1);
-    exit;
-}
-
-//Set the alarm
-if (textPos &lt; string_length(message) + 1) alarm_set(0, 1);
+            <string>ds_list_destroy(menuList);
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -203,30 +103,68 @@ if (textPos &lt; string_length(message) + 1) alarm_set(0, 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Other Functions
-//Move the string up
-if (maxHeight &amp;&amp; input_key_enter()) {
-    output = "";
-    line = 1;
-    alarm_set(0, 1);
-    maxHeight = false;
+            <string>//Moving up and down
+ move = 0;
+move -= max(keyboard_check_pressed(ord("W")), 0);
+move += max(keyboard_check_pressed(ord("S")), 0);
+if (move != 0) {
+    position += move;
+    if (position &lt; 1) position = ds_list_size(menuList) - 1;
+    if (position &gt; ds_list_size(menuList) -  1) position = 0;
 }
 
-//Turn off the view &amp;&amp; item
-if (textPos == string_length(message) + 1) {
-    if (item == noone) alarm_set(1, 90);
-    else {
-        if (!instance_exists(class_menu) &amp;&amp; !toggle) {
-            menu = instance_create(window_get_width() - 80, window_get_height() - 170, class_menu);
-            with (menu) {
-                owner = other.id;
-                x2 = window_get_width() - 20;
-                y2 = window_get_height() - 130;
-                if (ds_exists(menuList, ds_type_list)) ds_list_add(menuList, "Yes\menu_acceptItem", "No\menu_declineItem");
-            }
-        }
-    }
+if (input_key_enter()) {
+    output = string(ds_list_find_value(menuList, position));
+    script = asset_get_index((string_copy(output, string_pos("\", output) + 1, 20)));
+    alarm_set(0, 10);
+    script_execute(script);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_list_destroy(menuList);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_list_destroy(menuList);
 </string>
           </argument>
         </arguments>
@@ -253,11 +191,7 @@ if (textPos == string_length(message) + 1) {
 draw_set_color(c_black);
 draw_set_alpha(0.6);
 //Draw the box
-draw_roundrect(20, window_get_height() - 130, window_get_width() - 20, window_get_height() - 20, false);
-
-//Draw the person talking
-//draw_roundrect(view_xview + 2, view_yview + view_hview * 0.8 - 17, view_xview + 24, view_yview + view_hview * 0.8, false);
-//draw_sprite_ext(sprite, image_index, view_xview + 17, view_yview + view_hview * 0.8 - 10, -image_xscale * 2, image_yscale * 2, image_angle, image_blend, image_alpha);
+draw_roundrect(x, x2, y, y2, false);
 
 //Set Text Values
 draw_set_alpha(1);
@@ -266,11 +200,16 @@ draw_set_font(fnt_message);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top); 
 
-//Draw the text
-//See alarm[0] for the actual text logic
-draw_text(20 + xBuffer, window_get_height() - 130 + yBuffer, output);
+//Draw
+for (var i = 0; i &lt; ds_list_size(menuList); i++) {
+    message[i] = ds_list_find_value(menuList, i);
+    draw_text(x + xBuffer, y + yBuffer + (i * space), string_copy(message[i], 1, string_length(message[i]) - string_pos("\", message[i])));
+}
 
-if (maxHeight) draw_sprite(spr_arrow, image_index, window_get_width()/2, window_get_height() - 24);
+//Draw the cursor
+draw_sprite_ext(spr_arrow, image_index, x, y + yBuffer * (position * space), image_xscale, image_yscale, 90, image_blend, image_alpha);
+
+
 </string>
           </argument>
         </arguments>
