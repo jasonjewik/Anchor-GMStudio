@@ -124,6 +124,22 @@
       <script>scripts\menu_declineItem.gml</script>
       <script>scripts\menu_acceptItem.gml</script>
     </scripts>
+    <scripts name="State Machine">
+      <script>scripts\state_machine_init.gml</script>
+      <script>scripts\state_create.gml</script>
+      <script>scripts\state_init.gml</script>
+      <script>scripts\state_execute.gml</script>
+      <script>scripts\state_switch.gml</script>
+      <script>scripts\state_switch_previous.gml</script>
+      <script>scripts\state_update.gml</script>
+      <script>scripts\state_delete.gml</script>
+      <script>scripts\state_cleanup.gml</script>
+    </scripts>
+    <scripts name="Enemy States">
+      <script>scripts\enemy_wander.gml</script>
+      <script>scripts\enemy_chase.gml</script>
+      <script>scripts\enemy_idle.gml</script>
+    </scripts>
     <scripts name="Miscellaneous">
       <script>scripts\range_finder.gml</script>
       <script>scripts\on_screen.gml</script>
@@ -156,7 +172,7 @@
         <object>objects\class_player</object>
         <objects name="Enemies">
           <object>objects\class_enemy</object>
-          <object>objects\class_enemyNew</object>
+          <object>objects\class_immobileEnemy</object>
           <object>objects\class_standardEnemy</object>
         </objects>
       </objects>
@@ -184,6 +200,7 @@
       <object>objects\data_shadow</object>
     </objects>
     <objects name="Enemies">
+      <object>objects\enemy_sentry</object>
       <object>objects\enemy_roborat</object>
     </objects>
     <objects name="NPCs">

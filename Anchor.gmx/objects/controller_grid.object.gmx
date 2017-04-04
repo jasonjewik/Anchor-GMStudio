@@ -128,7 +128,7 @@ global.grid = mp_grid_create(0, 0, hCells, vCells, cWidth, cHeight);
           <argument>
             <kind>1</kind>
             <string>
-if (instance_exists(class_enemyNew) &amp;&amp; path_exists(class_enemyNew.path)) draw_path(class_enemyNew.path, x, y, true);
+if (instance_exists(class_standardEnemy) &amp;&amp; path_exists(class_standardEnemy.path)) draw_path(class_standardEnemy.path, x, y, true);
 /*
 draw_set_alpha(0.1);
 
