@@ -40,6 +40,7 @@ leash_range = 0;
 activated = false;
 max_hp = 1;
 hp = max_hp;
+attack_range = 0;
 
 //Health bars created in individual objects
 healthBar = noone;

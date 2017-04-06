@@ -26,7 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///Init Variables
-owner = instance_position(x, y, class_ranged);
+owner = instance_nearest(x, y, class_ranged);
+if (owner == noone) instance_destroy();
+show_debug_message(string(owner));
 with (owner) alarm_set(0, initFireDelay);
 
 damage = owner.damageAmount;

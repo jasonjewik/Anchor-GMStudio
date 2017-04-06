@@ -35,12 +35,13 @@ critChance = 0.2;
 auto = true;
 initFireDelay = room_speed/3;
 projectile = bullet_light_rapid;
+piercing = true;
 
 canBounce = true;
 spd = 32;
 dropOffSpeed = 0.2;
 
-bounds = 7;
+bounds = 12;
 </string>
           </argument>
         </arguments>

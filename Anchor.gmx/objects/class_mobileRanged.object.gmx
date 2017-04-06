@@ -39,6 +39,7 @@ acclCap = accl * 4;
 detection_range = 150;
 wander_range = 48;
 leash_range = 300;
+attack_range = 100;
 activated = false;
 max_hp = 10;
 hp = max_hp;
