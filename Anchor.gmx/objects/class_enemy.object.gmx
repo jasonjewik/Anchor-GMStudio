@@ -51,7 +51,6 @@ state_create("Idle", enemy_idle);
 state_create("Wander", enemy_wander);
 state_create("Chase", enemy_chase);
 state_create("Die", enemy_die);
-state_init("Idle");
 
 </string>
           </argument>

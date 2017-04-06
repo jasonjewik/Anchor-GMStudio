@@ -28,12 +28,14 @@
             <string>event_inherited();
 
 hitDirection = 0;
-isActive = false;
+isActive = true;
+if (owner == class_player) isActive = false;
 
 damageAmount = 0;
 damageVariance = 0;
 critChance = 0.5;
-trigger = input_mouse_left_click();
+if (owner == class_player) trigger = input_mouse_left_click();
+else trigger = 1;
 diag1 = false;
 diag2 = false;
 
@@ -196,39 +198,39 @@ hitbox = hitbox_default;
           <argument>
             <kind>1</kind>
             <string>///Attacks
-trigger = input_mouse_left_click();
-
-if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
-    alarm_set(0, room_speed * 3);
-    visible = true;
-    global.sensitivity = clamp(global.sensitivity, min_sensitivity, max_sensitivity);
+if (owner == class_player) {
+    trigger = input_mouse_left_click();
     
-    /*Old Unused Code
-    if (mouse_x - x &lt; global.sensitivity * 32) {
-        if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x + 32, y + 32, hitbox);
-        else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x + 32, y - 32, hitbox);
-        else instance_create(x + 32, y, hitbox);
-    } else if (x - mouse_x &lt; global.sensitivity * 32) {
-        if (mouse_y - y &lt; global.sensitivity * 32) instance_create(x - 32, y + 32, hitbox);
-        else if (y - mouse_y &lt; global.sensitivity * 32) instance_create(x - 32, y - 32, hitbox);        
-        else instance_create(x - 32, y, hitbox);
-    }*/
+    if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
+        alarm_set(0, room_speed * 3);
+        visible = true;
+        
+        angle = point_direction(x, y, mouse_x, mouse_y);
+        
+        if (angle &gt; 330 || angle &lt;= 30) instance_create(x + 32, y, hitbox);
+        else if (angle &gt; 30 &amp;&amp; angle &lt;= 60) instance_create(x + 32, y - 32, hitbox);
+        else if (angle &gt; 60 &amp;&amp; angle &lt;= 120) instance_create(x, y - 32, hitbox);
+        else if (angle &gt; 120 &amp;&amp; angle &lt;= 150) instance_create(x - 32, y - 32, hitbox);
+        else if (angle &gt; 150 &amp;&amp; angle &lt;= 210) instance_create(x - 32, y, hitbox);
+        else if (angle &gt; 210 &amp;&amp; angle &lt;= 240) instance_create(x - 32, y + 32, hitbox);
+        else if (angle &gt; 240 &amp;&amp; angle &lt;= 300) instance_create(x, y + 32, hitbox);
+        else if (angle &gt; 300 &amp;&amp; angle &lt;= 330) instance_create(x + 32, y + 32, hitbox);
+    }
+} else {
+    if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
+        alarm_set(0, room_speed * 3);
+        visible = true;
     
-    
-    if (abs(mouse_x - x) &lt; global.sensitivity * 32) diag1 = true;
-    if (abs(mouse_y - y) &lt; global.sensitivity * 32) diag2 = true;
-    
-    if (diag1 &amp;&amp; !diag2) {
-        if (mouse_y &lt; y) instance_create(x, y - 32, hitbox);
-        else if (mouse_y &gt; y) instance_create(x, y + 32, hitbox); 
-    } else if (!diag1 &amp;&amp; diag2) {
-        if (mouse_x &lt; x) instance_create(x - 32, y, hitbox);
-        else if (mouse_x &gt; x) instance_create(x + 32, y, hitbox);
-    } else if (diag1 &amp;&amp; diag2) {
-        if (mouse_x &lt; x &amp;&amp; mouse_y &lt; y) instance_create(x - 32, y - 32, hitbox);
-        else if (mouse_x &gt; x &amp;&amp; mouse_y &gt; y) instance_create(x + 32, y + 32, hitbox);
-        else if (mouse_x &lt; x &amp;&amp; mouse_y &gt; y) instance_create(x - 32, y + 32, hitbox);
-        else if (mouse_x &gt; x &amp;&amp; mouse_y &lt; y) instance_create(x + 32, y - 32, hitbox);
+        angle = point_direction(x, y, class_player.x, class_player.y);
+        
+        if (angle &gt; 330 || angle &lt;= 30) instance_create(x + 32, y, hitbox);
+        else if (angle &gt; 30 &amp;&amp; angle &lt;= 60) instance_create(x + 32, y - 32, hitbox);
+        else if (angle &gt; 60 &amp;&amp; angle &lt;= 120) instance_create(x, y - 32, hitbox);
+        else if (angle &gt; 120 &amp;&amp; angle &lt;= 150) instance_create(x - 32, y - 32, hitbox);
+        else if (angle &gt; 150 &amp;&amp; angle &lt;= 210) instance_create(x - 32, y, hitbox);
+        else if (angle &gt; 210 &amp;&amp; angle &lt;= 240) instance_create(x - 32, y + 32, hitbox);
+        else if (angle &gt; 240 &amp;&amp; angle &lt;= 300) instance_create(x, y + 32, hitbox);
+        else if (angle &gt; 300 &amp;&amp; angle &lt;= 330) instance_create(x + 32, y + 32, hitbox);
     }
 }
 </string>

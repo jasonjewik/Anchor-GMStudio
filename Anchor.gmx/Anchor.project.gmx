@@ -139,6 +139,7 @@
       <script>scripts\enemy_die.gml</script>
       <script>scripts\enemy_shoot.gml</script>
       <script>scripts\enemy_wander.gml</script>
+      <script>scripts\enemy_attack.gml</script>
       <script>scripts\enemy_chase.gml</script>
       <script>scripts\enemy_idle.gml</script>
     </scripts>
@@ -248,7 +249,6 @@
         </objects>
         <objects name="Settings Menu">
           <object>objects\button_fullscreen</object>
-          <object>objects\button_sensitivity</object>
         </objects>
       </objects>
     </objects>

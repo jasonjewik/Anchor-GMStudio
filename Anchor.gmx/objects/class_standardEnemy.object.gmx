@@ -39,6 +39,7 @@ acclCap = accl * 4;
 detection_range = 150;
 wander_range = 48;
 leash_range = 300;
+attack_range = 32;
 activated = false;
 max_hp = 10;
 hp = max_hp;
@@ -51,6 +52,9 @@ with (healthBar) {
     barTotalValue = other.max_hp;
     barColor = red;
 }
+
+state_create("Attack", enemy_attack);
+state_init("Idle");
 
 path = path_add();
 </string>

@@ -10,6 +10,10 @@ if (distance_to_target <= attack_range) {
         weapon = instance_create(x, y, weapon_rifle);
         weapon.owner = instance_position(x, y, class_enemy);
         state_switch("Shoot", true);
+    } else {
+        activated = true;
+        weapon = instance_create(x, y, weapon_melee_pipe);
+        weapon.owner = instance_position(x, y, class_enemy);
+        state_switch("Attack", true);
     }
-    else state_switch("Idle", true);
 }
