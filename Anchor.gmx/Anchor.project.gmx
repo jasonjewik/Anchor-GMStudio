@@ -176,6 +176,7 @@
           <object>objects\class_enemy</object>
           <object>objects\class_immobileEnemy</object>
           <object>objects\class_standardEnemy</object>
+          <object>objects\class_mobileRanged</object>
         </objects>
       </objects>
       <objects name="Items">

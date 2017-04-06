@@ -52,6 +52,9 @@ with (healthBar) {
     barColor = red;
 }
 
+state_create("Shoot", enemy_shoot);
+state_init("Idle");
+
 path = path_add();
 </string>
           </argument>
