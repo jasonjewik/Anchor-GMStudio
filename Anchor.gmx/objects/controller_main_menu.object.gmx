@@ -31,7 +31,7 @@ if (global.gameStart) {
     fadeIn.fadeDuration = room_speed * 1.5;
 }
 
-global.version = "Alpha 1.0.9";
+global.version = "Alpha 1.1.0";
 </string>
           </argument>
         </arguments>
