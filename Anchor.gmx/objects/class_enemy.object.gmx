@@ -38,16 +38,18 @@ detection_range = 150;
 wander_range = 0;
 leash_range = 0;
 activated = false;
-max_hp = 0;
+max_hp = 1;
 hp = max_hp;
 
 //Health bars created in individual objects
+healthBar = noone;
 
 //Finite State Machine
 state_machine_init();
 state_create("Idle", enemy_idle);
 state_create("Wander", enemy_wander);
 state_create("Chase", enemy_chase);
+state_create("Die", enemy_die);
 state_init("Idle");
 
 </string>
@@ -72,7 +74,9 @@ state_init("Idle");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>state_cleanup();
+            <string>with (healthBar) instance_destroy();
+
+state_cleanup();
 </string>
           </argument>
         </arguments>
@@ -161,7 +165,6 @@ state_init("Idle");
           <argument>
             <kind>1</kind>
             <string>state_execute();
-
 </string>
           </argument>
         </arguments>

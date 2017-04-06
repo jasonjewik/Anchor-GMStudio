@@ -135,13 +135,17 @@ if (state_name = "Wander") {
     target = class_player;
     distance_to_target = point_distance(x, y, target.x, target.y);
 }
+
 hit = place_meeting(x, y, class_damage);
+
+if (hit) activated = true;
+else activated = false;
 
 if (distance_to_target &lt; detection_range) {
     wallCheck = collision_line(x, y, target.x, target.y, class_wall, true, true);
     if (wallCheck == noone) activated = true;
-} 
-if (hit) activated = true;
+    else activated = false;
+} else if (distance_to_target &gt;= detection_range) activated = false;
 </string>
           </argument>
         </arguments>
@@ -166,7 +170,6 @@ if (hit) activated = true;
             <kind>1</kind>
             <string>event_inherited();
 if (global.pause &amp;&amp; path_exists(path)) path_delete(path);
-
 </string>
           </argument>
         </arguments>

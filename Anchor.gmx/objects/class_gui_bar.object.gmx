@@ -27,12 +27,12 @@
             <kind>1</kind>
             <string>owner = noone;
 barMaxValue = 0;
-barActualValue = 0;
+barActualValue = barMaxValue;
 barTotalValue = 0;
 toggle = false;
 buffer = 4;
-fillMultiplier = 3;
-valueTracking = noone;
+//fillMultiplier = 3;
+//valueTracking = noone;
 
 decConstant = 5;
 
@@ -107,15 +107,7 @@ barColor = green;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Opening the HUD
-if (barActualValue &lt; barMaxValue) {
-    barActualValue = barMaxValue;
-    //dist = barMaxValue - barActualValue;
-    //barActualValue += fillMultiplier * (dist/barMaxValue);
-    decrease = false;
-} else if (barActualValue &gt; barMaxValue) {
-    barActualValue -= decConstant;
-}
+            <string>barActualValue = barMaxValue;
 </string>
           </argument>
         </arguments>
@@ -140,7 +132,7 @@ if (barActualValue &lt; barMaxValue) {
 if (owner == class_player &amp;&amp; !global.hudOpen) {
     image_speed = -0.5;
     if (image_index == 0) instance_destroy();
-}
+} 
 </string>
           </argument>
         </arguments>

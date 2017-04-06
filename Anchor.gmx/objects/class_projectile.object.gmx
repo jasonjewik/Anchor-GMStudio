@@ -55,7 +55,8 @@ spd = owner.spd;
 initX = x;
 initY = y;
 
-move_towards_point(mouse_x, mouse_y, spd);
+if (owner.owner == class_player) move_towards_point(mouse_x, mouse_y, spd);
+else move_towards_point(class_player.x, class_player.y, spd);
 </string>
           </argument>
         </arguments>
@@ -168,8 +169,9 @@ move_towards_point(mouse_x, mouse_y, spd);
             <string>///Collisions
 
 //With Enemy
-if (place_meeting(x, y, class_enemy)) {
-    hit = instance_position(x, y, class_enemy);
+notme = owner.owner;
+if (!place_meeting(x, y, notme) &amp;&amp; !place_meeting(x, y, class_npc) &amp;&amp; place_meeting(x, y, class_shadowed)) {
+    hit = instance_position(x, y, class_shadowed);
     with (hit) hp -= other.damage;
     if (!piercing) instance_destroy();
     else {

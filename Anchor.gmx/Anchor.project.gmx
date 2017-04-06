@@ -136,6 +136,8 @@
       <script>scripts\state_cleanup.gml</script>
     </scripts>
     <scripts name="Enemy States">
+      <script>scripts\enemy_die.gml</script>
+      <script>scripts\enemy_shoot.gml</script>
       <script>scripts\enemy_wander.gml</script>
       <script>scripts\enemy_chase.gml</script>
       <script>scripts\enemy_idle.gml</script>
