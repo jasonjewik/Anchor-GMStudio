@@ -52,7 +52,6 @@ dashCost = maxStamina/4;
 max_timeEssence = 100;
 timeEssence = max_timeEssence;
 global.hudOpen = false;
-inventory = instance_create(x, y, data_inventory);
 
 x1 = mouse_x;
 y1 = mouse_y;
@@ -62,7 +61,7 @@ global.isDashing = false;
 global.timeSlow = false;
 global.xFace = 0;
 global.yFace = 0;
-//faceMe = noone;
+persistent = true;
 
 sprite_idle = player_default_idle;
 sprite_idle_back = player_default_idle_back;
@@ -74,7 +73,8 @@ sprite_walk_left = player_default_walkingleft;
 sprite_walk_right = player_default_walkingright;
 sprite_dash = player_default_dash;
 
-instance_create(x, y, gui_camera);
+
+
 </string>
           </argument>
         </arguments>
@@ -124,6 +124,29 @@ instance_create(x, y, gui_camera);
           <argument>
             <kind>4</kind>
             <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!global.pause) room_goto(rm_death);
+</string>
           </argument>
         </arguments>
       </action>
@@ -384,6 +407,10 @@ if (place_meeting(x, y + vSpeedFinal, class_wall)) {
     inc = sign(vSpeedFinal);
     if (place_meeting(x, y + inc, class_wall)) global.isDashing = false;
 }
+
+///Death
+if (hp &lt;= 0) instance_destroy();
+
 </string>
           </argument>
         </arguments>
@@ -429,7 +456,7 @@ if (global.currentSelect != noone) {
           <argument>
             <kind>1</kind>
             <string>///Pulling up the HUD
-if (input_key_interact() &amp;&amp; !global.canTalk &amp;&amp; !global.hudOpen) {
+if ((input_key_interact() || place_meeting(x, y, class_damage)) &amp;&amp; !global.chatOpen &amp;&amp; !global.canTalk &amp;&amp; !global.hudOpen) {
     healthBar = instance_create(view_xview + 2, view_yview - 6, gui_health_bar);
     healthBar.owner = class_player;
     healthBar.barMaxValue = hp;
@@ -509,28 +536,6 @@ if (!global.chatOpen) {
         }
     }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Death
-if (hp &lt;= 0) room_goto(rm_death);
 </string>
           </argument>
         </arguments>

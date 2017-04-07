@@ -217,15 +217,15 @@ if (textPos == string_length(message) + 1) {
     if (item == noone &amp;&amp; !toggle) {
         alarm_set(1, 90);
         toggle = true;
-    }
-    else {
+    } else {
         if (!instance_exists(class_menu) &amp;&amp; !toggle) {
             menu = instance_create(window_get_width() - 180, window_get_height() - 220, class_menu);
             with (menu) {
                 owner = other.id;
                 x2 = window_get_width() - 80;
                 y2 = window_get_height() - 145;
-                if (ds_exists(menuList, ds_type_list)) ds_list_add(menuList, "Yes\menu_acceptItem", "No\menu_declineItem");
+                if (object_get_parent(other.owner.object_index) == class_npc) if (ds_exists(menuList, ds_type_list)) ds_list_add(menuList, "Yes\menu_acceptItem", "No\menu_decline");
+                else if (object_get_parent(other.owner.object_index) == class_warp) if (ds_exists(menuList, ds_type_list)) ds_list_add(menuList, "Yes\menu_openInv", "No\menu_decline");
             }
         }
     }

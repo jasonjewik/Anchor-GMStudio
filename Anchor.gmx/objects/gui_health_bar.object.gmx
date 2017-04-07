@@ -3,7 +3,7 @@
   <spriteName>bar_health</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-9998</depth>
   <persistent>0</persistent>
   <parentName>class_gui_bar</parentName>
   <maskName>&lt;undefined&gt;</maskName>

@@ -10,9 +10,7 @@
   <persistent>-1</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code>instance_create(x, y, gui_camera);
-instance_create(x, y, data_inventory);
-global.pause = false;</code>
+  <code>instance_create(x, y, gui_camera);</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -54,15 +52,22 @@ global.pause = false;</code>
   </views>
   <instances>
     <instance objName="environ_wall" x="64" y="384" name="inst_B8C3DAD4" locked="0" code="" scaleX="2.25" scaleY="19.3548393249512" colour="4294967295" rotation="0"/>
-    <instance objName="npc_tutorial" x="128" y="192" name="inst_B09FCE2E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="npc_tutorial_2" x="256" y="192" name="inst_A6AEBDFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="640" y="96" name="inst_70372C4A" locked="0" code="" scaleX="35.5" scaleY="1.5" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="1216" y="384" name="inst_A93220E4" locked="0" code="" scaleX="2.25" scaleY="19.3548393249512" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="64" y="384" name="inst_265C2BB0" locked="0" code="" scaleX="2.25" scaleY="19.3548393249512" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="640" y="672" name="inst_02A4169D" locked="0" code="" scaleX="35.5" scaleY="1.5" colour="4294967295" rotation="0"/>
-    <instance objName="environ_warp" x="480" y="192" name="inst_9D230DD2" locked="0" code="target_r = rm_lvl_2;&#xA;target_x = 192;&#xA;target_y = 224;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="npc_tutorial_3" x="288" y="256" name="inst_712B5B0A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="controller_player" x="183" y="218" name="inst_DB12E1FA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="environ_warp" x="160" y="224" name="inst_9D230DD2" locked="0" code="target_r = rm_lvl_1;&#xA;target_x = 192;&#xA;target_y = 192;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_sentry" x="239" y="339" name="inst_C989FB79" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_roborat" x="480" y="320" name="inst_1C28FE54" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_sentry" x="334" y="263" name="inst_444A5384" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_roborat" x="448" y="256" name="inst_10380563" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="environ_wall" x="224" y="384" name="inst_6D9CA3A6" locked="0" code="" scaleX="8.5" scaleY="1.5" colour="4294967295" rotation="0"/>
+    <instance objName="environ_wall" x="288" y="192" name="inst_72BB1967" locked="0" code="" scaleX="1.5" scaleY="5.5" colour="4294967295" rotation="0"/>
+    <instance objName="environ_wall" x="448" y="192" name="inst_88D97786" locked="0" code="" scaleX="10.5" scaleY="1.5" colour="4294967295" rotation="0"/>
+    <instance objName="environ_wall" x="576" y="320" name="inst_5D6698A1" locked="0" code="" scaleX="1.5" scaleY="7.5" colour="4294967295" rotation="0"/>
+    <instance objName="environ_wall" x="448" y="416" name="inst_1A73554A" locked="0" code="" scaleX="7.5" scaleY="0.5" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_mobile_sentry" x="384" y="320" name="inst_12D9E36D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="controller_player" x="216" y="219" name="inst_53F79E4D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

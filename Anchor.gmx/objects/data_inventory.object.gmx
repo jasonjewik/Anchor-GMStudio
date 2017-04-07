@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>0</visible>
   <depth>-9999</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -32,6 +32,7 @@ global.itemEquip1 = noone;
 global.itemEquip2 = noone;
 
 global.currentSelect = global.itemEquip1;
+global.invOpen = false;
 </string>
           </argument>
         </arguments>
@@ -97,9 +98,12 @@ global.currentSelect = global.itemEquip1;
           <argument>
             <kind>1</kind>
             <string>///Toggling the Inventory View
-if (input_key_tab()) {
+if (input_key_tab() || global.invOpen) {
     if (!visible) visible = true;
-    else visible = false;
+    else {
+        visible = false;
+        global.invOpen = false;
+    }
 }
 
 x = view_xview + view_wview/2;
@@ -126,11 +130,14 @@ y = view_yview + view_hview/2;
             <kind>1</kind>
             <string>///Switching Items
 if (input_mouse_scroll_up() || input_mouse_scroll_down()) {
+    show_debug_message("detect");
     if (global.currentSelect == global.itemEquip1) {
+        show_debug_message("switch");
         with (global.currentSelect) isActive = false;
         global.currentSelect = global.itemEquip2;
         with (global.currentSelect) isActive = true;
     } else if (global.currentSelect == global.itemEquip2) {
+        show_debug_message("switch");
         with (global.currentSelect) isActive = false;
         global.currentSelect = global.itemEquip1;
         with (global.currentSelect) isActive = true;

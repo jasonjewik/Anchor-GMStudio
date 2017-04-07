@@ -65,6 +65,7 @@
     </sprites>
     <sprites name="Walls">
       <sprite>sprites\spr_wall</sprite>
+      <sprite>sprites\spr_warp</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_clyd_idle</sprite>
@@ -121,7 +122,8 @@
       <script>scripts\Friction.gml</script>
     </scripts>
     <scripts name="Menus">
-      <script>scripts\menu_declineItem.gml</script>
+      <script>scripts\menu_decline.gml</script>
+      <script>scripts\menu_openInv.gml</script>
       <script>scripts\menu_acceptItem.gml</script>
     </scripts>
     <scripts name="State Machine">
@@ -172,6 +174,7 @@
         <object>objects\class_wall</object>
         <object>objects\class_shadowed</object>
         <object>objects\class_npc</object>
+        <object>objects\class_warp</object>
         <object>objects\class_player</object>
         <objects name="Enemies">
           <object>objects\class_enemy</object>
@@ -197,6 +200,7 @@
       <object>objects\controller_main_menu</object>
       <object>objects\controller_settings_menu</object>
       <object>objects\controller_grid</object>
+      <object>objects\controller_player</object>
       <object>objects\controller_deathscreen</object>
     </objects>
     <objects name="Data Holders">
@@ -205,11 +209,13 @@
     </objects>
     <objects name="Enemies">
       <object>objects\enemy_sentry</object>
+      <object>objects\enemy_mobile_sentry</object>
       <object>objects\enemy_roborat</object>
     </objects>
     <objects name="NPCs">
       <object>objects\npc_tutorial</object>
       <object>objects\npc_tutorial_2</object>
+      <object>objects\npc_tutorial_3</object>
     </objects>
     <objects name="Player">
       <objects name="Characters">
@@ -233,6 +239,7 @@
     </objects>
     <objects name="Environment">
       <object>objects\environ_wander_check</object>
+      <object>objects\environ_warp</object>
       <object>objects\environ_wall</object>
     </objects>
     <objects name="GUI">
@@ -263,6 +270,7 @@
     <room>rooms\rm_menu</room>
     <room>rooms\rm_settings</room>
     <room>rooms\rm_lvl_1</room>
+    <room>rooms\rm_lvl_2</room>
     <room>rooms\rm_death</room>
   </rooms>
   <help>

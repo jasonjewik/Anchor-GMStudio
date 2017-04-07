@@ -41,6 +41,7 @@ activated = false;
 max_hp = 1;
 hp = max_hp;
 attack_range = 0;
+weapon = noone;
 
 //Health bars created in individual objects
 healthBar = noone;
@@ -75,6 +76,7 @@ state_create("Die", enemy_die);
           <argument>
             <kind>1</kind>
             <string>with (healthBar) instance_destroy();
+if (weapon != noone) with (weapon) instance_destroy();
 
 state_cleanup();
 </string>

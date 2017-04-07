@@ -78,6 +78,8 @@ else if (!active || !hover) lightUp = false;
             <kind>1</kind>
             <string>event_inherited();
 draw_sprite(start_menu_button, image_index, x - 4, y - 2);
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
 if (lightUp) draw_text_colour(x + xBuffer, y + yBuffer, name, c_white, c_white, c_white, c_white, image_alpha);
 else draw_text_color(x + xBuffer, y + yBuffer, name, c_black, c_black, c_black, c_black, image_alpha);
 

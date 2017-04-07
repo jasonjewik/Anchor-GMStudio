@@ -53,8 +53,9 @@
     else if (input_key_escape() &amp;&amp; !global.pause) global.pause = true;
     
     if (global.pause &amp;&amp; input_key_enter()) {
-        room_goto(rm_menu);
-        global.pause = false;
+        with (class_player) instance_destroy();
+        window_set_cursor(cr_none);
+        room_goto(rm_splash);
     }
 }
 </string>

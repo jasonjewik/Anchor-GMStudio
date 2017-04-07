@@ -27,8 +27,10 @@
             <kind>1</kind>
             <string>///Init Variables
 owner = instance_nearest(x, y, class_ranged);
-if (owner == noone) instance_destroy();
-show_debug_message(string(owner));
+if (owner == noone) {
+    instance_destroy();
+    //exit;
+}
 with (owner) alarm_set(0, initFireDelay);
 
 damage = owner.damageAmount;
@@ -173,6 +175,7 @@ if (owner.owner == class_player) {
           <argument>
             <kind>1</kind>
             <string>///Collisions
+if (!instance_exists(owner)) instance_destroy();
 
 //With Enemy
 //notme = owner.owner;

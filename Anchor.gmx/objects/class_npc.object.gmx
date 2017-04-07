@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>name = "";
-init_item = "";
+init_item = noone;
 item = init_item;
 message = "";
 wander_range = 48;
@@ -241,22 +241,6 @@ if (init_item != item) {
         <useapplyto>0</useapplyto>
         <exetype>0</exetype>
         <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-    </event>
-    <event eventtype="7" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>203</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_kill_object</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>

@@ -39,7 +39,8 @@ damageAmount = 0;
 damageVariance = 0;
 damageDropOff = 0;
 critChance = 0.5;
-trigger = input_mouse_right_click();
+trigger = 1;
+if (owner == class_player) trigger = input_mouse_right_click();
 
 isActive = true;
 if (owner == class_player) isActive = false;

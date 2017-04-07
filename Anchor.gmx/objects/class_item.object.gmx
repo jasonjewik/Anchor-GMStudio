@@ -97,6 +97,11 @@ owner = noone;
           <argument>
             <kind>1</kind>
             <string>///Picking item up
+if (instance_exists(owner)) {
+    if (object_get_parent(owner.object_index) == class_player) persistent = true;
+}
+//if (owner != noone &amp;&amp; instance_exists(owner)) instance_destroy();
+
 /*
 if (distance_to_object(class_player) &lt; 32 &amp;&amp; owner == noone) {
     global.canTalk = true;
