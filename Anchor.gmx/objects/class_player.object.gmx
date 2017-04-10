@@ -325,32 +325,16 @@ y+=vSpeedFinal;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Dash/Damage
-if (!global.chatOpen &amp;&amp; ((input_key_dash() &amp;&amp; stamina &gt;= dashCost &amp;&amp; !global.isDashing) || damage)) {
+            <string>///Dash
+if (!global.chatOpen &amp;&amp; ((input_key_dash() &amp;&amp; stamina &gt;= dashCost &amp;&amp; !global.isDashing))) {
     maxSpeed = speedCap;
     accl = acclCap;
     
     //Resets
-    if (!damage) alarm_set(1, room_speed/2); 
-    else if (damage) alarm_set(1, room_speed/4);
-        
-    /*if (!global.isDashing) {
-        //Get mouse coordinates at initial cast
-        tarX = mouse_x;
-        tarY = mouse_y;
-        
-        //Set the cooldown
-        alarm_set(0, room_speed * 2);
-        
-        global.isDashing = true;
-    }*/
-    
+    alarm_set(1, room_speed/2);   
    
-    //Old Code -- only works in 8 directions
-    
     //Direction of Roll
     if (!global.isDashing) {
-        if (!damage) {
             //Cooldown
             alarm_set(0, room_speed * 2);
             
@@ -359,45 +343,14 @@ if (!global.chatOpen &amp;&amp; ((input_key_dash() &amp;&amp; stamina &gt;= dash
             //Gets mouse position at time of activation so it doesn't change in real-time
             x1 = mouse_x;
             y1 = mouse_y;
-        } 
-                
-        //Determine the direcion of the dash
-        if (abs(x1 - x) &lt; 25) {
-            dir = "h";
-        } else if (abs(y1 - y) &lt; 25) {
-            dir = "v";
-        } else if (abs(x1 - x) - abs(y1 - y) &lt; 25) {
-            dir = "hv";
-        }
-              
-        //Ensures that this code only runs once
-        global.isDashing = true;
-    }
-    
-    //Switch block to make sure dash is only done in one direction
-    switch (dir) {
-        case "h": 
-            if (y1 &gt; y) vMove = 1;
-            else if (y1 &lt; y) vMove = -1;
-            break;
-        case "v": 
-            if (x1 &lt; x) hMove = -1;
-            else if (x1 &gt; x) hMove = 1;   
-            break;
-        case "hv": 
-            hMove = sign(mouse_x - x);
-            if (global.xFace == 1) {
-                if (global.yFace == 1) vMove = -hMove; 
-                else if (global.yFace == -1) vMove = hMove;
-            }
-            else if (global.xFace == -1) {
-                if (global.yFace == 1) vMove = hMove;
-                else if (global.yFace == -1) vMove = -hMove;
-            }
-            break;
-        default: break;
-    }
+            
+            //Ensures that this code only runs once
+            global.isDashing = true;
+    } 
 }
+
+if (global.isDashing) move_towards_point(x1, y1, maxSpeed);
+else if (!global.isDashing || distance_to_point(x1, y1) &lt; 2) speed = 0;
 
 if (place_meeting(x + hSpeedFinal, y, class_wall)) {
     inc = sign(hSpeedFinal);
