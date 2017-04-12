@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>class_weapon</parentName>
@@ -201,7 +201,14 @@ hitbox = hitbox_default;
 if (owner == class_player) {
     trigger = input_mouse_left_click();
     
-    if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger) {
+    if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger &amp;&amp; owner.state_name != "Melee") {
+        if (owner == class_player) {
+            with (owner) {
+                alarm_set(1, 1);
+                state_switch("Melee", true);
+            }
+        }
+        
         alarm_set(0, room_speed * 3);
         visible = true;
         

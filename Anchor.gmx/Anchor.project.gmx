@@ -137,6 +137,16 @@
       <script>scripts\state_delete.gml</script>
       <script>scripts\state_cleanup.gml</script>
     </scripts>
+    <scripts name="Player States">
+      <script>scripts\player_die.gml</script>
+      <script>scripts\player_range.gml</script>
+      <script>scripts\player_melee.gml</script>
+      <script>scripts\player_talk.gml</script>
+      <script>scripts\player_damage.gml</script>
+      <script>scripts\player_dash.gml</script>
+      <script>scripts\player_run.gml</script>
+      <script>scripts\player_idle.gml</script>
+    </scripts>
     <scripts name="Enemy States">
       <script>scripts\enemy_die.gml</script>
       <script>scripts\enemy_shoot.gml</script>

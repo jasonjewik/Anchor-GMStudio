@@ -1,4 +1,5 @@
 speed = 0;
+maxSpeed = 1;
 
 hMove = input_key_right() + -input_key_left();
 vMove = input_key_down() + -input_key_up();
@@ -9,7 +10,7 @@ vSpeed+=vMove*accl;
 hSpeed = clamp(hSpeed, -maxSpeed, maxSpeed);
 vSpeed = clamp(vSpeed, -maxSpeed, maxSpeed);
 
-frc = accl * 0.8;
+frc = accl * 0.95;
 
 hSpeed = Friction(hSpeed, frc);
 vSpeed = Friction(vSpeed, frc);
@@ -38,16 +39,8 @@ if (place_meeting(x, y + vSpeedFinal, class_solid)) {
 }
 y+=vSpeedFinal;
 
-if (hMove == 0 && vMove == 0) state_switch("Idle", true);
 if (place_meeting(x, y, class_damage) && !invulnerable) {
     alarm_set(0, room_speed);
     alarm_set(1, room_speed/4);
     state_switch("Damage", true);
-}
-if (stamina >= dashCost && input_key_dash() && !cooldown) {
-    alarm_set(0, room_speed);
-    alarm_set(1, room_speed/4);  
-    stamina -= dashCost;
-    lastSprite = sprite_index;
-    state_switch("Dash", true);
 }
