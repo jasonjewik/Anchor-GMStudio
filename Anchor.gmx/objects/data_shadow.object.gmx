@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>9999</depth>
+  <depth>9998</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,13 +27,13 @@
             <kind>1</kind>
             <string>global.shadowList = ds_list_create();
 global.shadowedList = ds_list_create();
-check = false;
+alarm_set(0, room_speed/10);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,15 +50,13 @@ check = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!check) {
-    for (i = 0; i &lt; instance_number(class_shadowed); i++) {
-        ds_list_insert(global.shadowedList, ds_list_size(global.shadowedList), instance_find(class_shadowed, i));
-        instanceSprite = ds_list_find_value(global.shadowedList, i);
-        shadowWidth = (instanceSprite.bbox_left - instanceSprite.bbox_right) * 1.1;
-        ds_list_insert(global.shadowList, ds_list_size(global.shadowList), shadowWidth);
-    }
-    check = true;
+            <string>for (i = 0; i &lt; instance_number(class_shadowed); i++) {
+    ds_list_insert(global.shadowedList, ds_list_size(global.shadowedList), instance_find(class_shadowed, i));
+    instanceSprite = ds_list_find_value(global.shadowedList, i);
+    shadowWidth = (instanceSprite.bbox_left - instanceSprite.bbox_right) * 1.1;
+    ds_list_insert(global.shadowList, ds_list_size(global.shadowList), shadowWidth);
 }
+alarm_set(0, -1);
 </string>
           </argument>
         </arguments>
@@ -83,7 +81,7 @@ check = false;
             <kind>1</kind>
             <string>ds_list_clear(global.shadowList);
 ds_list_clear(global.shadowedList);
-check = false;
+alarm_set(0, room_speed/10);
 </string>
           </argument>
         </arguments>

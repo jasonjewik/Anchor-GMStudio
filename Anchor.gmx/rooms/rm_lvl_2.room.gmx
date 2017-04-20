@@ -56,9 +56,8 @@
     <instance objName="environ_wall" x="1216" y="384" name="inst_A93220E4" locked="0" code="" scaleX="2.25" scaleY="19.3548393249512" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="640" y="672" name="inst_02A4169D" locked="0" code="" scaleX="35.5" scaleY="1.5" colour="4294967295" rotation="0"/>
     <instance objName="environ_warp" x="160" y="224" name="inst_9D230DD2" locked="0" code="target_r = rm_lvl_1;&#xA;target_x = 192;&#xA;target_y = 192;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_sentry" x="553" y="389" name="inst_C989FB79" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="enemy_sentry" x="544" y="288" name="inst_C989FB79" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="enemy_roborat" x="480" y="320" name="inst_1C28FE54" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_sentry" x="321" y="201" name="inst_444A5384" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="enemy_roborat" x="448" y="256" name="inst_10380563" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="192" y="480" name="inst_6D9CA3A6" locked="0" code="" scaleX="6.25" scaleY="8" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="288" y="192" name="inst_72BB1967" locked="0" code="" scaleX="1.5" scaleY="5.5" colour="4294967295" rotation="0"/>
@@ -68,7 +67,6 @@
     <instance objName="enemy_mobile_sentry" x="384" y="320" name="inst_12D9E36D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="controller_player" x="232" y="234" name="inst_53F79E4D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="enemy_sentry" x="239" y="145" name="inst_000E1DB2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemy_sentry" x="129" y="146" name="inst_63D80AD5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="458" y="467" name="inst_D935B56B" locked="0" code="" scaleX="8.96875" scaleY="3" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="224" y="192" name="inst_5A852CDB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="256" y="192" name="inst_CB86E4FB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -114,10 +112,8 @@
     <tile bgName="tile_grovel" x="512" y="192" w="64" h="64" xo="0" yo="0" id="10000392" name="inst_09D21BDB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_grovel" x="544" y="288" w="64" h="64" xo="0" yo="0" id="10000393" name="inst_4D2CE553" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_deserthouse" x="144" y="209" w="32" h="32" xo="0" yo="0" id="10000349" name="inst_19B9550D" depth="-10" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_tremans" x="121" y="131" w="32" h="32" xo="0" yo="0" id="10000350" name="inst_0F0BB478" depth="-10" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_tremans" x="230" y="130" w="32" h="32" xo="0" yo="0" id="10000351" name="inst_9D78E9B9" depth="-10" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_tremans" x="544" y="384" w="32" h="32" xo="0" yo="0" id="10000352" name="inst_1459BA98" depth="-10" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_tremans" x="313" y="197" w="32" h="32" xo="0" yo="0" id="10000353" name="inst_51FA0BA4" depth="-10" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_tremans" x="537" y="273" w="32" h="32" xo="0" yo="0" id="10000352" name="inst_1459BA98" depth="-10" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

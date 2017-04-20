@@ -25,13 +25,103 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>active = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>room_speed * 7</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>image_alpha -= dropOffSpeed;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Init Variables
-owner = instance_nearest(x, y, class_ranged);
-if (owner == noone) {
-    instance_destroy();
-    //exit;
-}
-with (owner) alarm_set(0, initFireDelay);
+show_debug_message(object_get_name(owner));
+show_debug_message(object_get_name(notme));
 
 damage = owner.damageAmount;
 damageVariance = owner.damageVariance; 
@@ -58,59 +148,17 @@ spd = owner.spd;
 initX = x;
 initY = y;
 
-if (owner.owner == class_player) {
+if (notme == class_player) {
     move_towards_point(mouse_x, mouse_y, spd);
     image_angle = point_direction(x, y, mouse_x, mouse_y);
 } else {
     move_towards_point(class_player.x, class_player.y, spd);
     image_angle = point_direction(x, y, class_player.x, class_player.y);
 }
+active = true;
+
+alarm_set(0, -1);
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Debug
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>room_speed * 20</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
           </argument>
         </arguments>
       </action>
@@ -160,6 +208,48 @@ if (owner.owner == class_player) {
       </action>
       <action>
         <libid>1</libid>
+        <id>612</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>active</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>true</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>422</id>
+        <kind>1</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -177,18 +267,6 @@ if (owner.owner == class_player) {
             <string>///Collisions
 if (!instance_exists(owner)) instance_destroy();
 
-//With Enemy
-//notme = owner.owner;
-if (/*!place_meeting(x, y, notme) &amp;&amp; !place_meeting(x, y, class_npc) &amp;&amp;*/ place_meeting(x, y, class_shadowed)) {
-    hit = instance_position(x, y, class_shadowed);
-    with (hit) hp -= other.damage;
-    if (!piercing) instance_destroy();
-    else {
-        if (crit) damage = irandom_range(owner.damageAmount - damageVariance, owner.damageAmount + damageVariance);
-        damage -= damageDropOff;
-    }
-}
-
 //With Walls
 if (place_meeting(x, y, class_wall)) {
     if (!canBounce) instance_destroy();
@@ -204,6 +282,22 @@ if (place_meeting(x, y, class_wall)) {
             initY = targetY;
             bounced++;
         } else instance_destroy();
+    }
+}
+
+//With Enemy
+if (place_meeting(x, y, class_shadowed)) {
+    show_debug_message("Contact");
+    if (place_meeting(x, y, notme)) show_debug_message("Skip"); 
+    else {
+        show_debug_message("Damage");
+        hit = instance_position(x, y, class_shadowed);
+        with (hit) hp -= other.damage;
+        if (!piercing) instance_destroy();
+        else {
+            if (crit) damage = irandom_range(owner.damageAmount - damageVariance, owner.damageAmount + damageVariance);
+            damage -= damageDropOff;
+        }
     }
 } 
 </string>
@@ -227,12 +321,26 @@ if (place_meeting(x, y, class_wall)) {
           <argument>
             <kind>1</kind>
             <string>///Drop off
-if (distance_to_point(initX, initY) &gt; range || alarm[0] == -1) image_alpha -= dropOffSpeed;
+if (distance_to_point(initX, initY) &gt; range) image_alpha -= dropOffSpeed;
 
 if (image_alpha == 0) instance_destroy();
 </string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>424</id>
+        <kind>2</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>

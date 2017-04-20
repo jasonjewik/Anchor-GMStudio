@@ -6,7 +6,7 @@ if (object_get_parent(object_index) != class_immobileEnemy) {
 } else {
     if (activated) {
         weapon = instance_create(x, y, weapon_rifle);
-        weapon.owner = instance_position(x, y, class_enemy);
+        with (weapon) owner = other.id;
         state_switch("Shoot", true);
     }
 }

@@ -63,6 +63,9 @@
         <sprite>sprites\player_default_idle</sprite>
       </sprites>
     </sprites>
+    <sprites name="Effects">
+      <sprite>sprites\spr_dust</sprite>
+    </sprites>
     <sprites name="Walls">
       <sprite>sprites\spr_wall</sprite>
       <sprite>sprites\spr_warp</sprite>
@@ -113,6 +116,7 @@
       <script>scripts\input_key_escape.gml</script>
       <script>scripts\input_key_tab.gml</script>
       <script>scripts\input_key_enter.gml</script>
+      <script>scripts\input_key_time.gml</script>
       <script>scripts\input_key_interact.gml</script>
       <script>scripts\input_key_dash.gml</script>
       <script>scripts\input_mouse_scroll_up.gml</script>
@@ -139,6 +143,7 @@
     </scripts>
     <scripts name="Player States">
       <script>scripts\player_die.gml</script>
+      <script>scripts\player_time.gml</script>
       <script>scripts\player_range.gml</script>
       <script>scripts\player_melee.gml</script>
       <script>scripts\player_talk.gml</script>
@@ -271,6 +276,7 @@
     </objects>
     <objects name="FX">
       <object>objects\fx_fadeFromBlack</object>
+      <object>objects\fx_dust</object>
       <object>objects\fx_fadeToBlack</object>
     </objects>
   </objects>

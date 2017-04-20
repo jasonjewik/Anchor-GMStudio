@@ -28,9 +28,10 @@
             <string>event_inherited();
 
 name = "Tutorial NPC v1";
-message = "Hello there! My name is " + name + " and I have a slightly longer exposition because the game developer wants to test something and... now you can have this item I'm supposed to give you! Will you accept it?";
 init_item = weapon_rifle;
 item = init_item;
+itemName = "Pulse Rifle";
+message = "Hello there! My name is " + name + " and I have this " + itemName + " that I'm supposed to give you! Will you accept it?";
 </string>
           </argument>
         </arguments>
