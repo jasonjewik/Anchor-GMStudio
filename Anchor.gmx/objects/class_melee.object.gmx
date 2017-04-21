@@ -201,7 +201,7 @@ hitbox = hitbox_default;
 if (owner == class_player) {
     trigger = input_mouse_left_click();
     
-    if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger &amp;&amp; owner.state_name != "Melee") {
+    if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger &amp;&amp; owner.state_name != "Melee" &amp;&amp; owner.state_name != "Dash") {
         if (owner == class_player) {
             with (owner) {
                 alarm_set(1, 1);
