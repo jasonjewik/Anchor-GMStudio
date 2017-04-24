@@ -25,40 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initiate Variables
-owner = instance_nearest(x, y, class_melee);
-
-damage = owner.damageAmount;
-damageVariance = owner.damageVariance; 
-damage = irandom_range(damage - damageVariance, damage + damageVariance);
-
-critChance = owner.critChance;
-critRoll = irandom_range(0, 1);
-if (critRoll &lt;= critChance) crit = true;
-else crit = false;
-if (crit) damage *= 1.5;
-damage = round(damage);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Debug
+            <string>active = false;
 </string>
           </argument>
         </arguments>
@@ -79,13 +46,53 @@ damage = round(damage);
         <arguments>
           <argument>
             <kind>0</kind>
-            <string>room_speed * 0.1</string>
+            <string>1</string>
           </argument>
           <argument>
             <kind>4</kind>
             <string>0</string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>room_speed</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="2" enumb="0">
@@ -105,28 +112,26 @@ damage = round(damage);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Resets the diagonal checks
-with (class_melee) {
-    diag1 = false;
-    diag2 = false;
-}
+            <string>///Initiate Variables
+show_debug_message(object_get_name(owner));
+show_debug_message(object_get_name(notme));
+
+damage = owner.damageAmount;
+damageVariance = owner.damageVariance; 
+damage = irandom_range(damage - damageVariance, damage + damageVariance);
+
+critChance = owner.critChance;
+critRoll = irandom_range(0, 1);
+if (critRoll &lt;= critChance) crit = true;
+else crit = false;
+if (crit) damage *= 1.5;
+damage = round(damage);
+active = true;
+
+alarm_set(1, 1);
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>203</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_kill_object</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="3" enumb="0">
@@ -174,6 +179,48 @@ with (class_melee) {
       </action>
       <action>
         <libid>1</libid>
+        <id>612</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>active</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>true</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>422</id>
+        <kind>1</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -189,22 +236,41 @@ with (class_melee) {
           <argument>
             <kind>1</kind>
             <string>///Collisions
-
-if (place_meeting(x, y, class_shadowed)) {
-    hit = instance_position(x, y, class_shadowed);
-    with (hit) {
-        hp -= other.damage;
-        damage = true;
-    }
-}
+if (!instance_exists(owner)) instance_destroy();
 
 //With Walls
-if (place_meeting(x, y, class_wall)) {
-    instance_destroy();
-}
+if (place_meeting(x, y, class_wall)) instance_destroy();
+
+//With Enemy
+if (place_meeting(x, y, class_shadowed)) {
+    show_debug_message("Contact");
+    if (place_meeting(x, y, notme)) show_debug_message("Skip"); 
+    else {
+        show_debug_message("Damage");
+        hit = instance_position(x, y, class_shadowed);
+        with (hit) {
+            hp -= other.damage;
+            damage = true;
+        }
+    }
+} 
 </string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>424</id>
+        <kind>2</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>

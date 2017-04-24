@@ -58,7 +58,7 @@ global.pause = false;</code>
     <instance objName="npc_tutorial_2" x="256" y="192" name="inst_A6AEBDFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="678" y="60" name="inst_70372C4A" locked="0" code="" scaleX="37.9354820251465" scaleY="4.35483884811401" colour="4294967295" rotation="0"/>
     <instance objName="environ_wall" x="1201" y="383" name="inst_A93220E4" locked="0" code="" scaleX="4.9375" scaleY="20.65625" colour="4294967295" rotation="0"/>
-    <instance objName="environ_wall" x="639" y="671" name="inst_02A4169D" locked="0" code="" scaleX="38.9677429199219" scaleY="3.86999988555908" colour="4294967295" rotation="0"/>
+    <instance objName="environ_wall" x="631" y="669" name="inst_02A4169D" locked="0" code="" scaleX="38.9677429199219" scaleY="3.86999988555908" colour="4294967295" rotation="0"/>
     <instance objName="environ_warp" x="480" y="192" name="inst_9D230DD2" locked="0" code="target_r = rm_lvl_2;&#xA;target_x = 192;&#xA;target_y = 224;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="npc_tutorial_3" x="352" y="256" name="inst_712B5B0A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="controller_player" x="256" y="256" name="inst_DB12E1FA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

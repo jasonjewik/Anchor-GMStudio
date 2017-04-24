@@ -1,8 +1,14 @@
 cooldown = true;
 move_towards_point(mouse_x, mouse_y, dashSpeed);
 
-if (collision_point(mouse_x, mouse_y, class_wall, false, true)) {
-    if (place_meeting(x + speed, y, class_wall)) {
+//if (collision_point(mouse_x, mouse_y, class_wall, false, true)) {
+    aiming_direction = point_direction(x, y, mouse_x, mouse_y);
+    range_to_wall = range_finder(x, y, aiming_direction, 256, class_wall, false, true);
+    
+    if (!range_to_wall) range_to_wall = 9999999;
+    if (range_to_wall <= sprite_width) speed = 0;
+        
+    /*if (place_meeting(x + speed, y, class_wall)) {
         inc2 = sign(speed);
         while (!place_meeting(x + inc2, y, class_wall)) speed = inc2;
         speed = 0;
@@ -11,10 +17,10 @@ if (collision_point(mouse_x, mouse_y, class_wall, false, true)) {
         inc2 = sign(speed);
         while (!place_meeting(x, y + inc2, class_wall)) speed = inc2;
         speed = 0;
-    }
+    }*/
     if (speed == 0) {
         sprite_index = lastSprite;
         alarm_set(1, -1);
         state_switch_previous();
-    }        
-}
+    }      
+
