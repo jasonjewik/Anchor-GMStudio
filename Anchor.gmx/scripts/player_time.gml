@@ -1,6 +1,6 @@
 with (all) {
     image_speed *= 0.05;
-    speed *= 0.05;
+    speed *= 0.5;
     path_speed *= 0.05;
 }
 

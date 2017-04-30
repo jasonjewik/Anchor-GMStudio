@@ -230,6 +230,7 @@ if (state_name == "Time") {
         image_speed *= 10;
         speed = 0;
     }
+    with (fx_dust) image_speed = random_range(1/4,1/8);
 }
 
 state_switch_previous();

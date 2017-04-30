@@ -235,7 +235,7 @@ if (owner == class_player) {
 
 ///Shooting
 if (isActive &amp;&amp; trigger &amp;&amp; !cooldown &amp;&amp; currentAmmo &gt; 0) {
-    if (owner == class_player &amp;&amp; owner.state_name != "Melee" &amp;&amp; owner.state_name != "Dash" &amp;&amp; owner.state_name != "Talk") {
+    if (owner == class_player &amp;&amp; owner.state_name != "Melee" &amp;&amp; owner.state_name != "Dash" &amp;&amp; owner.state_name != "Talk" &amp;&amp; owner.state_name != "Time") {
         with (owner) {
             alarm_set(1, other.fireDelay);
             state_switch("Range", true);
