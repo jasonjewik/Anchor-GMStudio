@@ -3,18 +3,12 @@ if (instance_exists(hit)) {
     dir2 = point_direction(hit.x, hit.y, x, y);
 
     motion_add(dir2, 2);
-    if (place_meeting(x + speed, y, class_wall)) {
-        inc2 = sign(speed);
-        while (!place_meeting(x + inc2, y, class_wall)) speed = inc2;
-        speed = 0;
-    }
-    if (place_meeting(x, y + speed, class_wall)) {
-        inc2 = sign(speed);
-        while (!place_meeting(x, y + inc2, class_wall)) speed = inc2;
-        speed = 0;
-    }
+    range_to_wall = range_finder(x, y, dir2, 256, class_wall, false, true);
+    
+    if (!range_to_wall) range_to_wall = 9999999;
+    if (range_to_wall <= sprite_width/2) speed = 0;
 }
 
 if (hp <= 0) state_switch("Die", true);
 
-if (state_timer > 100) state_switch_previous();
+if (state_timer > 10) state_switch_previous();

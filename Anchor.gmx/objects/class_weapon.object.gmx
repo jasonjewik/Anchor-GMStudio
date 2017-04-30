@@ -61,7 +61,6 @@ if (instance_exists(owner)) {
         x = owner.x + (image_xscale * 5);
     }
     y = owner.y;
-
 }
 </string>
           </argument>

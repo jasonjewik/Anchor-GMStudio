@@ -229,13 +229,18 @@ bounds = 0;
             <string>event_inherited();
 
 if (owner == class_player) {
-    if (auto) trigger = input_mouse_right_hold();
-    else trigger = input_mouse_right_click();
+    if (auto) {
+        if (room != rm_lvl_1) trigger = input_mouse_right_hold();
+        else trigger = 0;
+    } else {
+        if (room != rm_lvl_1) trigger = input_mouse_right_click();
+        else trigger = 0;
+    }
 } else trigger = true;
 
 ///Shooting
 if (isActive &amp;&amp; trigger &amp;&amp; !cooldown &amp;&amp; currentAmmo &gt; 0) {
-    if (owner == class_player &amp;&amp; owner.state_name != "Melee" &amp;&amp; owner.state_name != "Dash" &amp;&amp; owner.state_name != "Talk" &amp;&amp; owner.state_name != "Time") {
+    if (owner == class_player &amp;&amp; owner.state_name != "Melee" &amp;&amp; owner.state_name != "Dash" &amp;&amp; owner.state_name != "Talk" &amp;&amp; owner.state_name != "Time" &amp;&amp; owner.state_name != "Die") {
         with (owner) {
             alarm_set(1, other.fireDelay);
             state_switch("Range", true);

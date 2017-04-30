@@ -199,8 +199,10 @@ alarm_set(0, -1);
           <argument>
             <kind>1</kind>
             <string>///Attacks
-if (owner == class_player) {
-    trigger = input_mouse_left_click();
+if (instance_exists(class_player)) {
+if (owner == class_player &amp;&amp; class_player.state_name != "Die") {
+    if (room != rm_lvl_1) trigger = input_mouse_left_click();
+    else trigger = 0;
     
     if (instance_exists(owner) &amp;&amp; isActive &amp;&amp; trigger &amp;&amp; owner.state_name != "Melee" &amp;&amp; owner.state_name != "Dash" &amp;&amp; owner.state_name != "Talk" &amp;&amp; alarm[0] == -1) {
         if (owner == class_player) {
@@ -336,6 +338,7 @@ if (owner == class_player) {
             }
         }
     }
+}
 }
 </string>
           </argument>
